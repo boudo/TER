@@ -216,6 +216,28 @@ liste concatener_listes(liste l1, liste l2)
 	return debut;
 }
 
+int compare_liste(liste l, liste ll)
+{
+	if(l == NULL &&  ll == NULL)
+	{
+		return 1;
+	}
+	else if((l == NULL && ll != NULL) || (l != NULL && ll == NULL))
+	{
+		return 0;
+	}
+	else if(l->val != ll->val)
+	{
+		return 0;
+	}
+	else if(l->val == ll->val)
+	{
+		return compare_liste(l->suiv, ll->suiv);
+	}
+	
+	return 0;
+}
+
 liste entrelacer_tries(liste l1, liste l2)
 {
 

@@ -38,6 +38,8 @@ liste ajoute_elem_trie(liste l,int i);
 
 liste generer_liste(liste l,int Nmax, int mode);
 
+int compare_liste(liste l, liste ll);
+
 int compte_elems(liste l);
 
 //renvoi l'indice du premier element qui à la valeur val dans la liste
