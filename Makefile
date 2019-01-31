@@ -9,7 +9,7 @@ principal: test
 	#./test
 
 test:
-	gcc -Wall -o test test.c liste_corrige.c -lgmp
+	gcc -Wall -o test Tests_prim.c liste_corrige.c -lgmp
 	
 clean:
 	rm -f test
