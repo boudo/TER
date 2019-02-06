@@ -5,8 +5,8 @@ run: clean principal
 
 principal: test
 	#time ./test
-	valgrind ./test
-	#./test
+	#valgrind ./test
+	./test
 
 test:
 	gcc -Wall -o test Tests_prim.c liste_corrige.c -lgmp
