@@ -9,9 +9,9 @@ principal: test
 	./test
 
 test:
-	gcc -Wall -o test Tests_prim.c liste_corrige.c -lgmp
+	gcc -Wall -o test Tests_prim.c liste/liste.c fermat/fermat.c fonctions/fonctions.c miller/miller.c -lgmp
 	
 clean:
-	rm -f test
-	rm -f *.o
+	rm -f test *.o
+	 
 	
