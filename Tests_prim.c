@@ -7,6 +7,7 @@
 #include "fermat/fermat.h"
 #include "fonctions/fonctions.h"
 #include "miller/miller.h"
+#include "crible/crible.h"
 
 int main()
 {
@@ -64,6 +65,17 @@ int main()
 	gmp_printf("%Zd-1=2^%Zd*%Zd\n",d_r,d_exp,d_a);
 	
 	mpz_clears(pgcd_r,d_a,d_r,d_exp,pgcd_a,pgcd_b,f,e_a,e_exp, sm_r,a,n,h,NULL);//Clears
+	
+	gmp_printf("\n###################### Test Crible Erathostene ######################\n\n");
+	
+	int x = 100;
+	
+	liste l= creer_liste();
+	
+	l = crible_era(x);
+ 	printf("Les nombres premiers plus petits que %d sont: ",x);
+ 	affiche_liste(l);
+ 	libere_liste(l);
 	
 	return 0;
 }

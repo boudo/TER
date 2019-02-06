@@ -9,7 +9,7 @@ principal: test
 	./test
 
 test:
-	gcc -Wall -o test Tests_prim.c liste/liste.c fermat/fermat.c fonctions/fonctions.c miller/miller.c -lgmp
+	gcc -Wall -o test Tests_prim.c liste/liste.c fermat/fermat.c fonctions/fonctions.c miller/miller.c crible/crible.c -lgmp
 	
 clean:
 	rm -f test *.o
