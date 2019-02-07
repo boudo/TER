@@ -9,7 +9,7 @@
 #include "../liste/liste.h"
 #include "../fonctions/fonctions.h"
 
-void Miller_Rabin(mpz_t n, mpz_t rep);
+void Miller_Rabin(mpz_t n, int rep);
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 
