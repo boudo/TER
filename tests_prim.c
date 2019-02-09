@@ -1,13 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gmp.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <gmp.h>
 #include <time.h>
 
-#include "liste/liste.h"
-#include "fermat/fermat.h"
-#include "fonctions/fonctions.h"
-#include "miller/miller.h"
+// #include "liste/liste.h"
+// #include "fermat/fermat.h"
+// #include "fonctions/fonctions.h"
+// #include "miller/miller.h"
 #include "crible/crible.h"
+#include "testProbabilistes/testProbabilistes.h"
 
 int main()
 {
