@@ -10,6 +10,8 @@
 #include "crible/crible.h"
 #include "testProbabilistes/testProbabilistes.h"
 
+#include "liste/listegmp.h"
+
 int main()
 {
 	mpz_t pgcd_r,pgcd_a,pgcd_b,a,n,h;//Declaration r,pgcda,pgcdb
@@ -77,6 +79,12 @@ int main()
  	printf("Les nombres premiers plus petits que %d sont: ",x);
  	affiche_liste(l);
  	libere_liste(l);
+ 	
+ 	gmp_printf("\n###################### Test Liste gmp ######################\n\n");
+ 	
+ 	listegmp lg= creer_listegmp();
+ 	
+ 	affiche_listegmp(lg);
 	
 	return 0;
 }
