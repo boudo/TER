@@ -106,6 +106,20 @@ int main()
  	mpz_set_ui(m_test,1373653);//composé normalement
  	
  	Miller_Rabin(m_test,10);
+
+ 	gmp_printf("\n###################### Test solovay strassen ######################\n\n");
+
+ 	mpz_t tss,tfou;
+ 	mpz_inits(tss,tfou,NULL);
+ 	mpz_set_ui(tss,12);
+ 	mpz_set_ui(tfou,3);
+ 	if(solovayStrassen(tss,tfou)){
+ 		gmp_printf("ce nombre est premier\n");
+ 	} else {
+ 		gmp_printf("ce nombre est composé\n");
+ 	}
+ 	
+	
 	
 	return 0;
 }

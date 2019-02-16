@@ -15,6 +15,8 @@ void Miller_Rabin(mpz_t n, int rep);
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 
+void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b);
 
+int solovayStrassen(mpz_t aTraiter, mpz_t iterations);
 
 #endif
