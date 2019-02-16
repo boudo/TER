@@ -52,7 +52,16 @@ int main()
 	expoRapide_gmp(f,e_a,e_exp);
 	mpz_sub_ui(f,f,1);
 	
-	Fermat(f,5);
+	float temps;
+    clock_t t1, t2;
+ 
+    t1 = clock();
+ 
+    Fermat(f,5);
+     
+    t2 = clock();
+    temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    printf("temps = %f\n", temps);
 	
 	gmp_printf("\n###################### Test Decomposition ######################\n\n");
 	
