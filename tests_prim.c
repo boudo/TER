@@ -71,7 +71,7 @@ int main()
 	
 	gmp_printf("\n###################### Test Crible Erathostene ######################\n\n");
 	
-	int x = 100;
+	int x = 10;
 	
 	liste l= creer_liste();
 	
@@ -80,11 +80,23 @@ int main()
  	affiche_liste(l);
  	libere_liste(l);
  	
- 	gmp_printf("\n###################### Test Liste gmp ######################\n\n");
+ 	gmp_printf("\n###################### Test Crible GMP ######################\n\n");
  	
  	listegmp lg= creer_listegmp();
+ 	mpz_t lg_a,lg_era;
+ 	mpz_inits(lg_a,lg_era,NULL);
+ 	
+ 	mpz_set_ui(lg_era,10);
+ 	mpz_set_ui(lg_a,2);
+ 	
+ 	//lg=ajoute_elem_debutgmp(lg,lg_a);
+ 	lg=crible_era_gmp(lg_era);
+ 	
+ 	gmp_printf("Les nombres premiers plus petits que %Zd sont: ",lg_era);
  	
  	affiche_listegmp(lg);
+ 	
+ 	libere_listegmp(lg);
 	
 	return 0;
 }

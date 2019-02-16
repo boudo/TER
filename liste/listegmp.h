@@ -18,9 +18,11 @@ struct elem_listegmp{
 
 typedef struct elem_listegmp* liste_listegmp;
 
-listegmp creer_listegmp();
-int est_videgmp(listegmp l);
-void affiche_listegmp(listegmp l);
+listegmp creer_listegmp();//Fonction qui créer une liste gmp
+listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i);//Fonction qui ajoute un element au debut dans la liste
+int est_videgmp(listegmp l);//Fonction qui retourne si la liste est vide ou non
+void affiche_listegmp(listegmp l);// Fonction qui affiche le contenu de la liste
+listegmp libere_listegmp(listegmp l);// Fonction qui libere la liste
 
 #endif
 
