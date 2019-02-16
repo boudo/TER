@@ -54,16 +54,16 @@ int Fermat(mpz_t n, int iter)
 // ************* Miller ***************************
 void Miller_Rabin(mpz_t n, int rep)
 {
-	mpz_t nMoins1, alea, temoin;
-	mpz_inits(nMoins1, alea, temoin, NULL);
+	mpz_t nMoins2, alea, temoin;
+	mpz_inits(nMoins2, alea, temoin, NULL);
 	gmp_randstate_t state;
 	gmp_randinit_mt(state);
-	mpz_sub_ui(nMoins1, n, 1); // n - 1
+	mpz_sub_ui(nMoins2, n, 2); // n - 2
 
 	for(int i=0; i<rep; i++)
 	{
 		gmp_randseed_ui(state, time(NULL));
-		mpz_urandomm (alea , state , nMoins1);
+		mpz_urandomm (alea , state , nMoins2);
 		if(mpz_cmp_ui(alea, 2) < 0)
 		{
 			mpz_add_ui(alea, alea, 2);
@@ -72,13 +72,13 @@ void Miller_Rabin(mpz_t n, int rep)
 		if (mpz_cmp_ui(temoin, 0) > 0)
 		{
 			printf("ce nombre est composé\n");
-			mpz_clears(nMoins1, alea, temoin, NULL);
+			mpz_clears(nMoins2, alea, temoin, NULL);
 			gmp_randclear(state);
 			return ;
 		}
 	}
 	printf("ce nombre est premier\n");
-	mpz_clears(nMoins1, alea, temoin, NULL);
+	mpz_clears(nMoins2, alea, temoin, NULL);
 	gmp_randclear(state);
 }
 

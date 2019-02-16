@@ -67,8 +67,6 @@ int main()
 	
 	gmp_printf("%Zd-1=2^%Zd*%Zd\n",d_r,d_exp,d_a);
 	
-	mpz_clears(pgcd_r,d_a,d_r,d_exp,pgcd_a,pgcd_b,f,e_a,e_exp, sm_r,a,n,h,NULL);//Clears
-	
 	gmp_printf("\n###################### Test Crible Erathostene ######################\n\n");
 	
 	int x = 10;
@@ -97,6 +95,17 @@ int main()
  	affiche_listegmp(lg);
  	
  	libere_listegmp(lg);
+ 	
+ 	mpz_clears(pgcd_r,d_a,d_r,d_exp,pgcd_a,pgcd_b,f,e_a,e_exp, sm_r,a,n,h,lg_a,lg_era,NULL);//Clears
+ 	
+ 	gmp_printf("\n###################### Test Miller ######################\n\n");
+ 	
+ 	mpz_t m_test;
+ 	mpz_inits(m_test,NULL);
+ 	
+ 	mpz_set_ui(m_test,1373653);//composé normalement
+ 	
+ 	Miller_Rabin(m_test,10);
 	
 	return 0;
 }
