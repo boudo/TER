@@ -120,7 +120,7 @@ int main()
 
  	mpz_t tss,tfou;
  	mpz_inits(tss,tfou,NULL);
- 	mpz_set_ui(tss,12);
+ 	mpz_set_ui(tss,15);
  	mpz_set_ui(tfou,3);
  	if(solovayStrassen(tss,tfou)){
  		gmp_printf("ce nombre est premier\n");
