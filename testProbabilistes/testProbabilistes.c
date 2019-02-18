@@ -117,6 +117,7 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 	return ;
 }
 
+
 /**
 * Cette fonction permet de calculer le Symbole de jacobi (a/p) et de determiner si
 * si p divise a ou pas ainsi que si a est un résidu quadratique modulo p ou non
@@ -199,8 +200,12 @@ int solovayStrassen(mpz_t aTraiter, mpz_t iterations) {
 		//On utilise des variable de copie
 		mpz_set(aTraiterTmp,aTraiter);
 		mpz_set(randomTmp,randomNumber);
+		//gmp_printf("squareAndMultiply : resultat :%Zd, randomNumber :%Zd, exposant :%Zd, aTraiterTmp :%Zd \n",resultatM, randomNumber, exposant, aTraiterTmp);
 		jacobiSymbol(resultatJ, randomTmp, aTraiterTmp);
+		mpz_set(aTraiterTmp,aTraiter);
 		squareAndMultiply(resultatM, randomNumber, exposant, aTraiterTmp);
+		//gmp_printf("jacobi : resultat :%Zd ,randomTmp :%Zd, aTraiterTmp :%Zd \n",resultatJ,randomTmp, aTraiterTmp);
+		//gmp_printf("squareAndMultiply : resultat :%Zd, randomNumber :%Zd, exposant :%Zd, aTraiterTmp :%Zd \n",resultatM, randomNumber, exposant, aTraiterTmp);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
 		if(mpz_cmp_ui(resultatJ,0) == 0 && mpz_cmp(resultatJ,resultatM) != 0){
 

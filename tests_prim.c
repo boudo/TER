@@ -134,5 +134,6 @@ int main()
  	}
 	
 	mpz_clears(tss,tfou,NULL);
+
 	return 0;
 }
