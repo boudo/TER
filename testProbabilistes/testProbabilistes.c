@@ -6,9 +6,9 @@
 int Fermat(mpz_t n, int iter)
 {
 	printf("taille = %d\n", iter);
-	mpz_t pgcd, sqm, alea, expo;
+	mpz_t pg, sqm, alea, expo;
 	gmp_randstate_t state;
-	mpz_inits(pgcd, sqm, alea, expo, NULL);
+	mpz_inits(pg, sqm, alea, expo, NULL);
 	gmp_randinit_mt(state);
 	mpz_sub_ui(expo, n, 1); // expo = n - 1
 	for(int i=0; i<iter; i++)
@@ -19,11 +19,11 @@ int Fermat(mpz_t n, int iter)
 		{
 			mpz_add_ui(alea, alea, 3);
 		}
-		pgcd_gmp(pgcd, n, alea);
-		if (mpz_cmp_ui(pgcd, 1) != 0)
+		pgcd(pg, n, alea);
+		if (mpz_cmp_ui(pg, 1) != 0)
 		{
-			gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pgcd,alea, n);
-			mpz_clears(pgcd, sqm, alea, expo, NULL);
+			gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
+			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
@@ -31,22 +31,22 @@ int Fermat(mpz_t n, int iter)
 		// mpz_set(expo, n);
 		// mpz_sub_ui(expo, n, 1);
 		//printf("debut\n");
-		squareAndMultiply_gmp(sqm, alea, expo, n);
+		squareAndMultiply(sqm, alea, expo, n);
 		//printf("debut\n");
 		//mpz_powm(sqm, alea, expo, n);
 		//printf("Fermat\n");
-		if(mpz_cmp_ui(pgcd, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
+		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
-			gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pgcd);
-			mpz_clears(pgcd, sqm, alea, expo, NULL);
+			gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
+			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
 	}
 
 
-	gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pgcd, alea);
-	mpz_clears(pgcd, sqm, alea, expo, NULL);
+	gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
+	mpz_clears(pg, sqm, alea, expo, NULL);
 	gmp_randclear(state);
 	return 1;
 }
@@ -61,16 +61,16 @@ void Miller_Rabin(mpz_t n, int rep)
 	mpz_sub_ui(nMoins2, n, 2); // n - 2
 
 	for(int i=0; i<rep; i++)
-	{
+	{ printf("ici for\n");
 		gmp_randseed_ui(state, time(NULL));
 		mpz_urandomm (alea , state , nMoins2);
 		if(mpz_cmp_ui(alea, 2) < 0)
-		{
+		{printf("ici comp\n");
 			mpz_add_ui(alea, alea, 2);
 		}
 		temoinMiller(temoin, alea, n);
 		if (mpz_cmp_ui(temoin, 0) > 0)
-		{
+		{printf("ici temoin\n");
 			printf("ce nombre est composé\n");
 			mpz_clears(nMoins2, alea, temoin, NULL);
 			gmp_randclear(state);
@@ -84,15 +84,16 @@ void Miller_Rabin(mpz_t n, int rep)
 
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
-{
+{printf("ici dans temoin\n");
 	mpz_t s, d, nMoins1, x;
 	mpz_inits(s, d, nMoins1,x, NULL);
 
 	mpz_sub_ui(nMoins1, n, 1);
-
+	printf("ici dans temoin test decomposition\n");
 	decomposition(nMoins1, s, d);
-
-	squareAndMultiply_gmp(x, a, d, n);
+	printf("ici dans temoin\n");
+	squareAndMultiply(x, a, d, n);
+	printf("ici dans temoin ok\n");
 	if(mpz_cmp_ui(x, 1) == 0 || mpz_cmp(x, nMoins1) == 0)
 	{
 		mpz_set_ui(res, 0);
@@ -199,7 +200,7 @@ int solovayStrassen(mpz_t aTraiter, mpz_t iterations) {
 		mpz_set(aTraiterTmp,aTraiter);
 		mpz_set(randomTmp,randomNumber);
 		jacobiSymbol(resultatJ, randomTmp, aTraiterTmp);
-		squareAndMultiply_gmp(resultatM, randomNumber, exposant, aTraiterTmp);
+		squareAndMultiply(resultatM, randomNumber, exposant, aTraiterTmp);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
 		if(mpz_cmp_ui(resultatJ,0) == 0 && mpz_cmp(resultatJ,resultatM) != 0){
 

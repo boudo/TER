@@ -22,7 +22,7 @@ int main()
 	mpz_set_ui(pgcd_a,6);//Affectation
 	mpz_set_ui(pgcd_b,4);
 	
-	pgcd_gmp(pgcd_r,pgcd_a,pgcd_b);
+	pgcd(pgcd_r,pgcd_a,pgcd_b);
 	
 	gmp_printf("PGCD(%Zd,%Zd)=%Zd\n",pgcd_a,pgcd_b,pgcd_r);//Affichage
 	
@@ -37,7 +37,7 @@ int main()
 	mpz_set_ui(n,527);
 	mpz_set_ui(h,2);
 	
-	squareAndMultiply_gmp(sm_r,a,h,n);
+	squareAndMultiply(sm_r,a,h,n);
 	
 	gmp_printf("SQUARE=%Zd mod %Zd\n\n",sm_r,n);
 	
@@ -49,7 +49,7 @@ int main()
 	mpz_set_ui(e_a,2);
 	mpz_set_ui(e_exp,521);
 	
-	expoRapide_gmp(f,e_a,e_exp);
+	expoRapide(f,e_a,e_exp);
 	mpz_sub_ui(f,f,1);
 	
 	float temps;
@@ -106,29 +106,33 @@ int main()
  	libere_listegmp(lg);
  	
  	mpz_clears(pgcd_r,d_a,d_r,d_exp,pgcd_a,pgcd_b,f,e_a,e_exp, sm_r,a,n,h,lg_a,lg_era,NULL);//Clears
- 	
  	gmp_printf("\n###################### Test Miller ######################\n\n");
  	
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
  	
- 	mpz_set_ui(m_test,1373653);//composé normalement
+ 	//mpz_set_ui(m_test,1373653);//composé normalement
+ 	for(int i=13; i<=13; i++){
+ 		printf("%d\n", i);
+ 	mpz_set_ui(m_test,i);
  	
- 	Miller_Rabin(m_test,10);
+ 	Miller_Rabin(m_test,10);}
 
  	gmp_printf("\n###################### Test solovay strassen ######################\n\n");
 
  	mpz_t tss,tfou;
  	mpz_inits(tss,tfou,NULL);
- 	mpz_set_ui(tss,12);
- 	mpz_set_ui(tfou,3);
+ 	for (int j = 0; j <= 1; j++){
+ 		printf("%d\n", j);
+ 	mpz_set_ui(tss,j);
+ 	mpz_set_ui(tfou,10);
  	if(solovayStrassen(tss,tfou)){
  		gmp_printf("ce nombre est premier\n");
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	
+ 	}
 	
-	
+	mpz_clears(tss,tfou,NULL);
 	return 0;
 }

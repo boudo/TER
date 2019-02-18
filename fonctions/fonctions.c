@@ -1,6 +1,6 @@
 #include "fonctions.h"
 
-void pgcd_gmp(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
+void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
 {
 	if(mpz_cmp(a,b) == 0)
 	{
@@ -26,7 +26,7 @@ void pgcd_gmp(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
 			mpz_init(reste);
 
 			mpz_mod(reste, a, b);
-			pgcd_gmp(resultat, b, reste);
+			pgcd(resultat, b, reste);
 			//printf("pgcd b a mod b\n");
 
 			mpz_clear(reste);
@@ -34,16 +34,16 @@ void pgcd_gmp(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
 	}
 	else
 	{
-		pgcd_gmp(resultat, b, a);
+		pgcd(resultat, b, a);
 		//printf("pgcd b a\n");
 	}
 }
 
-void squareAndMultiply_gmp(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
+void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
 {
 	mpz_set(resultat, x);
 	liste expoB = creer_liste();
-	expoB = expoEnBinMpz(expo);
+	expoB = expoEnBin(expo);
 	//printf("OK pour expoBinMPZ\n");
 	expoB = supprime_elem_debut(expoB);
 
@@ -63,7 +63,7 @@ void squareAndMultiply_gmp(mpz_t resultat, const mpz_t x, const mpz_t expo, cons
 	expoB = libere_liste(expoB);
 }
 
-liste expoEnBinMpz(const mpz_t expo)
+liste expoEnBin(const mpz_t expo)
 {
 	int r = 0;
 	liste maListe = creer_liste();
@@ -85,11 +85,11 @@ liste expoEnBinMpz(const mpz_t expo)
 	return maListe;
 }
 
-void expoRapide_gmp(mpz_t resultat, const mpz_t x, const mpz_t expo)
+void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 {
 	mpz_set(resultat, x);
 	liste expoB = creer_liste();
-	expoB = expoEnBinMpz(expo);
+	expoB = expoEnBin(expo);
 	expoB = supprime_elem_debut(expoB);
 
 	while(!est_vide(expoB))
@@ -115,16 +115,16 @@ void decomposition(mpz_t x,mpz_t s,mpz_t t) // Fonction qui décompose un entier
 	mpz_set_ui(deux, 2);
 
 	while(mpz_cmp(y,x)!=0) // Tant que on trouve pas 2^s * t = x
-	{
+	{printf("ici dans decom while 1\n"); // boucle infini
         mpz_set_ui(t,1); //On recommence avec t = 1
         mpz_mul(y,S_pow,t);// y = 2^s * t (on test les valeurs)
 
         while(mpz_cmp(y,x) < 0)// On arrette de tester quand 2^s * t > x
-        {                      //
+        {printf("ici dans decom while 2\n");        //
 			mpz_add_ui(t,t,2); // t est impair donc on l'incremente de 2 en 2
 			
 			//deux_pow(S_pow,s);
-			expoRapide_gmp(S_pow, deux, s);
+			expoRapide(S_pow, deux, s);
 			mpz_mul(y,S_pow,t);
         }
         
