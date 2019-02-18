@@ -120,15 +120,15 @@ int main()
 
  	mpz_t tss,tfou;
  	mpz_inits(tss,tfou,NULL);
- 	mpz_set_ui(tss,15);
- 	mpz_set_ui(tfou,3);
+ 	mpz_set_ui(tss,1373653);
+ 	mpz_set_ui(tfou,10000);
  	if(solovayStrassen(tss,tfou)){
  		gmp_printf("ce nombre est premier\n");
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	
-	
-	
+ 	mpz_clears(tss,tfou,NULL);
+
+
 	return 0;
 }

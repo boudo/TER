@@ -63,6 +63,7 @@ void squareAndMultiply_gmp(mpz_t resultat, const mpz_t x, const mpz_t expo, cons
 	expoB = libere_liste(expoB);
 }
 
+
 liste expoEnBinMpz(const mpz_t expo)
 {
 	int r = 0;

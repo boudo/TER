@@ -116,24 +116,6 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 	return ;
 }
 
-void exponentiationModulaire (mpz_t resultat, mpz_t a, mpz_t k, mpz_t n) {
-	mpz_t i,tmp,tmpa;
-	mpz_inits(i,tmp,tmpa,NULL);
-	mpz_set(tmpa,a);
-	//parcours de boucle k = k/2
-	for (mpz_set_ui(i,1); mpz_cmp_ui(k,0)>0; mpz_div_ui(k,k,2)) {
-		mpz_mod_ui(tmp,k,2);
-		// Si l'exposant k est different de 0
-		if(mpz_cmp_ui(tmp,0) != 0){
-			mpz_mul(i,i,tmpa);
-			mpz_mod(i,i,n);
-		}
-		mpz_mul(tmpa,tmpa,tmpa);
-		mpz_mod(tmpa,tmpa,n);
-	}
-	mpz_set(resultat,i);
-	mpz_clears(i,tmp,tmpa,NULL);
-}
 
 /**
 * Cette fonction permet de calculer le Symbole de jacobi (a/p) et de determiner si
@@ -217,8 +199,12 @@ int solovayStrassen(mpz_t aTraiter, mpz_t iterations) {
 		//On utilise des variable de copie
 		mpz_set(aTraiterTmp,aTraiter);
 		mpz_set(randomTmp,randomNumber);
+		//gmp_printf("squareAndMultiply : resultat :%Zd, randomNumber :%Zd, exposant :%Zd, aTraiterTmp :%Zd \n",resultatM, randomNumber, exposant, aTraiterTmp);
 		jacobiSymbol(resultatJ, randomTmp, aTraiterTmp);
-		exponentiationModulaire(resultatM, randomNumber, exposant, aTraiterTmp);
+		mpz_set(aTraiterTmp,aTraiter);
+		squareAndMultiply_gmp(resultatM, randomNumber, exposant, aTraiterTmp);
+		//gmp_printf("jacobi : resultat :%Zd ,randomTmp :%Zd, aTraiterTmp :%Zd \n",resultatJ,randomTmp, aTraiterTmp);
+		//gmp_printf("squareAndMultiply : resultat :%Zd, randomNumber :%Zd, exposant :%Zd, aTraiterTmp :%Zd \n",resultatM, randomNumber, exposant, aTraiterTmp);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
 		if(mpz_cmp_ui(resultatJ,0) == 0 && mpz_cmp(resultatJ,resultatM) != 0){
 
