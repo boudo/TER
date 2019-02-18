@@ -61,7 +61,7 @@ int main()
  
     t1 = clock();
  
-    Fermat(f,10000);
+    Fermat(f,5);
      
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
@@ -116,7 +116,7 @@ int main()
  	mpz_inits(m_test,NULL);
  	
  	//mpz_set_ui(m_test,1373653);//composé normalement
- 	for(int i=13; i<=13; i++){
+ 	for(int i=5; i<=100; i++){
  		printf("%d\n", i);
  	mpz_set_ui(m_test,i);
  	

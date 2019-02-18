@@ -18,4 +18,6 @@ liste expoEnBin(const mpz_t expo);
 
 void decomposition(mpz_t x,mpz_t s,mpz_t t);
 
+void decomposition1(mpz_t s,mpz_t d, mpz_t nMoins1);
+
 #endif

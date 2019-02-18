@@ -134,3 +134,28 @@ void decomposition(mpz_t x,mpz_t s,mpz_t t) // Fonction qui décompose un entier
 
 	mpz_clears(y,S_pow, deux,NULL);
 }
+
+void decomposition1(mpz_t s,mpz_t d, mpz_t nMoins1)
+{
+	mpz_set_ui(s, 0);
+	mpz_set_ui(d,0);
+	mpz_t tmp, tmp1, deux,res;
+	mpz_inits(tmp, tmp1, deux, res, NULL);
+	mpz_set_ui(deux, 2);
+	mpz_set(tmp, nMoins1);
+	while(mpz_cmp_ui(tmp, 1) > 0)
+	{	mpz_mod_ui(res, tmp, 2);
+		if(mpz_cmp_ui(res, 0) == 0)
+		{
+			mpz_add_ui(s, s, 1);
+			mpz_div_ui(tmp, tmp, 2);
+		}
+		else
+		{
+			break;
+		}
+	}
+	expoRapide(tmp1,deux, s);
+	mpz_div(d, nMoins1, tmp1);
+	mpz_clears(tmp, tmp1, deux,res, NULL);
+}

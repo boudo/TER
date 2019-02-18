@@ -90,7 +90,8 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 
 	mpz_sub_ui(nMoins1, n, 1);
 	//printf("ici dans temoin test decomposition\n");
-	decomposition(nMoins1, s, d);
+	// decomposition(nMoins1, s, d);
+	decomposition1(s, d, nMoins1);
 	//printf("ici dans temoin\n");
 	squareAndMultiply(x, a, d, n);
 	//printf("ici dans temoin ok\n");
