@@ -32,10 +32,10 @@ int main()
 	
 	mpz_t sm_r;
 	mpz_inits(sm_r,NULL);
-	
-	mpz_set_ui(a,188);
-	mpz_set_ui(n,527);
-	mpz_set_ui(h,2);
+	//voici le 2eme test ibra
+	mpz_set_ui(a,56548900);
+	mpz_set_ui(n,1538727382901);
+	mpz_set_ui(h,1538727382900);
 	
 	squareAndMultiply_gmp(sm_r,a,h,n);
 	
