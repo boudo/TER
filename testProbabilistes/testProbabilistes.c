@@ -5,7 +5,7 @@
 // ************* Fermat ***************************
 int Fermat(mpz_t n, int iter)
 {
-	printf("taille = %d\n", iter);
+	//printf("taille = %d\n", iter);
 	mpz_t pg, sqm, alea, expo;
 	gmp_randstate_t state;
 	mpz_inits(pg, sqm, alea, expo, NULL);
@@ -61,16 +61,16 @@ void Miller_Rabin(mpz_t n, int rep)
 	mpz_sub_ui(nMoins2, n, 2); // n - 2
 
 	for(int i=0; i<rep; i++)
-	{ printf("ici for\n");
+	{ //printf("ici for\n");
 		gmp_randseed_ui(state, time(NULL));
 		mpz_urandomm (alea , state , nMoins2);
 		if(mpz_cmp_ui(alea, 2) < 0)
-		{printf("ici comp\n");
+		{//printf("ici comp\n");
 			mpz_add_ui(alea, alea, 2);
 		}
 		temoinMiller(temoin, alea, n);
 		if (mpz_cmp_ui(temoin, 0) > 0)
-		{printf("ici temoin\n");
+		{//printf("ici temoin\n");
 			printf("ce nombre est composé\n");
 			mpz_clears(nMoins2, alea, temoin, NULL);
 			gmp_randclear(state);
@@ -84,16 +84,16 @@ void Miller_Rabin(mpz_t n, int rep)
 
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
-{printf("ici dans temoin\n");
+{//printf("ici dans temoin\n");
 	mpz_t s, d, nMoins1, x;
 	mpz_inits(s, d, nMoins1,x, NULL);
 
 	mpz_sub_ui(nMoins1, n, 1);
-	printf("ici dans temoin test decomposition\n");
+	//printf("ici dans temoin test decomposition\n");
 	decomposition(nMoins1, s, d);
-	printf("ici dans temoin\n");
+	//printf("ici dans temoin\n");
 	squareAndMultiply(x, a, d, n);
-	printf("ici dans temoin ok\n");
+	//printf("ici dans temoin ok\n");
 	if(mpz_cmp_ui(x, 1) == 0 || mpz_cmp(x, nMoins1) == 0)
 	{
 		mpz_set_ui(res, 0);

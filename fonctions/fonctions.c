@@ -115,12 +115,12 @@ void decomposition(mpz_t x,mpz_t s,mpz_t t) // Fonction qui décompose un entier
 	mpz_set_ui(deux, 2);
 
 	while(mpz_cmp(y,x)!=0) // Tant que on trouve pas 2^s * t = x
-	{printf("ici dans decom while 1\n"); // boucle infini
+	{//printf("ici dans decom while 1\n"); // boucle infini
         mpz_set_ui(t,1); //On recommence avec t = 1
         mpz_mul(y,S_pow,t);// y = 2^s * t (on test les valeurs)
 
         while(mpz_cmp(y,x) < 0)// On arrette de tester quand 2^s * t > x
-        {printf("ici dans decom while 2\n");        //
+        {//printf("ici dans decom while 2\n");        //
 			mpz_add_ui(t,t,2); // t est impair donc on l'incremente de 2 en 2
 			
 			//deux_pow(S_pow,s);

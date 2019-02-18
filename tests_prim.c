@@ -51,13 +51,17 @@ int main()
 	
 	expoRapide(f,e_a,e_exp);
 	mpz_sub_ui(f,f,1);
-	
+	// mpz_set_ui(e_a,2);
+	// mpz_set_ui(e_exp,521);
+	// expoRapide_gmp(f,e_a,e_exp);
+	// mpz_sub_ui(f,f,1);
+	mpz_set_ui(f,1373653);
 	float temps;
     clock_t t1, t2;
  
     t1 = clock();
  
-    Fermat(f,5);
+    Fermat(f,10000);
      
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
@@ -120,20 +124,23 @@ int main()
 
  	gmp_printf("\n###################### Test solovay strassen ######################\n\n");
 
- 	mpz_t tss,tfou;
- 	mpz_inits(tss,tfou,NULL);
- 	for (int j = 0; j <= 1; j++){
- 		printf("%d\n", j);
- 	mpz_set_ui(tss,j);
- 	mpz_set_ui(tfou,10);
+ 	mpz_t tss,tfou,resultat,alea;
+ 	mpz_inits(tss,tfou,resultat,alea,NULL);
+ 	mpz_set_ui(tss,1373653);
+ 	mpz_set_ui(tfou,1373652);
+ 	mpz_set_ui(alea,554331);
  	if(solovayStrassen(tss,tfou)){
  		gmp_printf("ce nombre est premier\n");
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	}
-	
-	mpz_clears(tss,tfou,NULL);
+ 	squareAndMultiply(resultat,alea,tfou,tss);
+
+ 	gmp_printf("le resultat est : %Zd\n",resultat);
+ 	mpz_set_ui(resultat, 0);
+ 	pgcd(resultat,tss,alea);
+ 	gmp_printf("le pgcd est : %Zd\n",resultat);
+ 	mpz_clears(tss,tfou,NULL);
 
 	return 0;
 }
