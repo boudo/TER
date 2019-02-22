@@ -11,7 +11,7 @@
 
 int Fermat(mpz_t n, int iter);
 
-void Miller_Rabin(mpz_t n, int rep);
+int Miller_Rabin(mpz_t n, int rep);
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 

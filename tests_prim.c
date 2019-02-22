@@ -61,7 +61,7 @@ int main()
  
     t1 = clock();
  
-    Fermat(f,5);
+    Fermat(f,100);
      
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
@@ -115,31 +115,21 @@ int main()
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
  	
- 	//mpz_set_ui(m_test,1373653);//composé normalement
- 	for(int i=5; i<=100; i++){
- 		printf("%d\n", i);
- 	mpz_set_ui(m_test,i);
+ 	mpz_set_ui(m_test,1373653);//composé normalement
  	
- 	Miller_Rabin(m_test,10);}
+ 	Miller_Rabin(m_test,100);
 
  	gmp_printf("\n###################### Test solovay strassen ######################\n\n");
 
  	mpz_t tss,tfou,resultat,alea;
  	mpz_inits(tss,tfou,resultat,alea,NULL);
  	mpz_set_ui(tss,1373653);
- 	mpz_set_ui(tfou,1373652);
- 	mpz_set_ui(alea,554331);
+ 	mpz_set_ui(tfou,100);
  	if(solovayStrassen(tss,tfou)){
  		gmp_printf("ce nombre est premier\n");
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	squareAndMultiply(resultat,alea,tfou,tss);
-
- 	gmp_printf("le resultat est : %Zd\n",resultat);
- 	mpz_set_ui(resultat, 0);
- 	pgcd(resultat,tss,alea);
- 	gmp_printf("le pgcd est : %Zd\n",resultat);
  	mpz_clears(tss,tfou,NULL);
 
 	return 0;

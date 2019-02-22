@@ -52,7 +52,7 @@ int Fermat(mpz_t n, int iter)
 }
 
 // ************* Miller ***************************
-void Miller_Rabin(mpz_t n, int rep)
+int Miller_Rabin(mpz_t n, int rep)
 {
 	mpz_t nMoins2, alea, temoin;
 	mpz_inits(nMoins2, alea, temoin, NULL);
@@ -74,12 +74,13 @@ void Miller_Rabin(mpz_t n, int rep)
 			printf("ce nombre est composé\n");
 			mpz_clears(nMoins2, alea, temoin, NULL);
 			gmp_randclear(state);
-			return ;
+			return 0;
 		}
 	}
 	printf("ce nombre est premier\n");
 	mpz_clears(nMoins2, alea, temoin, NULL);
 	gmp_randclear(state);
+	return 1;
 }
 
 
@@ -202,12 +203,14 @@ int solovayStrassen(mpz_t aTraiter, mpz_t iterations) {
 		jacobiSymbol(resultatJ, randomNumber, aTraiter);
 		squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
-		if(mpz_cmp_ui(resultatJ,0) == 0 && mpz_cmp(resultatJ,resultatM) != 0){
+		mpz_sub(tmp,resultatM,aTraiter);
+		if(mpz_cmp_ui(resultatJ,0) == 0 || mpz_cmp(resultatJ,resultatM) != 0 || mpz_cmp(resultatJ,tmp) != 0){
 
 			mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,NULL);
 			return 0;
 		}
 	}
 	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,NULL);
+	gmp_randclear(state);
 	return 1;
 }
