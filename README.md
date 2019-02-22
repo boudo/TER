@@ -1,4 +1,4 @@
-# TER
+# TER ( chacun travaille sur sa b.....)
 
 Travail a faire :
 
