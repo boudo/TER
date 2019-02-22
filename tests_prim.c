@@ -55,13 +55,13 @@ int main()
 	// mpz_set_ui(e_exp,521);
 	// expoRapide_gmp(f,e_a,e_exp);
 	// mpz_sub_ui(f,f,1);
-	mpz_set_ui(f,1373653);
+	mpz_set_ui(f,27);
 	float temps;
     clock_t t1, t2;
  
     t1 = clock();
  
-    Fermat(f,5);
+    Fermat(f,2);
      
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
@@ -120,7 +120,7 @@ int main()
  		printf("%d\n", i);
  	mpz_set_ui(m_test,i);
  	
- 	Miller_Rabin(m_test,10);}
+ 	Miller_Rabin(m_test,10000);}
 
  	gmp_printf("\n###################### Test solovay strassen ######################\n\n");
 
