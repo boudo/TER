@@ -14,7 +14,7 @@
 
 int main()
 {
-	mpz_t pgcd_r,pgcd_a,pgcd_b,a,n,h;//Declaration r,pgcda,pgcdb
+	/*mpz_t pgcd_r,pgcd_a,pgcd_b,a,n,h;//Declaration r,pgcda,pgcdb
 	mpz_inits(pgcd_r,pgcd_a,pgcd_b,a,n,h,NULL);//Init
 
 	gmp_printf("\n###################### Test PGCD ######################\n\n");
@@ -130,7 +130,26 @@ int main()
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	mpz_clears(tss,tfou,NULL);
+ 	mpz_clears(tss,tfou,NULL);*/
+
+	int test;
+ 	mpz_t m_test;
+ 	mpz_inits(m_test,NULL);
+ 	for (int i = 4; i < 100; ++i)
+ 	{
+ 		mpz_set_ui(m_test,i);//composé normalement
+ 	
+ 		test = Miller_Rabin(m_test,20);
+ 		if (test == 0)
+ 		{
+ 			printf("%d est composé\n", i);
+ 		}
+ 		else
+ 		{
+ 			printf("%d est premier\n", i);	
+ 		}
+ 	}
+ 	mpz_clears(m_test, NULL);
 
 	return 0;
 }
