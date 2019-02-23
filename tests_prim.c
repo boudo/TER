@@ -150,10 +150,10 @@ int main()
  		}
  	}
  	mpz_clears(m_test, NULL);
-
+/*
  	gmp_printf("\n###################### multi Test ######################\n\n");
  	printf("est premier : %d\n", estPremier(tss,100));
-
+*/
  	gmp_printf("\n###################### generation nbr premier ######################\n\n");
 
  	mesureTempsFichier("mesureTemps/mesure.txt",10);
