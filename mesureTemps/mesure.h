@@ -12,4 +12,6 @@ int estPremier(mpz_t nombre,int nombreIteration);
 
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);
 
+void mesureTempsFichier(char *nomFichier,int nbrIteration);
+
 #endif

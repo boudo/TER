@@ -136,9 +136,8 @@ int main()
 
  	gmp_printf("\n###################### generation nbr premier ######################\n\n");
 
- 	generNbrPremier(tfou,12,10);
-
- 	gmp_printf("le nombre generer : %Zd\n",tfou);
+ 	mesureTempsFichier("mesureTemps/mesure.txt",10);
+ 	
 
  	mpz_clears(tss,tfou,resultat,alea,NULL);
 

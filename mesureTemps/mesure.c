@@ -28,3 +28,42 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration) {
 	
 	mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
 }
+
+void mesureTempsFichier(char *nomFichier,int nbrIteration) {
+	FILE* fichier = NULL;
+	fichier = fopen(nomFichier, "w");
+ 	float temps;
+    clock_t t1, t2;
+    mpz_t nbrPremier;
+    mpz_inits(nbrPremier,NULL);
+    if (fichier != NULL)
+    {
+    	fprintf(fichier,"  Fermat    Miller  Strassen\n");
+    	for(int i=1; i<=5; i++){
+    		fprintf(fichier,"%d ", i);
+    		if(i != 1){
+    			generNbrPremier(nbrPremier,i,nbrIteration);
+    		}else {
+    			mpz_set_ui(nbrPremier,1);
+    		}
+	    	t1 = clock();
+	    	Fermat(nbrPremier,nbrIteration);
+	    	t2 = clock();
+	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        fprintf(fichier,"%f ", temps);
+	        t1 = clock();
+	    	Miller_Rabin(nbrPremier,nbrIteration);
+	    	t2 = clock();
+	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        fprintf(fichier,"%f ", temps);
+	        t1 = clock();
+	    	solovayStrassen(nbrPremier,nbrIteration);
+	    	t2 = clock();
+	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        fprintf(fichier,"%f\n", temps);
+    	}
+    	
+        fclose(fichier);
+    }
+    mpz_clears(nbrPremier,NULL);
+}
