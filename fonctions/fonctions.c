@@ -87,9 +87,18 @@ liste expoEnBin(const mpz_t expo)
 
 void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 {
+
+	if(mpz_cmp_ui(expo, 0) == 0)
+	{
+		mpz_set_ui(resultat, 1);
+		return ;
+	}
+
 	mpz_set(resultat, x);
 	liste expoB = creer_liste();
 	expoB = expoEnBin(expo);
+	// printf("expo en bin\n");
+	// affiche_liste(expoB);
 	expoB = supprime_elem_debut(expoB);
 
 	while(!est_vide(expoB))
@@ -155,7 +164,11 @@ void decomposition1(mpz_t s,mpz_t d, mpz_t nMoins1)
 			break;
 		}
 	}
+	// gmp_printf("ici nMoins1 = %Zd\n", nMoins1);
+	// gmp_printf("ici s = %Zd\n", s);
 	expoRapide(tmp1,deux, s);
+	// gmp_printf("ici tmp1 = %Zd\n", tmp1);
 	mpz_div(d, nMoins1, tmp1);
+	// gmp_printf("ici d = %Zd\n", d);
 	mpz_clears(tmp, tmp1, deux,res, NULL);
 }
