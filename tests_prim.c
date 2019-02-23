@@ -7,9 +7,9 @@
 // #include "fermat/fermat.h"
 // #include "fonctions/fonctions.h"
 // #include "miller/miller.h"
+#include "mesureTemps/mesure.h"
 #include "crible/crible.h"
 #include "testProbabilistes/testProbabilistes.h"
-
 #include "liste/listegmp.h"
 
 int main()
@@ -125,12 +125,22 @@ int main()
  	mpz_inits(tss,tfou,resultat,alea,NULL);
  	mpz_set_ui(tss,1373653);
  	mpz_set_ui(tfou,100);
- 	if(solovayStrassen(tss,tfou)){
+ 	if(solovayStrassen(tss,100)){
  		gmp_printf("ce nombre est premier\n");
  	} else {
  		gmp_printf("ce nombre est composé\n");
  	}
- 	mpz_clears(tss,tfou,NULL);
+
+ 	gmp_printf("\n###################### multi Test ######################\n\n");
+ 	printf("est premier : %d\n", estPremier(tss,100));
+
+ 	gmp_printf("\n###################### generation nbr premier ######################\n\n");
+
+ 	generNbrPremier(tfou,12,10);
+
+ 	gmp_printf("le nombre generer : %Zd\n",tfou);
+
+ 	mpz_clears(tss,tfou,resultat,alea,NULL);
 
 	return 0;
 }
