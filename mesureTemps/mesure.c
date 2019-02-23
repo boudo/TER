@@ -39,7 +39,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
     if (fichier != NULL)
     {
     	fprintf(fichier,"  Fermat    Miller  Strassen\n");
-    	for(int i=1; i<=5; i++){
+    	for(int i=1; i<=40; i++){
     		fprintf(fichier,"%d ", i);
     		if(i != 1){
     			generNbrPremier(nbrPremier,i,nbrIteration);
