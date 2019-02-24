@@ -9,7 +9,6 @@
 #include "../liste/liste.h"
 #include "../liste/listegmp.h"
 
-liste crible_era(int n);
-listegmp crible_era_gmp(mpz_t n);
+listegmp Eratosthene(mpz_t n);
 
 #endif

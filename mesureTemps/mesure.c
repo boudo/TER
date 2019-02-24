@@ -31,6 +31,7 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration) {
 }
 
 void mesureTempsFichier(char *nomFichier,int nbrIteration) {
+	listegmp lg = creer_listegmp();
 	FILE* fichier = NULL;
 	fichier = fopen(nomFichier, "w");
  	float temps;
@@ -39,7 +40,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
     mpz_inits(nbrPremier,NULL);
     if (fichier != NULL)
     {
-    	fprintf(fichier,"  Fermat    Miller  Strassen   Erasto\n");
+    	fprintf(fichier,"  Fermat    Miller  Strassen   Eratos\n");
     	for(int i=1; i<=10; i++){
     		fprintf(fichier,"%d ", i);
     		if(i != 1){
@@ -68,9 +69,10 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
 	        fprintf(fichier,"%f ", temps);
 	        if(i != 1){
 	        t1 = clock();
-	    	crible_era_gmp(nbrPremier);
+	    	lg = Eratosthene(nbrPremier);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	    	lg = libere_listegmp(lg);
 	    	}else {
 	        	temps = 0.000000;
 	        }

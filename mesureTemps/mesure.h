@@ -7,6 +7,7 @@
 #include <time.h>
 
 #include "../testProbabilistes/testProbabilistes.h"
+#include "../crible/crible.h"
 
 
 int estPremier(mpz_t nombre,int nombreIteration);

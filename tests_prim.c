@@ -133,7 +133,7 @@ int main()
  	//~ mpz_clears(tss,tfou,NULL);*/
 
 
-	int test, test1;
+	int test, test1, test2;
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
  	for (int i = 1; i < 100; ++i)
@@ -142,9 +142,11 @@ int main()
  	
  		test = Fermat(m_test,25);
  		test1 = Miller_Rabin(m_test, 25);
+ 		// test2 = solovayStrassen(m_test, 25);
  		printf("%d\n", i);
  		printf("fermat = %d\n", test);
  		printf("miller = %d\n", test1);
+ 		// printf("trassen  = %d\n", test2);
  		// if (test == 0)
  		// {
  		// 	printf("%d est composé\n", i);
@@ -153,12 +155,19 @@ int main()
  		// {
  		// 	printf("%d est premier\n", i);	
  		// }
- 	}
+ 	}	mpz_set_ui(m_test,2147483647);
+ 		test = Fermat(m_test,25);
+ 		test1 = Miller_Rabin(m_test, 25);
+ 		// test2 = solovayStrassen(m_test, 25);
+ 		printf("%d\n", 2147483647);
+ 		printf("fermat = %d\n", test);
+ 		printf("miller = %d\n", test1);
+ 		// printf("trassen  = %d\n", test2);
  	mpz_clears(m_test, NULL);
 
  	gmp_printf("\n###################### generation nbr premier ######################\n\n");
 
- 	mesureTempsFichier("mesureTemps/mesure.txt",10);
+ 	// mesureTempsFichier("mesureTemps/mesure.txt",10);
 
 	return 0;
 }

@@ -114,37 +114,7 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 	}
 }
 
-
-void decomposition(mpz_t x,mpz_t s,mpz_t t) // Fonction qui décompose un entier x en 2^s * t
-{                                    
-	mpz_t y,S_pow, deux;
-	mpz_inits(y,S_pow, deux, NULL);
-
-	mpz_set_ui(y,0);
-	mpz_set_ui(deux, 2);
-
-	while(mpz_cmp(y,x)!=0) // Tant que on trouve pas 2^s * t = x
-	{//printf("ici dans decom while 1\n"); // boucle infini
-        mpz_set_ui(t,1); //On recommence avec t = 1
-        mpz_mul(y,S_pow,t);// y = 2^s * t (on test les valeurs)
-
-        while(mpz_cmp(y,x) < 0)// On arrette de tester quand 2^s * t > x
-        {//printf("ici dans decom while 2\n");        //
-			mpz_add_ui(t,t,2); // t est impair donc on l'incremente de 2 en 2
-			
-			//deux_pow(S_pow,s);
-			expoRapide(S_pow, deux, s);
-			mpz_mul(y,S_pow,t);
-        }
-        
-        mpz_add_ui(s,s,1); // on test avec la puissante de 2 suivante
-	}
-	mpz_sub_ui(s,s,1);
-
-	mpz_clears(y,S_pow, deux,NULL);
-}
-
-void decomposition1(mpz_t s,mpz_t d, mpz_t nMoins1)
+void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1)
 {
 	mpz_set_ui(s, 0);
 	mpz_set_ui(d,0);

@@ -15,11 +15,11 @@ int Fermat(mpz_t n, int iter)
 		return 1;
 	}
 	
-	mpz_t pg, sqm, alea, expo;
+	mpz_t pg, sqm, alea, nMoins1;
 	gmp_randstate_t state;
-	mpz_inits(pg, sqm, alea, expo, NULL);
+	mpz_inits(pg, sqm, alea, nMoins1, NULL);
 	gmp_randinit_mt(state);
-	mpz_sub_ui(expo, n, 1); // expo = n - 1
+	mpz_sub_ui(nMoins1, n, 1); // nMoins1 = n - 1
 	for(int i=0; i<iter; i++)
 	{	
 		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
@@ -36,29 +36,29 @@ int Fermat(mpz_t n, int iter)
 		if (mpz_cmp_ui(pg, 1) != 0)
 		{
 			// gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
-			mpz_clears(pg, sqm, alea, expo, NULL);
+			mpz_clears(pg, sqm, alea, nMoins1, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
-		//mpz_sub_ui(expo, n, 1);printf("Fermat\n");
-		// mpz_set(expo, n);
-		// mpz_sub_ui(expo, n, 1);
+		//mpz_sub_ui(nMoins1, n, 1);printf("Fermat\n");
+		// mpz_set(nMoins1, n);
+		// mpz_sub_ui(nMoins1, n, 1);
 		//printf("debut\n");
-		squareAndMultiply(sqm, alea, expo, n);
+		squareAndMultiply(sqm, alea, nMoins1, n);
 		//printf("debut\n");
-		//mpz_powm(sqm, alea, expo, n);
+		//mpz_powm(sqm, alea, nMoins1, n);
 		//printf("Fermat\n");
 		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
-			// gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
-			mpz_clears(pg, sqm, alea, expo, NULL);
+			// gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, nMoins1, n, pg);
+			mpz_clears(pg, sqm, alea, nMoins1, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
 	}
 
 	// gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
-	mpz_clears(pg, sqm, alea, expo, NULL);
+	mpz_clears(pg, sqm, alea, nMoins1, NULL);
 	gmp_randclear(state);
 	return 1;
 }
@@ -109,49 +109,49 @@ int Miller_Rabin(mpz_t n, int rep)
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 {//printf("ici dans temoin\n");
-	mpz_t s, d, nMoins1, x, i, tmp, deux, tmp1;
-	mpz_inits(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+	mpz_t s, d, nMoins1, modul, i, tmp, deux, tmp1;
+	mpz_inits(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 
 	mpz_set_ui(deux, 2);
 	mpz_sub_ui(nMoins1, n, 1);
 	//printf("ici dans temoin test decomposition\n");
 	// decomposition(nMoins1, s, d);
-	decomposition1(s, d, nMoins1);
+	decomposition(s, d, nMoins1);
 	//printf("ici dans temoin\n");
-	squareAndMultiply(x, a, d, n);
+	squareAndMultiply(modul, a, d, n);
 	//printf("ici dans temoin ok\n");
-	if(mpz_cmp_ui(x, 1) == 0 || mpz_cmp(x, nMoins1) == 0)
+	if(mpz_cmp_ui(modul, 1) == 0 || mpz_cmp(modul, nMoins1) == 0)
 	{
 		// printf("ce nombre n'est pas un temoin de composition 1\n");
 		mpz_set_ui(res, 0);
-		mpz_clears(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 		return ;
 	}
 	for(mpz_set_ui(i,1); mpz_cmp(i,s) < 0; mpz_add_ui(i, i, 1))
 	{
 		expoRapide(tmp, deux, i);
 		mpz_mul(tmp1, d, tmp);
-		squareAndMultiply(x, a, tmp1, n);
-		if(mpz_cmp(x, nMoins1) == 0)
+		squareAndMultiply(modul, a, tmp1, n);
+		if(mpz_cmp(modul, nMoins1) == 0)
 		{
 			// printf("ce nombre n'est pas un temoin de composition 2\n");
 			mpz_set_ui(res, 0);
-			mpz_clears(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 			return ;
 		}
-		if(mpz_cmp_ui(x, 1) == 0)
+		if(mpz_cmp_ui(modul, 1) == 0)
 		{
 			// printf("ce nombre est un temoin de composition 2\n");
 			mpz_set_ui(res, 1);
-			mpz_clears(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 			return ;
 		}
 
 	}
 	expoRapide(tmp, deux, s);
 	mpz_mul(tmp1, d, tmp);
-	squareAndMultiply(x, a, tmp1, n);
-	if(mpz_cmp_ui(x, 1) == 0)
+	squareAndMultiply(modul, a, tmp1, n);
+	if(mpz_cmp_ui(modul, 1) == 0)
 	{	
 		// gmp_printf("s %Zd\n", s);
 		// gmp_printf("d %Zd\n", d);
@@ -161,13 +161,13 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 		// gmp_printf("modul %Zd\n", x);
 		// printf("ce nombre n'est pas un temoin de composition 3\n");
 		mpz_set_ui(res, 0);
-		mpz_clears(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 		return ;
 	}
 
 	// printf("ce nombre est un temoin de composition 4\n");
 	mpz_set_ui(res, 1);
-	mpz_clears(s, d, nMoins1,x, i, tmp, deux, tmp1, NULL);
+	mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
 	return ;
 }
 
