@@ -97,7 +97,7 @@ int main()
  	//~ mpz_t lg_a,lg_era;
  	//~ mpz_inits(lg_a,lg_era,NULL);
  	
- 	//~ mpz_set_ui(lg_era,2);
+ 	//~ mpz_set_ui(lg_era,3);
  	//~ //mpz_set_ui(lg_a,2);
  	
  	//~ //lg=ajoute_elem_debutgmp(lg,lg_a);
@@ -108,8 +108,24 @@ int main()
  	//~ affiche_listegmp(lg);
  	
  	//~ libere_listegmp(lg);
+ 	//~ mpz_clears(lg_a,lg_era,NULL);
  	
  	//~mpz_clears(pgcd_r,d_a,d_r,d_exp,pgcd_a,pgcd_b,f,e_a,e_exp, sm_r,a,n,h,lg_a,lg_era,NULL);//Clears
+ 	
+ 	//~ gmp_printf("\n###################### Test Crible GMP OPTI MAX ######################\n\n");
+ 
+ 	//~ mpz_t res_test;
+ 	//~ mpz_inits(res_test,NULL);
+ 	//~ int res;
+ 	
+ 	//~ mpz_set_ui(res_test,4);
+ 
+ 	//~ res=Test_Era(res_test);
+ 	
+ 	//~ gmp_printf("%Zd == %d (1=premier,0=composé,-1=erreur)",res_test,res);
+ 	
+ 	//~ mpz_clears(res_test,NULL);
+ 	
  	//~ gmp_printf("\n###################### Test Miller ######################\n\n");
  	
  	//~ mpz_t m_test;

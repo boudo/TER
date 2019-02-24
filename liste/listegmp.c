@@ -9,13 +9,14 @@ listegmp creer_listegmp()
 	return NULL;
 }
 
-listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i)
+listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i,int p)
 {
 	listegmp new = malloc(sizeof(struct elemgmp));
 	
 	mpz_init(new->val);
 	mpz_set(new->val,i);
 	
+	new->primalite = p;
 	new->suiv = l;
 	
 	return new;
@@ -30,7 +31,6 @@ int est_videgmp(listegmp l)
 
 void affiche_listegmp(listegmp l)
 {
-	
 	if(est_videgmp(l))
 	{
 		gmp_printf("La liste est vide \n");
@@ -38,7 +38,7 @@ void affiche_listegmp(listegmp l)
 	}
 	while(l)
 	{
-		gmp_printf("%Zd ",l->val);
+		gmp_printf("%Zd(%d) ",l->val,l->primalite);
 		l = l->suiv;
 	}
 	gmp_printf("\n");
@@ -51,7 +51,7 @@ listegmp libere_listegmp(listegmp l)
 	while(l)
 	{
 		tmp = l->suiv;
-		//printf("libération de %d\n",l->val);
+
 		mpz_clears(l->val,NULL);
 		free(l);
 		l = tmp;
