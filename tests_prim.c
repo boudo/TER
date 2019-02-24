@@ -41,6 +41,7 @@ int main()
  		printf("%d\n", i);
  		printf("fermat = %d\n", test);
  		printf("miller = %d\n", test1);
+ 		// printf("trassen  = %d\n", test2);
  		
  	}	
  	mpz_set_ui(m_test,2147483647);

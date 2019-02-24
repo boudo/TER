@@ -59,7 +59,6 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
 }
 
 void mesureTempsFichier(char *nomFichier,int nbrIteration) {
-	listegmp lg = creer_listegmp();
 /*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
  *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
  *  \param nomFichier : nom du Fichier où seront stockés les mesures

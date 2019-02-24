@@ -291,7 +291,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 			return 0;
 		}
 	}
-	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,NULL);
+	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM, exposant, itt, NULL);
 	gmp_randclear(state);
 	return 1;
 }
