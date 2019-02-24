@@ -6,23 +6,36 @@
 int Fermat(mpz_t n, int iter)
 {
 	//printf("taille = %d\n", iter);
+	if(mpz_cmp_ui(n,2) < 0)
+	{
+		return 0;
+	}
+	if(mpz_cmp_ui(n, 2) == 0 || mpz_cmp_ui(n, 3) == 0)
+	{
+		return 1;
+	}
+	
 	mpz_t pg, sqm, alea, expo;
 	gmp_randstate_t state;
 	mpz_inits(pg, sqm, alea, expo, NULL);
 	gmp_randinit_mt(state);
 	mpz_sub_ui(expo, n, 1); // expo = n - 1
 	for(int i=0; i<iter; i++)
-	{
-		gmp_randseed_ui(state, time(NULL));
+	{	
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
 		mpz_urandomm (alea , state , n);
-		if(mpz_cmp_ui(alea, 3) < 0)
+		// gmp_printf("alea = %Zd\n", alea);
+
+		if(mpz_cmp_ui(alea, 2) < 0)
 		{
-			mpz_add_ui(alea, alea, 3);
+			mpz_add_ui(alea, alea, 2);
 		}
+		// gmp_printf("alea = %Zd\n", alea);
+
 		pgcd(pg, n, alea);
 		if (mpz_cmp_ui(pg, 1) != 0)
 		{
-			gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
+			// gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
 			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
@@ -37,7 +50,7 @@ int Fermat(mpz_t n, int iter)
 		//printf("Fermat\n");
 		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
-			gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
+			// gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
 			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
@@ -45,7 +58,7 @@ int Fermat(mpz_t n, int iter)
 	}
 
 
-	gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
+	// gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
 	mpz_clears(pg, sqm, alea, expo, NULL);
 	gmp_randclear(state);
 	return 1;
@@ -54,6 +67,15 @@ int Fermat(mpz_t n, int iter)
 // ************* Miller ***************************
 int Miller_Rabin(mpz_t n, int rep)
 {
+	if(mpz_cmp_ui(n,2) < 0)
+	{
+		return 0;
+	}
+	if(mpz_cmp_ui(n, 2) == 0 || mpz_cmp_ui(n, 3) == 0)
+	{
+		return 1;
+	}
+
 	mpz_t nMoins1, alea, temoin;
 	mpz_inits(nMoins1, alea, temoin, NULL);
 	gmp_randstate_t state;
@@ -62,8 +84,10 @@ int Miller_Rabin(mpz_t n, int rep)
 
 	for(int i=0; i<rep; i++)
 	 { 	//printf("ici for\n");
-		gmp_randseed_ui(state, time(NULL));
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
 		mpz_urandomm (alea , state , nMoins1);
+		// gmp_printf("alea = %Zd\n", alea);
+
 		if(mpz_cmp_ui(alea, 2) < 0)
 		{//printf("ici comp\n");
 			mpz_add_ui(alea, alea, 2);

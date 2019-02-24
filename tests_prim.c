@@ -132,22 +132,26 @@ int main()
  	}
  	mpz_clears(tss,tfou,NULL);*/
 
-	int test;
+	int test, test1;
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
- 	for (int i = 4; i < 100; ++i)
+ 	for (int i = 1; i < 100; ++i)
  	{
- 		mpz_set_ui(m_test,i);//composé normalement
+ 		mpz_set_ui(m_test,i);
  	
- 		test = Miller_Rabin(m_test,20);
- 		if (test == 0)
- 		{
- 			printf("%d est composé\n", i);
- 		}
- 		else
- 		{
- 			printf("%d est premier\n", i);	
- 		}
+ 		test = Fermat(m_test,25);
+ 		test1 = Miller_Rabin(m_test, 25);
+ 		printf("%d\n", i);
+ 		printf("fermat = %d\n", test);
+ 		printf("miller = %d\n", test1);
+ 		// if (test == 0)
+ 		// {
+ 		// 	printf("%d est composé\n", i);
+ 		// }
+ 		// else
+ 		// {
+ 		// 	printf("%d est premier\n", i);	
+ 		// }
  	}
  	mpz_clears(m_test, NULL);
 
