@@ -6,7 +6,7 @@
 #include <stdlib.h>
 // #include <time.h>
 
-#include "../liste/liste.h"
+#include "../crible/crible.h"
 #include "../fonctions/fonctions.h"
 
 int Fermat(mpz_t n, int iter);

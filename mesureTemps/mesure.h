@@ -8,6 +8,7 @@
 
 #include "../testProbabilistes/testProbabilistes.h"
 
+
 int estPremier(mpz_t nombre,int nombreIteration);
 
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);

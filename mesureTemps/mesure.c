@@ -1,5 +1,6 @@
 #include "mesure.h"
 
+
 int estPremier(mpz_t nombre,int nombreIteration) {
 	if(Fermat(nombre,nombreIteration) && Miller_Rabin(nombre,nombreIteration) && solovayStrassen(nombre,nombreIteration)){
 		return 1;
@@ -38,7 +39,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
     mpz_inits(nbrPremier,NULL);
     if (fichier != NULL)
     {
-    	fprintf(fichier,"  Fermat    Miller  Strassen\n");
+    	fprintf(fichier,"  Fermat    Miller  Strassen   Erasto\n");
     	for(int i=1; i<=10; i++){
     		fprintf(fichier,"%d ", i);
     		if(i != 1){
@@ -64,6 +65,15 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        fprintf(fichier,"%f ", temps);
+	        if(i != 1){
+	        t1 = clock();
+	    	crible_era_gmp(nbrPremier);
+	    	t2 = clock();
+	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	    	}else {
+	        	temps = 0.000000;
+	        }
 	        fprintf(fichier,"%f\n", temps);
     	}
     	
