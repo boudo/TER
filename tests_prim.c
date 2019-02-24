@@ -79,14 +79,14 @@ int main()
 	gmp_randclear(state);
 
 
- 	gmp_printf("\n###################### generation nbr premier ######################\n\n");
- 	float temps;
-    clock_t t1, t2;
- 	t1 = clock();
-	mesureTempsFichier("mesureTemps/mesure.txt",10,1024);
-	t2 = clock();
-	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    printf("temp : %f\n", temps);
+ // 	gmp_printf("\n###################### generation nbr premier ######################\n\n");
+ // 	float temps;
+ //    clock_t t1, t2;
+ // 	t1 = clock();
+	// mesureTempsFichier("mesureTemps/mesure.txt",10,1024);
+	// t2 = clock();
+	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+ //    printf("temp : %f\n", temps);
 
 
 	return 0;

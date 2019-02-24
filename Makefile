@@ -6,8 +6,8 @@ run: clean principal
 
 principal: test
 	#time ./test
-	#valgrind ./test
-	./test
+	valgrind ./test
+	#./test
 
 test: tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o liste.o listegmp.o
 	gcc -o test tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o liste.o listegmp.o -lgmp
