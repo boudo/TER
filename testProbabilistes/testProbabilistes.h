@@ -6,7 +6,7 @@
 #include <stdlib.h>
 // #include <time.h>
 
-#include "../liste/liste.h"
+#include "../crible/crible.h"
 #include "../fonctions/fonctions.h"
 
 int Fermat(mpz_t n, int iter);
@@ -17,6 +17,6 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 
 void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b);
 
-int solovayStrassen(mpz_t aTraiter, mpz_t iterations);
+int solovayStrassen(mpz_t aTraiter, int iterations);
 
 #endif
