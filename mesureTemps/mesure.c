@@ -35,10 +35,8 @@ int estPremier(mpz_t nombre,int nombreIteration)
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration) 
 {
 	mpz_t bornSup,bornInf,diff,exposant,exposer,alea;
-	gmp_randstate_t state;
 	
 	mpz_inits(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
-	gmp_randinit_mt(state);
 	
 	mpz_set_ui(exposer,2);
 	mpz_set_ui(exposant,nbrBit);
@@ -48,17 +46,17 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
 	
 	expoRapide(bornInf,exposer,exposant);
 	mpz_sub(diff,bornSup,bornInf);
-	
+	mpz_add_ui(alea,bornInf,1);
+	//gmp_printf("chiffre : %Zd\n",bornInf);
 	do {
-		gmp_randseed_ui(state, time(NULL));
-		mpz_urandomm (alea , state , diff);
+		mpz_add_ui(alea,alea,2);
 		mpz_add(resultat,alea,bornInf);
 	}while(!estPremier(resultat,nombreIteration));
-	
+	//gmp_printf("chiffre : %Zd\n",resultat);
 	mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
 }
 
-void mesureTempsFichier(char *nomFichier,int nbrIteration) {
+void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
 /*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
  *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
  *  \param nomFichier : nom du Fichier où seront stockés les mesures
@@ -75,8 +73,9 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
     
     if(fichier != NULL)
     {
-    	fprintf(fichier,"  Fermat    Miller  Strassen   Eratos\n");
-    	for(int i=1; i<=10; i++){
+    	//fprintf(fichier,"  Fermat    Miller  Strassen   Eratos\n");
+    	fprintf(fichier,"  Fermat    Miller  Strassen\n");
+    	for(int i=1; i<=nbrBitMax; i++){
     		fprintf(fichier,"%d ", i);
     		
     		if(i != 1)
@@ -116,21 +115,21 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	        fprintf(fichier,"%f ", temps);
+	        fprintf(fichier,"%f\n", temps);
 	        
 	        //Erastothene
-	        if(i != 1)
-	        {
-				t1 = clock();
-				Eratosthene(nbrPremier);
-				t2 = clock();
-				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	    	}	
-	    	else 
-	    	{
-	        	temps = 0.000000;
-	        }
-	        fprintf(fichier,"%f\n", temps);
+	   //      if(i != 1)
+	   //      {
+				// t1 = clock();
+				// Eratosthene(nbrPremier);
+				// t2 = clock();
+				// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	   //  	}	
+	   //  	else 
+	   //  	{
+	   //      	temps = 0.000000;
+	   //      }
+	   //      fprintf(fichier,"%f\n", temps);
 	        //***
     	}
     	
