@@ -1,13 +1,36 @@
 #include "mesure.h"
 
+/*! \file      mesure.c
+ *  \brief     Fichier contenant les tests de mesures
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
 
-int estPremier(mpz_t nombre,int nombreIteration) {
-	if(Fermat(nombre,nombreIteration) && Miller_Rabin(nombre,nombreIteration) && solovayStrassen(nombre,nombreIteration)){
+/*! \fn int estPremier(mpz_t nombre,int nombreIteration)
+ *  \brief Fonction qui permet de dire si un nombre est premier ou non
+ *  \param nombre : nombre à tester
+ *  \param nombreIteration : nombre d'iterations
+ * 	\return retourne 1 si premier sinon 0
+ */
+int estPremier(mpz_t nombre,int nombreIteration) 
+{
+	if(Fermat(nombre,nombreIteration) && Miller_Rabin(nombre,nombreIteration) && solovayStrassen(nombre,nombreIteration))
+	{
 		return 1;
 	}
+	
 	return 0;
 }
 
+/*! \fn void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
+ *  \brief Fonction qui permet de generer un nombre premier
+ *  \param resultat : nombre à tester
+ *  \param nbrBit : nombrede bits
+ *  \param nombreIteration : nombre d'iterations
+ */
 //fonction de generation d'un nombre prenier a n bits
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration) 
 {
@@ -35,6 +58,11 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
 	mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
 }
 
+/*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
+ *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
+ *  \param nomFichier : nom du Fichier où seront stockés les mesures
+ *  \param nbrIteration : nombre d'iterations
+ */
 void mesureTempsFichier(char *nomFichier,int nbrIteration) 
 {
 	FILE* fichier = NULL;

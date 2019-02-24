@@ -1,5 +1,19 @@
 #include "crible.h"
 
+/*! \file      crible.c
+ *  \brief     Fichier contenant le crible d'erastotene
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
+
+/*! \fn listegmp crible_era_gmp(mpz_t n)
+ *  \brief Fonction qui renvoie les nombres composés et premiers jusqu'à n
+ *  \param n : entier n
+ *  \return retourne la liste contenant les nombres composés et premiers de 2 jusqu'à n
+ */
 listegmp crible_era_gmp(mpz_t n)//amelioré avec la condition des multiples de nbr 1er qui sont composés
 {
 	mpz_t i,j,x,borne_sup_premier,carre_val_prim,multiple_val;
@@ -64,6 +78,11 @@ listegmp crible_era_gmp(mpz_t n)//amelioré avec la condition des multiples de n
 	return lg;
 }
 
+/*! \fn int Test_Era(mpz_t n)
+ *  \brief Fonction Deterministe qui utilise le crible d'erastotene pour dire si un nombre est premier ou non
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé et -1 si erreur
+ */
 int Test_Era(mpz_t n)
 {
 	//Si n < 2
