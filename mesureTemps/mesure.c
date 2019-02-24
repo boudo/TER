@@ -39,7 +39,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
     if (fichier != NULL)
     {
     	fprintf(fichier,"  Fermat    Miller  Strassen\n");
-    	for(int i=1; i<=40; i++){
+    	for(int i=1; i<=10; i++){
     		fprintf(fichier,"%d ", i);
     		if(i != 1){
     			generNbrPremier(nbrPremier,i,nbrIteration);
@@ -51,10 +51,14 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration) {
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	        fprintf(fichier,"%f ", temps);
-	        t1 = clock();
-	    	Miller_Rabin(nbrPremier,nbrIteration);
-	    	t2 = clock();
-	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        if(i != 1){
+	        	t1 = clock();
+		    	Miller_Rabin(nbrPremier,nbrIteration);
+		    	t2 = clock();
+		    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	        }else {
+	        	temps = 0.000000;
+	        }
 	        fprintf(fichier,"%f ", temps);
 	        t1 = clock();
 	    	solovayStrassen(nbrPremier,nbrIteration);

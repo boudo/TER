@@ -135,7 +135,7 @@ int main()
 	int test;
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
- 	for (int i = 4; i < 100; ++i)
+ 	for (int i = 2; i < 100; ++i)
  	{
  		mpz_set_ui(m_test,i);//composé normalement
  	

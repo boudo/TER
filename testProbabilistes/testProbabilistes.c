@@ -22,7 +22,7 @@ int Fermat(mpz_t n, int iter)
 		pgcd(pg, n, alea);
 		if (mpz_cmp_ui(pg, 1) != 0)
 		{
-			gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
+			//gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
 			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
@@ -37,7 +37,7 @@ int Fermat(mpz_t n, int iter)
 		//printf("Fermat\n");
 		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
-			gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
+			//gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, expo, n, pg);
 			mpz_clears(pg, sqm, alea, expo, NULL);
 			gmp_randclear(state);
 			return 0;
@@ -45,7 +45,7 @@ int Fermat(mpz_t n, int iter)
 	}
 
 
-	gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
+	//gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
 	mpz_clears(pg, sqm, alea, expo, NULL);
 	gmp_randclear(state);
 	return 1;
@@ -240,7 +240,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations) {
 			return 0;
 		}
 	}
-	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,itt,NULL);
+	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,NULL);
 	gmp_randclear(state);
 	return 1;
 }
