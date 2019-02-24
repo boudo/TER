@@ -1,5 +1,20 @@
 #include "fonctions.h"
 
+/*! \file      fonctions.c
+ *  \brief     Fichier contenant les différentes fonctions nécessaires au bon fonctionnement du programme
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
+
+/*! \fn void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) 
+ *  \brief Fonction qui calcule le pgcd entre a et b
+ *  \param resultat : resultat
+ *  \param a : nombre a
+ *  \param b : nombre b
+ */
 void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
 {
 	if(mpz_cmp(a,b) == 0)
@@ -39,6 +54,13 @@ void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
 	}
 }
 
+/*! \fn void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
+ *  \brief Fonction qui calcule le square and multiply
+ *  \param resultat : resultat
+ *  \param x : entier x
+ *  \param expo : exposant
+ *  \param modul : modulo
+ */
 void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
 {
 	mpz_set(resultat, x);
@@ -63,6 +85,11 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 	expoB = libere_liste(expoB);
 }
 
+/*! \fn liste expoEnBin(const mpz_t expo)
+ *  \brief Fonction qui calcule l'exponention binaire
+ *  \param expo : exposant
+ *  \return retourne la liste contenant le nombre en binaire
+ */
 liste expoEnBin(const mpz_t expo)
 {
 	int r = 0;
@@ -85,9 +112,14 @@ liste expoEnBin(const mpz_t expo)
 	return maListe;
 }
 
+/*! \fn void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
+ *  \brief Fonction qui calcule l'exponention rapide
+ *  \param resultat : resultat
+ *  \param x : entier x
+ *  \param expo : exposant
+ */
 void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 {
-
 	if(mpz_cmp_ui(expo, 0) == 0)
 	{
 		mpz_set_ui(resultat, 1);
@@ -114,6 +146,13 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 	}
 }
 
+
+/*! \fn void decomposition(mpz_t s,mpz_t d,mpz_t nMoins1)
+ *  \brief Fonction qui decompose un entier x en 2^s * d
+ *  \param s : entier s
+ *  \param d : exposant d
+ *  \param nMoins1 : entier nMoins1
+ */
 void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1)
 {
 	mpz_set_ui(s, 0);

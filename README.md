@@ -2,15 +2,20 @@
 
 Travail a faire :
 
+## faire le TRI des fonctions + listes.c et .h 
+	essayer de traduire les fonctions que ta besoin en listegmp ibra comme ca on aura
+	pas de galere.
+    voir les 2 fonctions de decomposition et en eliminer une
+    Verifier le doxygen svp (pour le jacobi arezki faut que tu regardes)
+
 ## Test de Lucas
 	A implementer (nombre de mersen)
 
 ## Test de Pepin
 	A implementer
 
-## Cribe d' Erastotene
-	version basic a ameliorer
-	https://www.commentcamarche.net/faq/7646-verifier-si-un-nombre-entier-est-un-nombre-premier-en-c
+## Cribe d' Erastotene(FINI)
+	tester les valeurs svp !!!
 
 ## Generer des nombres premiers
 	A implementer
@@ -21,6 +26,3 @@ Travail a faire :
 
 ## Afficher les resultats sur un graphe
 	A implementer
-
-
-pour erastotene : https://www.commentcamarche.net/faq/7646-verifier-si-un-nombre-entier-est-un-nombre-premier-en-c

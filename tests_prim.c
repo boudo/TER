@@ -12,6 +12,19 @@
 #include "testProbabilistes/testProbabilistes.h"
 #include "liste/listegmp.h"
 
+/*! \file      tests_prim.c
+ *  \brief     Fichier contenant le programme principal
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
+
+/*! \fn int main()
+ *  \brief Fonction qui exécute le programme
+ *  \return retourne 0 une fois terminé
+ */
 int main()
 {
 	

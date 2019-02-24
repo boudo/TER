@@ -1,7 +1,22 @@
 #include "testProbabilistes.h"
 // #include "../fonctions/fonctions.h"
 
+/*! \file      testProbabilistes.c
+ *  \brief     Fichier contenant les différents tests probabilistes
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
 
+
+/*! \fn int Fermat(mpz_t n, int iter)
+ *  \brief Fonction test de Fermat qui permet de tester si un nombre est premier ou non
+ *  \param n : nombre à tester
+ *  \param iter : nombre d'iterations
+ *  \return retourne 1 si premier ou sinon 0
+ */
 // ************* Fermat ***************************
 int Fermat(mpz_t n, int iter)
 {
@@ -63,6 +78,12 @@ int Fermat(mpz_t n, int iter)
 	return 1;
 }
 
+/*! \fn int Miller_Rabin(mpz_t n, int rep)
+ *  \brief Fonction test de Miller_Rabin qui permet de tester si un nombre est premier ou non
+ *  \param n : nombre à tester
+ *  \param rep : nombre d'iterations
+ *  \return retourne 1 si premier sinon 0
+ */
 // ************* Miller ***************************
 int Miller_Rabin(mpz_t n, int rep)
 {
@@ -106,7 +127,12 @@ int Miller_Rabin(mpz_t n, int rep)
 	return 1;
 }
 
-
+/*! \fn void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
+ * 	\brief Fonction permettant de trouver les temoins de Miller
+ * 	\param res : On renvoie le resultat.
+ * 	\param a : a est le futur temoin de miller(ou non)
+ * 	\param n : n est le nombre à tester
+ */
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 {//printf("ici dans temoin\n");
 	mpz_t s, d, nMoins1, modul, i, tmp, deux, tmp1;
@@ -172,18 +198,20 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 }
 
 
-/**
-* Cette fonction permet de calculer le Symbole de jacobi (a/p) et de determiner si
-* si p divise a ou pas ainsi que si a est un résidu quadratique modulo p ou non
-* @param resultat : On renvoi le resultat.
-* @param a : a est un résidu quadratique ou non de b
-* @param b 
-*/
-void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b) {
+/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+ * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
+ * 	\param resultat : On renvoie le resultat.
+ * 	\param a : a est un résidu quadratique ou non de b
+ * 	\param b : b est un residu quadratique ou non de a ?
+ */
+void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+{
 	mpz_t tmp,tmp2,i,tmpa,tmpb;
 	mpz_inits(tmp,tmp2,i,tmpa,tmpb,NULL); // on initialise la liste de variable
+	
 	mpz_set(tmpa,a);
 	mpz_set(tmpb,b);
+	
 	mpz_mod_ui(tmp,tmpb,2); // tmp = b % 2
 	//Si b % 2 est egale a 0 ou b = 0
 	if ( mpz_cmp_ui(tmpb,0) <= 0 || mpz_cmp_ui(tmp,0) == 0 )
@@ -218,14 +246,14 @@ void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b) {
 	mpz_clears(tmp,tmp2,i,tmpa,tmpb,NULL); // on libere la mémoire 
 }
 
-/**
-* Cette fonction permet de calculer si un nombre est premier ou composé.
-* @param aTraiter : le nombre que l'on désire traiter.
-* @param iterations : le nombre d'iterations que l'on désire faire lors du teste.
-* @return on return 1 s'il est premier ou bien 0 s'il est composé
-*/
-int solovayStrassen(mpz_t aTraiter, int iterations) {
-	
+/*! \fn int solovayStrassen(mpz_t aTraiter, int iterations)
+ *  \brief Fonction permettant de calculer si un nombre est premier ou composé.
+ *  \param aTraiter : le nombre que l'on désire traiter.
+ *  \param iterations : le nombre d'iterations que l'on désire faire lors du teste.
+ *  \return on retourne 1 s'il est premier ou bien 0 s'il est composé
+ */
+int solovayStrassen(mpz_t aTraiter, int iterations) 
+{	
 	if (mpz_cmp_ui(aTraiter,2) < 0)
 		return 0;
 	
@@ -252,7 +280,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations) {
 	for (mpz_set_ui(i,0); mpz_cmp(i,itt) < 0; mpz_add_ui(i, i, 1)) {
 		//on creer notre nombre aleatoire
 		mpz_urandomm(randomNumber,state,tmp);
-		mpz_add_ui(randomNumber, randomNumber, 2); // on reajoute le 2 qu'on a soustrait precedemment
+		mpz_add_ui(randomNumber, randomNumber, 2); // on rajoute le 2 qu'on a soustrait precedemment
 		jacobiSymbol(resultatJ, randomNumber, aTraiter);
 		squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
