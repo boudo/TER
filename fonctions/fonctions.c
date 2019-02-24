@@ -65,7 +65,7 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 {
 	mpz_set(resultat, x);
 	liste expoB = creer_liste();
-	expoB = expoEnBin(expo);
+	expoB = getBinaire(expo);
 	//printf("OK pour expoBinMPZ\n");
 	expoB = supprime_elem_debut(expoB);
 
@@ -85,12 +85,12 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 	expoB = libere_liste(expoB);
 }
 
-/*! \fn liste expoEnBin(const mpz_t expo)
- *  \brief Fonction qui calcule l'exponention binaire
+/*! \fn liste getBinaire(const mpz_t expo)
+ *  \brief Fonction qui calcule l'exposant en binaire
  *  \param expo : exposant
  *  \return retourne la liste contenant le nombre en binaire
  */
-liste expoEnBin(const mpz_t expo)
+liste getBinaire(const mpz_t expo)
 {
 	int r = 0;
 	liste maListe = creer_liste();
@@ -128,7 +128,7 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 
 	mpz_set(resultat, x);
 	liste expoB = creer_liste();
-	expoB = expoEnBin(expo);
+	expoB = getBinaire(expo);
 	// printf("expo en bin\n");
 	// affiche_liste(expoB);
 	expoB = supprime_elem_debut(expoB);
@@ -180,4 +180,10 @@ void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1)
 	mpz_div(d, nMoins1, tmp1);
 	// gmp_printf("ici d = %Zd\n", d);
 	mpz_clears(tmp, tmp1, deux,res, NULL);
+}
+
+void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n)
+{
+	gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+	mpz_urandomb(alea, state, n);
 }

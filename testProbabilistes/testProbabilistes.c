@@ -243,6 +243,8 @@ void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b)
 	}
 	if (mpz_cmp_ui(tmpb,1) == 0){ mpz_set(resultat,i); } //Si b = 1
 	else mpz_set_ui(resultat,0);
+
+	
 	mpz_clears(tmp,tmp2,i,tmpa,tmpb,NULL); // on libere la mémoire 
 }
 
@@ -287,7 +289,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 		mpz_sub(tmp,resultatM,aTraiter);
 		if(mpz_cmp_ui(resultatJ,0) == 0 && (mpz_cmp(resultatJ,resultatM) != 0 || mpz_cmp(resultatJ,tmp) != 0)){
 
-			mpz_clears(i,randomNumber,tmp,resultatJ,resultatM,NULL);
+			mpz_clears(i,randomNumber,tmp,resultatJ, exposant, itt, resultatM,NULL);
 			return 0;
 		}
 	}

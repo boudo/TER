@@ -14,10 +14,10 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo);
 
 void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul);
 
-liste expoEnBin(const mpz_t expo);
+liste getBinaire(const mpz_t expo);
 
-void decomposition(mpz_t x,mpz_t s,mpz_t t);
+void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1);
 
-void decomposition1(mpz_t s,mpz_t d, mpz_t nMoins1);
+void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
 
 #endif
