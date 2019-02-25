@@ -4,7 +4,7 @@
 #include <gmp.h>
 #include <stdio.h>
 #include <stdlib.h>
-// #include <time.h>
+#include <time.h>
 
 #include "../crible/crible.h"
 #include "../fonctions/fonctions.h"

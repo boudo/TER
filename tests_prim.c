@@ -31,7 +31,7 @@ int main()
 	int test, test1, test2;
  	mpz_t m_test;
  	mpz_inits(m_test,NULL);
- 	for (int i = 1; i < 100000; ++i)
+ 	for (int i = 1; i < 10000; ++i)
  	{
  		mpz_set_ui(m_test,i);
  	
@@ -64,14 +64,14 @@ int main()
 	// gmp_randclear(state);
 
 
- // 	gmp_printf("\n###################### generation nbr premier ######################\n\n");
- // 	float temps;
- //    clock_t t1, t2;
- // 	t1 = clock();
-	// mesureTempsFichier("mesureTemps/mesure.txt",25,1024);
-	// t2 = clock();
-	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
- //    printf("temp : %f\n", temps);
+ 	gmp_printf("\n###################### generation nbr premier ######################\n\n");
+ 	float temps;
+    clock_t t1, t2;
+ 	t1 = clock();
+	mesureTempsFichier("mesureTemps/mesure.txt",25,10);
+	t2 = clock();
+	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    printf("temp : %f\n", temps);
 
 
 	return 0;

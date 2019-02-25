@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <gmp.h>
 
 #include "../liste/listegmp.h"

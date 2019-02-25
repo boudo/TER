@@ -1,5 +1,4 @@
 #include "testProbabilistes.h"
-// #include "../fonctions/fonctions.h"
 
 /*! \file      testProbabilistes.c
  *  \brief     Fichier contenant les différents tests probabilistes
