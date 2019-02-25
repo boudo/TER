@@ -46,7 +46,6 @@ int Fermat(mpz_t n, int iter)
 			mpz_add_ui(alea, alea, 2);
 		}
 		// gmp_printf("alea = %Zd\n", alea);
-
 		pgcd(pg, n, alea);
 		if (mpz_cmp_ui(pg, 1) != 0)
 		{
@@ -55,14 +54,7 @@ int Fermat(mpz_t n, int iter)
 			gmp_randclear(state);
 			return 0;
 		}
-		//mpz_sub_ui(nMoins1, n, 1);printf("Fermat\n");
-		// mpz_set(nMoins1, n);
-		// mpz_sub_ui(nMoins1, n, 1);
-		//printf("debut\n");
 		squareAndMultiply(sqm, alea, nMoins1, n);
-		//printf("debut\n");
-		//mpz_powm(sqm, alea, nMoins1, n);
-		//printf("Fermat\n");
 		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
 			// gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, nMoins1, n, pg);
@@ -258,6 +250,11 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 {	
 	if (mpz_cmp_ui(aTraiter,2) < 0)
 		return 0;
+
+	if(mpz_cmp_ui(aTraiter, 2) == 0 || mpz_cmp_ui(aTraiter, 3) == 0)
+	{
+		return 1;
+	}
 	
 	mpz_t tmp;
 	mpz_init(tmp);
@@ -273,16 +270,24 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	//on initialise tout les parametre pour avoir des nombres aleatoire
 	gmp_randstate_t state;
 	gmp_randinit_default(state);
-	gmp_randseed_ui(state,time(NULL));
-
+	// gmp_randseed_ui(state,time(NULL));
 	mpz_sub_ui(exposant,aTraiter,1); //On fait exposant-1
 	mpz_div_ui(exposant,exposant,2); // puis on fait (exposant-1)/2
-	mpz_sub_ui(tmp, aTraiter, 2); // on soustrait 2 pour avoir l'ensemble de définition compris entre 2 et n-1 pour les nombre aléatoire
+	// mpz_sub_ui(tmp, aTraiter, 2); // on soustrait 2 pour avoir l'ensemble de définition compris entre 2 et n-1 pour les nombre aléatoire
 
 	for (mpz_set_ui(i,0); mpz_cmp(i,itt) < 0; mpz_add_ui(i, i, 1)) {
 		//on creer notre nombre aleatoire
-		mpz_urandomm(randomNumber,state,tmp);
-		mpz_add_ui(randomNumber, randomNumber, 2); // on rajoute le 2 qu'on a soustrait precedemment
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+		mpz_urandomm (randomNumber , state , aTraiter);
+		// gmp_printf("randomNumber = %Zd\n", randomNumber);
+
+		// on rajoute le 2 qu'on a soustrait precedemment
+		if(mpz_cmp_ui(randomNumber, 2) < 0)
+		{//printf("ici comp\n");
+			mpz_add_ui(randomNumber, randomNumber, 2);
+		}
+
+
 		jacobiSymbol(resultatJ, randomNumber, aTraiter);
 		squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
@@ -290,6 +295,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 		if(mpz_cmp_ui(resultatJ,0) == 0 && (mpz_cmp(resultatJ,resultatM) != 0 || mpz_cmp(resultatJ,tmp) != 0)){
 
 			mpz_clears(i,randomNumber,tmp,resultatJ, exposant, itt, resultatM,NULL);
+			gmp_randclear(state);
 			return 0;
 		}
 	}
