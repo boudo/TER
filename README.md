@@ -1,5 +1,9 @@
 # TER ( chacun travaille sur sa b.....)
 
+## Generations Doxygen
+
+Il faut juste taper "doxygen" dans le terminal au niveau du fichier doxyfile(ter/).
+
 Travail a faire :
 
 ## faire le TRI des fonctions + listes.c et .h 

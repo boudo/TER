@@ -1,6 +1,6 @@
-#include "testProbabilistes.h"
+#include "testPrimalites.h"
 
-/*! \file      testProbabilistes.c
+/*! \file      testPrimalites.c
  *  \brief     Fichier contenant les différents tests probabilistes
  *  \author    ROBIN JORAN
  *  \author    BOUDO IBRAHIM
@@ -118,127 +118,6 @@ int Miller_Rabin(mpz_t n, int rep)
 	return 1;
 }
 
-/*! \fn void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
- * 	\brief Fonction permettant de trouver les temoins de Miller
- * 	\param res : On renvoie le resultat.
- * 	\param a : a est le futur temoin de miller(ou non)
- * 	\param n : n est le nombre à tester
- */
-void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
-{//printf("ici dans temoin\n");
-	mpz_t s, d, nMoins1, modul, i, tmp, deux, tmp1;
-	mpz_inits(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-
-	mpz_set_ui(deux, 2);
-	mpz_sub_ui(nMoins1, n, 1);
-	//printf("ici dans temoin test decomposition\n");
-	// decomposition(nMoins1, s, d);
-	decomposition(s, d, nMoins1);
-	//printf("ici dans temoin\n");
-	squareAndMultiply(modul, a, d, n);
-	//printf("ici dans temoin ok\n");
-	if(mpz_cmp_ui(modul, 1) == 0 || mpz_cmp(modul, nMoins1) == 0)
-	{
-		// printf("ce nombre n'est pas un temoin de composition 1\n");
-		mpz_set_ui(res, 0);
-		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-		return ;
-	}
-	for(mpz_set_ui(i,1); mpz_cmp(i,s) < 0; mpz_add_ui(i, i, 1))
-	{
-		expoRapide(tmp, deux, i);
-		mpz_mul(tmp1, d, tmp);
-		squareAndMultiply(modul, a, tmp1, n);
-		if(mpz_cmp(modul, nMoins1) == 0)
-		{
-			// printf("ce nombre n'est pas un temoin de composition 2\n");
-			mpz_set_ui(res, 0);
-			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-			return ;
-		}
-		if(mpz_cmp_ui(modul, 1) == 0)
-		{
-			// printf("ce nombre est un temoin de composition 2\n");
-			mpz_set_ui(res, 1);
-			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-			return ;
-		}
-
-	}
-	expoRapide(tmp, deux, s);
-	mpz_mul(tmp1, d, tmp);
-	squareAndMultiply(modul, a, tmp1, n);
-	if(mpz_cmp_ui(modul, 1) == 0)
-	{	
-		// gmp_printf("s %Zd\n", s);
-		// gmp_printf("d %Zd\n", d);
-		// gmp_printf("tmp %Zd\n", tmp);
-		// gmp_printf("tmp1 %Zd\n", tmp1);
-		// gmp_printf("alea %Zd\n", a);
-		// gmp_printf("modul %Zd\n", x);
-		// printf("ce nombre n'est pas un temoin de composition 3\n");
-		mpz_set_ui(res, 0);
-		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-		return ;
-	}
-
-	// printf("ce nombre est un temoin de composition 4\n");
-	mpz_set_ui(res, 1);
-	mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
-	return ;
-}
-
-
-/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
- * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
- * 	\param resultat : On renvoie le resultat.
- * 	\param a : a est un résidu quadratique ou non de b
- * 	\param b : b est un residu quadratique ou non de a ?
- */
-void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
-{
-	mpz_t tmp,tmp2,i,tmpa,tmpb;
-	mpz_inits(tmp,tmp2,i,tmpa,tmpb,NULL); // on initialise la liste de variable
-	
-	mpz_set(tmpa,a);
-	mpz_set(tmpb,b);
-	
-	mpz_mod_ui(tmp,tmpb,2); // tmp = b % 2
-	//Si b % 2 est egale a 0 ou b = 0
-	if ( mpz_cmp_ui(tmpb,0) <= 0 || mpz_cmp_ui(tmp,0) == 0 )
-		mpz_set_ui(resultat, 0);
-	mpz_set_ui(i,1);
-	if( mpz_cmp_ui(tmpa,0) < 0 ) { //Si a < 0
-		mpz_neg( tmpa, tmpa);
-		mpz_mod_ui(tmp,tmpb,4);
-		if (( mpz_cmp_ui(tmp,3) == 0)) //si b % 4 = 3
-			mpz_neg(i,i); // i =- i
-	}
-	while (mpz_cmp_ui(tmpa,0) != 0) {
-		mpz_mod_ui(tmp,tmpa,2);
-		while (mpz_cmp_ui(tmp,0) == 0) { //Tant que a % 2 = 0
-			mpz_div_ui(tmpa,tmpa,2);
-			mpz_mod_ui(tmp,tmpb,8);
-			if ((mpz_cmp_ui(tmp,3) == 0 || mpz_cmp_ui(tmp,5) == 0)) //Si b % 8 = 3 ou b % 8 = 5
-				mpz_neg(i,i);
-			mpz_mod_ui(tmp,tmpa,2);
-		}
-		mpz_set(tmp,tmpa);
-		mpz_set(tmpa,tmpb);
-		mpz_set(tmpb,tmp);
-		mpz_mod_ui(tmp,tmpa,4);
-		mpz_mod_ui(tmp2,tmpb,4);
-		if (mpz_cmp_ui(tmp,3) == 0 && mpz_cmp_ui(tmp2,3) == 0) //Si a % 4 = 3 et b % 4 = 3
-			mpz_neg(i,i);
-		mpz_mod(tmpa,tmpa,tmpb);
-	}
-	if (mpz_cmp_ui(tmpb,1) == 0){ mpz_set(resultat,i); } //Si b = 1
-	else mpz_set_ui(resultat,0);
-
-	
-	mpz_clears(tmp,tmp2,i,tmpa,tmpb,NULL); // on libere la mémoire 
-}
-
 /*! \fn int solovayStrassen(mpz_t aTraiter, int iterations)
  *  \brief Fonction permettant de calculer si un nombre est premier ou composé.
  *  \param aTraiter : le nombre que l'on désire traiter.
@@ -300,5 +179,67 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	}
 	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM, exposant, itt, NULL);
 	gmp_randclear(state);
+	return 1;
+}
+
+/*! \fn int Eratosthene(mpz_t n)
+ *  \brief Fonction Deterministe qui utilise le crible d'erastothene pour dire si un nombre est premier ou non
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé et -1 si erreur
+ */
+int Eratosthene(mpz_t n)
+{
+	//Si n < 2
+	if (mpz_cmp_ui(n, 2) < 0)
+	{
+		return -1;
+	}
+	
+	//Si n = 2
+	if (mpz_cmp_ui(n, 2) == 0)
+	{
+		return 1;
+	}
+
+	mpz_t racine_n,resteDiv,nmoins1;
+	mpz_inits(racine_n,resteDiv,nmoins1,NULL);
+
+	//Liste des nombres premiers < à racine_n
+	mpz_sqrt(racine_n,n);
+	listegmp premier = creer_listegmp();
+	
+	if(mpz_cmp_ui(n,3)==0)//Cas pour 3
+	{
+		mpz_sub_ui(nmoins1,n,1);
+		premier = crible_era_gmp(nmoins1);
+	}
+	else
+	{
+		premier = crible_era_gmp(racine_n); 
+	}
+
+	//On teste si chacun de ces nombres premiers / n
+	listegmp tmp = premier;
+
+	while (tmp->val != NULL)
+	{
+		if (tmp->primalite == 1)
+		{
+			mpz_mod(resteDiv,n,tmp->val);
+			
+			//Cas quand composé
+			if (mpz_cmp_ui(resteDiv,0) == 0 ) 
+			{
+				mpz_clears(resteDiv, racine_n,nmoins1, NULL);
+				libere_listegmp(premier);
+				return 0;
+			}
+		}
+		tmp = tmp->suiv;
+	}
+		
+	//Cas quand 1er
+	mpz_clears(resteDiv,racine_n,nmoins1,NULL);
+	libere_listegmp(premier);
 	return 1;
 }
