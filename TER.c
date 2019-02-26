@@ -2,7 +2,7 @@
 #include "mesureTemps/mesure.h"
 #include "testPrimalites/testPrimalites.h"
 
-/*! \file      tests_prim.c
+/*! \file      TER.c
  *  \brief     Fichier contenant le programme principal
  *  \author    ROBIN JORAN
  *  \author    BOUDO IBRAHIM
