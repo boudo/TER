@@ -117,21 +117,21 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	        fprintf(fichier,"%f ", temps);
+	        fprintf(fichier,"%f\n", temps);
 	        
 	        //Erastothene
-	        if(i != 1)
-	        {
-				t1 = clock();
-				Eratosthene(nbrPremier);
-				t2 = clock();
-				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	    	}	
-	    	else 
-	    	{
-	        	temps = 0.000000;
-	        }
-	         fprintf(fichier,"%f\n", temps);
+	   //      if(i != 1)
+	   //      {
+				// t1 = clock();
+				// Eratosthene(nbrPremier);
+				// t2 = clock();
+				// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	   //  	}	
+	   //  	else 
+	   //  	{
+	   //      	temps = 0.000000;
+	   //      }
+	   //       fprintf(fichier,"%f\n", temps);
 	        
     	}
     	

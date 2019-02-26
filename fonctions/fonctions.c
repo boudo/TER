@@ -523,7 +523,7 @@ void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b)
 	mpz_mod_ui(tmp,tmpb,2); // tmp = b % 2
 	//Si b % 2 est egale a 0 ou b = 0
 	if ( mpz_cmp_ui(tmpb,0) <= 0 || mpz_cmp_ui(tmp,0) == 0 )
-		mpz_set_ui(resultat, 0);
+		{mpz_set_ui(resultat, 0);return;}
 	mpz_set_ui(i,1);
 	if( mpz_cmp_ui(tmpa,0) < 0 ) { //Si a < 0
 		mpz_neg( tmpa, tmpa);
