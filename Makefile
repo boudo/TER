@@ -9,8 +9,8 @@ principal: test
 	#valgrind ./test
 	./test
 
-test: tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o listes.o 
-	gcc -o test tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o listes.o -lgmp
+test: tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o
+	gcc -o test tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o -lgmp
 
 tests_prim.o: tests_prim.c testProbabilistes/testProbabilistes.c crible/crible.c
 	gcc $(CFLAGS) tests_prim.c
@@ -26,9 +26,6 @@ crible.o: crible/crible.c crible/crible.h
 
 fonctions.o: fonctions/fonctions.c fonctions/fonctions.h
 	gcc $(CFLAGS) fonctions/fonctions.c
-
-listes.o: liste/listes.c liste/listes.h
-	gcc $(CFLAGS) liste/listes.c
 	
 clean:
 	rm -f test
