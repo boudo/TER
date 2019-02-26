@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = /home/user/Bureau/Projet_TER/ter
+OUTPUT_DIRECTORY       = /home/babatche/Bureau/UVSQ/UNIVERSITE/Veresailles/M1/S2/TERS/ter
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
