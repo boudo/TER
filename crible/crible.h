@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <gmp.h>
 
-#include "../liste/listegmp.h"
+#include "../liste/listes.h"
 
 listegmp crible_era_gmp(mpz_t n);
 int Eratosthene(mpz_t n);

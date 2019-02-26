@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../liste/liste.h"
+#include "../liste/listes.h"
 
 void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b);
 

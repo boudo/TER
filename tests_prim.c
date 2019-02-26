@@ -10,7 +10,7 @@
 #include "mesureTemps/mesure.h"
 #include "crible/crible.h"
 #include "testProbabilistes/testProbabilistes.h"
-#include "liste/listegmp.h"
+//~ #include "liste/listegmp.h"
 
 /*! \file      tests_prim.c
  *  \brief     Fichier contenant le programme principal
@@ -28,24 +28,24 @@
 int main()
 {
 	
-	int test, test1, test2;
- 	mpz_t m_test;
- 	mpz_inits(m_test,NULL);
- 	for (int i = 1; i < 10000; ++i)
- 	{
- 		mpz_set_ui(m_test,i);
+	//~ int test, test1, test2;
+ 	//~ mpz_t m_test;
+ 	//~ mpz_inits(m_test,NULL);
+ 	//~ for (int i = 1; i < 10000; ++i)
+ 	//~ {
+ 		//~ mpz_set_ui(m_test,i);
  	
- 		test = Fermat(m_test,25);
- 		test1 = Miller_Rabin(m_test, 25);
- 		test2 = solovayStrassen(m_test, 25);
- 		printf("%d\n", i);
- 		printf("fermat = %d\n", test);
- 		printf("miller = %d\n", test1);
- 		printf("trassen  = %d\n", test2);
+ 		//~ test = Fermat(m_test,25);
+ 		//~ test1 = Miller_Rabin(m_test, 25);
+ 		//~ test2 = solovayStrassen(m_test, 25);
+ 		//~ printf("%d\n", i);
+ 		//~ printf("fermat = %d\n", test);
+ 		//~ printf("miller = %d\n", test1);
+ 		//~ printf("trassen  = %d\n", test2);
  		
- 	}	
+ 	//~ }	
 
- 	mpz_clears(m_test, NULL);
+ 	//~ mpz_clears(m_test, NULL);
 
 
 	// int n = 5;
