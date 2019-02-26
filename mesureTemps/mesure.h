@@ -6,8 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../testProbabilistes/testProbabilistes.h"
-#include "../testDeterministes/testDeterministes.h"
+#include "../testPrimalites/testPrimalites.h"
 
 int estPremier(mpz_t nombre,int nombreIteration);
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);

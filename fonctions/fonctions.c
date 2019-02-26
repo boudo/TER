@@ -429,3 +429,123 @@ void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n)
 	gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
 	mpz_urandomb(alea, state, n);
 }
+
+/*! \fn void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
+ * 	\brief Fonction permettant de trouver les temoins de Miller
+ * 	\param res : On renvoie le resultat.
+ * 	\param a : a est le futur temoin de miller(ou non)
+ * 	\param n : n est le nombre à tester
+ */
+void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
+{//printf("ici dans temoin\n");
+	mpz_t s, d, nMoins1, modul, i, tmp, deux, tmp1;
+	mpz_inits(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+
+	mpz_set_ui(deux, 2);
+	mpz_sub_ui(nMoins1, n, 1);
+	//printf("ici dans temoin test decomposition\n");
+	// decomposition(nMoins1, s, d);
+	decomposition(s, d, nMoins1);
+	//printf("ici dans temoin\n");
+	squareAndMultiply(modul, a, d, n);
+	//printf("ici dans temoin ok\n");
+	if(mpz_cmp_ui(modul, 1) == 0 || mpz_cmp(modul, nMoins1) == 0)
+	{
+		// printf("ce nombre n'est pas un temoin de composition 1\n");
+		mpz_set_ui(res, 0);
+		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+		return ;
+	}
+	for(mpz_set_ui(i,1); mpz_cmp(i,s) < 0; mpz_add_ui(i, i, 1))
+	{
+		expoRapide(tmp, deux, i);
+		mpz_mul(tmp1, d, tmp);
+		squareAndMultiply(modul, a, tmp1, n);
+		if(mpz_cmp(modul, nMoins1) == 0)
+		{
+			// printf("ce nombre n'est pas un temoin de composition 2\n");
+			mpz_set_ui(res, 0);
+			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+			return ;
+		}
+		if(mpz_cmp_ui(modul, 1) == 0)
+		{
+			// printf("ce nombre est un temoin de composition 2\n");
+			mpz_set_ui(res, 1);
+			mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+			return ;
+		}
+
+	}
+	expoRapide(tmp, deux, s);
+	mpz_mul(tmp1, d, tmp);
+	squareAndMultiply(modul, a, tmp1, n);
+	if(mpz_cmp_ui(modul, 1) == 0)
+	{	
+		// gmp_printf("s %Zd\n", s);
+		// gmp_printf("d %Zd\n", d);
+		// gmp_printf("tmp %Zd\n", tmp);
+		// gmp_printf("tmp1 %Zd\n", tmp1);
+		// gmp_printf("alea %Zd\n", a);
+		// gmp_printf("modul %Zd\n", x);
+		// printf("ce nombre n'est pas un temoin de composition 3\n");
+		mpz_set_ui(res, 0);
+		mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+		return ;
+	}
+
+	// printf("ce nombre est un temoin de composition 4\n");
+	mpz_set_ui(res, 1);
+	mpz_clears(s, d, nMoins1,modul, i, tmp, deux, tmp1, NULL);
+	return ;
+}
+
+/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+ * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
+ * 	\param resultat : On renvoie le resultat.
+ * 	\param a : a est un résidu quadratique ou non de b
+ * 	\param b : b est un residu quadratique ou non de a ?
+ */
+void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+{
+	mpz_t tmp,tmp2,i,tmpa,tmpb;
+	mpz_inits(tmp,tmp2,i,tmpa,tmpb,NULL); // on initialise la liste de variable
+	
+	mpz_set(tmpa,a);
+	mpz_set(tmpb,b);
+	
+	mpz_mod_ui(tmp,tmpb,2); // tmp = b % 2
+	//Si b % 2 est egale a 0 ou b = 0
+	if ( mpz_cmp_ui(tmpb,0) <= 0 || mpz_cmp_ui(tmp,0) == 0 )
+		mpz_set_ui(resultat, 0);
+	mpz_set_ui(i,1);
+	if( mpz_cmp_ui(tmpa,0) < 0 ) { //Si a < 0
+		mpz_neg( tmpa, tmpa);
+		mpz_mod_ui(tmp,tmpb,4);
+		if (( mpz_cmp_ui(tmp,3) == 0)) //si b % 4 = 3
+			mpz_neg(i,i); // i =- i
+	}
+	while (mpz_cmp_ui(tmpa,0) != 0) {
+		mpz_mod_ui(tmp,tmpa,2);
+		while (mpz_cmp_ui(tmp,0) == 0) { //Tant que a % 2 = 0
+			mpz_div_ui(tmpa,tmpa,2);
+			mpz_mod_ui(tmp,tmpb,8);
+			if ((mpz_cmp_ui(tmp,3) == 0 || mpz_cmp_ui(tmp,5) == 0)) //Si b % 8 = 3 ou b % 8 = 5
+				mpz_neg(i,i);
+			mpz_mod_ui(tmp,tmpa,2);
+		}
+		mpz_set(tmp,tmpa);
+		mpz_set(tmpa,tmpb);
+		mpz_set(tmpb,tmp);
+		mpz_mod_ui(tmp,tmpa,4);
+		mpz_mod_ui(tmp2,tmpb,4);
+		if (mpz_cmp_ui(tmp,3) == 0 && mpz_cmp_ui(tmp2,3) == 0) //Si a % 4 = 3 et b % 4 = 3
+			mpz_neg(i,i);
+		mpz_mod(tmpa,tmpa,tmpb);
+	}
+	if (mpz_cmp_ui(tmpb,1) == 0){ mpz_set(resultat,i); } //Si b = 1
+	else mpz_set_ui(resultat,0);
+
+	
+	mpz_clears(tmp,tmp2,i,tmpa,tmpb,NULL); // on libere la mémoire 
+}

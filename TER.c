@@ -1,7 +1,6 @@
 #include <time.h>
 #include "mesureTemps/mesure.h"
-#include "testDeterministes/testDeterministes.h"
-#include "testProbabilistes/testProbabilistes.h"
+#include "testPrimalites/testPrimalites.h"
 
 /*! \file      tests_prim.c
  *  \brief     Fichier contenant le programme principal
