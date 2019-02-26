@@ -7,13 +7,10 @@
 #include <time.h>
 
 #include "../testProbabilistes/testProbabilistes.h"
-#include "../crible/crible.h"
-
+#include "../testDeterministes/testDeterministes.h"
 
 int estPremier(mpz_t nombre,int nombreIteration);
-
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);
-
 void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax);
 
 #endif

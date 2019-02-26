@@ -44,6 +44,7 @@ listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i,int p);//Fonction qui ajoute un
 int est_videgmp(listegmp l);//Fonction qui retourne si la liste est vide ou non
 void affiche_listegmp(listegmp l);// Fonction qui affiche le contenu de la liste
 listegmp libere_listegmp(listegmp l);// Fonction qui libere la liste
+listegmp crible_era_gmp(mpz_t n);//Crible era
 
 
 //FONCTIONS

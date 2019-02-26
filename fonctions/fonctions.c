@@ -180,6 +180,75 @@ listegmp libere_listegmp(listegmp l)
 	return NULL;
 }
 
+/*! \fn listegmp crible_era_gmp(mpz_t n)
+ *  \brief Fonction qui renvoie les nombres composés et premiers jusqu'à n
+ *  \param n : entier n
+ *  \return retourne la liste contenant les nombres composés et premiers de 2 jusqu'à n
+ */
+listegmp crible_era_gmp(mpz_t n)//amelioré avec la condition des multiples de nbr 1er qui sont composés
+{
+	mpz_t i,j,x,borne_sup_premier,carre_val_prim,multiple_val;
+	mpz_inits(i,j,x,borne_sup_premier,carre_val_prim,multiple_val,NULL);
+	
+	listegmp lg = creer_listegmp();
+	
+	for(mpz_set(i,n);mpz_cmp_ui(i,1)>0;mpz_sub_ui(i,i,1))//On initialise la liste des nombres de 2 à N comme premiers(primalité=1).
+	{	
+		lg = ajoute_elem_debutgmp(lg,i,1);
+	}
+	
+	// Amélioration : ne garder que les nombres premiers
+	// On marque "composé" tous les nombres composés de la liste
+
+	mpz_set(borne_sup_premier,n);
+	listegmp tmp = lg;
+	
+	//~ listegmp debut = lg;
+	//~ listegmp parcours;
+	//~ listegmp tmp;
+	
+	while(tmp->suiv)
+	{
+		if(tmp->primalite == 1)
+		{
+			//Condition d'arret
+			mpz_mul(carre_val_prim,tmp->val,tmp->val);
+			
+			if (mpz_cmp(carre_val_prim,borne_sup_premier)>0)
+			{
+				return lg;
+			}
+			
+			//les multiples d'un nbr 1er sont composés
+			listegmp compo = tmp;
+
+			int m = 2;
+			mpz_mul_ui(multiple_val,tmp->val,m);
+			
+			while(mpz_cmp(multiple_val,n) <= 0) 
+			{
+				for(mpz_set_ui(j,0);mpz_cmp(tmp->val,j)>0;mpz_add_ui(j,j,1)) 
+				{
+					//MAJ de la borne sup premier
+					if(compo->primalite == 1)
+					{
+						mpz_set(borne_sup_premier, compo->val);
+					}
+
+					compo=compo->suiv;
+				}
+				compo->primalite = 0;
+				m++;
+				mpz_mul_ui(multiple_val,tmp->val,m);
+			}		
+		}
+		tmp = tmp->suiv;
+	}
+	mpz_clears(i,j,x,borne_sup_premier,carre_val_prim,multiple_val,NULL);
+	
+	return lg;
+}
+
 //FONCTIONS
 
 /*! \fn void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) 

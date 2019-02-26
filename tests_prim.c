@@ -1,16 +1,7 @@
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <gmp.h>
 #include <time.h>
-
-// #include "liste/liste.h"
-// #include "fermat/fermat.h"
-// #include "fonctions/fonctions.h"
-// #include "miller/miller.h"
 #include "mesureTemps/mesure.h"
-#include "crible/crible.h"
+#include "testDeterministes/testDeterministes.h"
 #include "testProbabilistes/testProbabilistes.h"
-//~ #include "liste/listegmp.h"
 
 /*! \file      tests_prim.c
  *  \brief     Fichier contenant le programme principal
@@ -72,7 +63,6 @@ int main()
 	t2 = clock();
 	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temp : %f\n", temps);
-
 
 	return 0;
 }

@@ -9,10 +9,10 @@ principal: test
 	#valgrind ./test
 	./test
 
-test: tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o
-	gcc -o test tests_prim.o mesure.o testProbabilistes.o crible.o fonctions.o -lgmp
+test: tests_prim.o mesure.o testProbabilistes.o testDeterministes.o fonctions.o
+	gcc -o test tests_prim.o mesure.o testProbabilistes.o testDeterministes.o fonctions.o -lgmp
 
-tests_prim.o: tests_prim.c testProbabilistes/testProbabilistes.c crible/crible.c
+tests_prim.o: tests_prim.c 
 	gcc $(CFLAGS) tests_prim.c
 
 mesure.o: mesureTemps/mesure.c mesureTemps/mesure.h
@@ -21,8 +21,8 @@ mesure.o: mesureTemps/mesure.c mesureTemps/mesure.h
 testProbabilistes.o: testProbabilistes/testProbabilistes.c testProbabilistes/testProbabilistes.h
 	gcc $(CFLAGS) testProbabilistes/testProbabilistes.c
 
-crible.o: crible/crible.c crible/crible.h
-	gcc $(CFLAGS) crible/crible.c
+testDeterministes.o: testDeterministes/testDeterministes.c testDeterministes/testDeterministes.h
+	gcc $(CFLAGS) testDeterministes/testDeterministes.c
 
 fonctions.o: fonctions/fonctions.c fonctions/fonctions.h
 	gcc $(CFLAGS) fonctions/fonctions.c
