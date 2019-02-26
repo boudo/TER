@@ -56,12 +56,14 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
 	mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
 }
 
-void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
 /*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
  *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
  *  \param nomFichier : nom du Fichier où seront stockés les mesures
  *  \param nbrIteration : nombre d'iterations
  */
+
+void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) 
+{
 	FILE* fichier = NULL;
 	fichier = fopen(nomFichier, "w");
 	
