@@ -424,6 +424,12 @@ void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1)
 	mpz_clears(tmp, tmp1, deux,res, NULL);
 }
 
+/*! \fn void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n)
+ * 	\brief Fonction permettant de generer un nombre aléatoire
+ * 	\param alea : nombre aléatoire
+ * 	\param state : etat pour modifier le random 
+ * 	\param n : nombre de bits
+ */
 void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n)
 {
 	gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));

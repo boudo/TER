@@ -3,6 +3,7 @@
 ## Generations Doxygen
 
 Il faut juste taper "doxygen" dans le terminal au niveau du fichier doxyfile(ter/).
+Puis se déplacer dans Documentation/html/ et ouvrir le fichier index.html
 
 Travail a faire :
 
