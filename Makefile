@@ -1,31 +1,53 @@
 # Makefile du Projet test de primalité
 
+CC = gcc
 CFLAGS = -c -g -Wall
+LIB = -lgmp
+NOM = -o $@
+
+ODIR  = binaires
+MTDIR = mesureTemps
+TPDIR = testPrimalites
+FDIR = fonctions
+
+
 
 run: clean principal
 
+all: test doc
+
 principal: test
-	#time ./test
+	time ./test
 	#valgrind ./test
-	./test
+	#./test
 
-test: TER.o mesure.o testPrimalites.o fonctions.o
-	gcc -o test TER.o mesure.o testPrimalites.o fonctions.o -lgmp
+test: $(ODIR)/TER.o $(ODIR)/mesure.o $(ODIR)/testPrimalites.o $(ODIR)/fonctions.o
+	$(CC) -o test $^ $(LIB)
 
-TER.o: TER.c 
-	gcc $(CFLAGS) TER.c
+$(ODIR)/TER.o: creation TER.c 
+	$(CC) $(CFLAGS) $(NOM) TER.c
 
-mesure.o: mesureTemps/mesure.c mesureTemps/mesure.h
-	gcc $(CFLAGS) mesureTemps/mesure.c
+$(ODIR)/mesure.o: creation $(MTDIR)/mesure.c $(MTDIR)/mesure.h
+	$(CC) $(CFLAGS) $(NOM) $(MTDIR)/mesure.c
 
-testPrimalites.o: testPrimalites/testPrimalites.c testPrimalites/testPrimalites.h
-	gcc $(CFLAGS) testPrimalites/testPrimalites.c
+$(ODIR)/testPrimalites.o: creation $(TPDIR)/testPrimalites.c $(TPDIR)/testPrimalites.h
+	$(CC) $(CFLAGS) $(NOM) $(TPDIR)/testPrimalites.c
 
-fonctions.o: fonctions/fonctions.c fonctions/fonctions.h
-	gcc $(CFLAGS) fonctions/fonctions.c
+$(ODIR)/fonctions.o: creation $(FDIR)/fonctions.c $(FDIR)/fonctions.h
+	$(CC) $(CFLAGS) $(NOM) $(FDIR)/fonctions.c
 	
+creation:
+	mkdir -p $(ODIR)
+
+doc :
+	doxygen
+
+cleanAll:clean
+	rm -rf $(ODIR)
+	rm -rf Documentation
+
 clean:
 	rm -f test
-	rm -f *.o
+	rm -f $(ODIR)/*.o
 	 
 	

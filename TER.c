@@ -18,31 +18,31 @@
 int main()
 {
 	
-	 //~ int test, test1, test2, iter, cont;
- 	 //~ mpz_t m_test;
- 	 //~ mpz_inits(m_test,NULL);
- 	 //~ iter = 100;
- 	 //~ cont = 0;
- 	 //~ for (int i = 0; i < 10000; ++i)
- 	 //~ {
- 		//~ mpz_set_ui(m_test,i);
+	 int test, test1, test2, iter, cont;
+ 	 mpz_t m_test;
+ 	 mpz_inits(m_test,NULL);
+ 	 iter = 100;
+ 	 cont = 0;
+ 	 for (int i = 0; i < 10; ++i)
+ 	 {
+ 		mpz_set_ui(m_test,i);
  	
- 		//~ test = Fermat(m_test,iter);
- 		//~ test1 = Miller_Rabin(m_test, iter);
- 		//~ test2 = solovayStrassen(m_test, iter);
- 		//~ printf("%d\n", i);
- 		//~ printf("fermat = %d\n", test);
- 		//~ printf("miller = %d\n", test1);
- 		//~ printf("trassen  = %d\n", test2);
- 		//~ if(test != test1 || test1 != test2 || test != test2)
- 		//~ {
- 			//~ printf("************************************\n");
- 			//~ cont++;
- 		//~ }
+ 		test = Fermat(m_test,iter);
+ 		test1 = Miller_Rabin(m_test, iter);
+ 		test2 = solovayStrassen(m_test, iter);
+ 		printf("%d\n", i);
+ 		printf("fermat = %d\n", test);
+ 		printf("miller = %d\n", test1);
+ 		printf("trassen  = %d\n", test2);
+ 		if(test != test1 || test1 != test2 || test != test2)
+ 		{
+ 			printf("************************************\n");
+ 			cont++;
+ 		}
  		
- 	//~ }	printf("cont = %d\n", cont);
+ 	}	printf("cont = %d\n", cont);
 
- 	//~ mpz_clears(m_test, NULL);
+ 	mpz_clears(m_test, NULL);
 
 
 	// mpz_t resultatJ, randomNumber, aTraiter;
@@ -76,14 +76,14 @@ int main()
 	// gmp_randclear(state);
 
 
-	gmp_printf("\n###################### generation nbr premier ######################\n\n");
-	float temps;
-	clock_t t1, t2;
-	t1 = clock();
-	mesureTempsFichier("mesureTemps/mesure.txt",25,10);
-	t2 = clock();
-	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	printf("temp : %f\n", temps);
+	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
+	// float temps;
+	// clock_t t1, t2;
+	// t1 = clock();
+	// mesureTempsFichier("mesureTemps/mesure.txt",25,10);
+	// t2 = clock();
+	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	// printf("temp : %f\n", temps);
 
 	return 0;
 }

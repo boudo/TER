@@ -17,6 +17,7 @@
  *  \return retourne 1 si premier ou sinon 0
  */
 // ************* Fermat ***************************
+
 int Fermat(mpz_t n, int iter)
 {
 	//printf("taille = %d\n", iter);
@@ -27,6 +28,15 @@ int Fermat(mpz_t n, int iter)
 	if(mpz_cmp_ui(n, 2) == 0 || mpz_cmp_ui(n, 3) == 0)
 	{
 		return 1;
+	}
+
+	mpz_t pair;
+	mpz_init(pair);
+	mpz_mod_ui(pair,n,2);
+	if (mpz_cmp_ui(pair,0) == 0)
+	{ // SI n % 2 est egale a 0
+		mpz_clear(pair);
+		return 0;
 	}
 	
 	mpz_t pg, sqm, alea, nMoins1;
@@ -49,7 +59,7 @@ int Fermat(mpz_t n, int iter)
 		if (mpz_cmp_ui(pg, 1) != 0)
 		{
 			// gmp_printf("pgcd = %Zd et alea = %Zd donc %Zd est composé\n",pg,alea, n);
-			mpz_clears(pg, sqm, alea, nMoins1, NULL);
+			mpz_clears(pg, sqm, alea, nMoins1, pair, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
@@ -57,14 +67,14 @@ int Fermat(mpz_t n, int iter)
 		if(mpz_cmp_ui(pg, 1) == 0 && mpz_cmp_ui(sqm, 1) != 0)
 		{
 			// gmp_printf("sqm = %Zd et alea = %Zd expo = %Zd donc  %Zd est composé pgcd = %Zd\n", sqm, alea, nMoins1, n, pg);
-			mpz_clears(pg, sqm, alea, nMoins1, NULL);
+			mpz_clears(pg, sqm, alea, nMoins1, pair, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
 	}
 
 	// gmp_printf("sqm = %Zd et %Zd est 1er pgcd = %Zd et alea =  %Zd\n", sqm, n, pg, alea);
-	mpz_clears(pg, sqm, alea, nMoins1, NULL);
+	mpz_clears(pg, sqm, alea, nMoins1, pair, NULL);
 	gmp_randclear(state);
 	return 1;
 }
@@ -87,6 +97,15 @@ int Miller_Rabin(mpz_t n, int rep)
 		return 1;
 	}
 
+	mpz_t pair;
+	mpz_init(pair);
+	mpz_mod_ui(pair,n,2);
+	if (mpz_cmp_ui(pair,0) == 0)
+	{ // SI n % 2 est egale a 0
+		mpz_clear(pair);
+		return 0;
+	}
+
 	mpz_t nMoins1, alea, temoin;
 	mpz_inits(nMoins1, alea, temoin, NULL);
 	gmp_randstate_t state;
@@ -107,13 +126,13 @@ int Miller_Rabin(mpz_t n, int rep)
 		if (mpz_cmp_ui(temoin, 0) > 0)
 		{//printf("ici temoin\n");
 			// printf("ce nombre est composé\n");
-			mpz_clears(nMoins1, alea, temoin, NULL);
+			mpz_clears(nMoins1, alea, temoin, pair, NULL);
 			gmp_randclear(state);
 			return 0;
 		}
 	}
 	// printf("ce nombre est premier\n");
-	mpz_clears(nMoins1, alea, temoin, NULL);
+	mpz_clears(nMoins1, alea, temoin, pair, NULL);
 	gmp_randclear(state);
 	return 1;
 }
