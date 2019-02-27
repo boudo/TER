@@ -84,27 +84,27 @@ int main()
  	
  	//~ mpz_clears(nbr_fermat,b,NULL);
  	
- 	gmp_printf("\n###################### Pepin ######################\n\n");
+ 	//~ gmp_printf("\n###################### Pepin ######################\n\n");
  	
- 	mpz_t a;
- 	int test3,i;
- 	mpz_inits(a,NULL);
+ 	//~ mpz_t a;
+ 	//~ int test3,i;
+ 	//~ mpz_inits(a,NULL);
 
-	for(i=1 ;i<=17;i++)
-	{
-		mpz_set_ui(a,i);
+	//~ for(i=1 ;i<=17;i++)
+	//~ {
+		//~ mpz_set_ui(a,i);
 		
-		float temps;
-    clock_t t1, t2;
- 	t1 = clock();
-	test3=Pepin(a);
-	t2 = clock();
-	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    gmp_printf("F%Zd \n pepin=%d\n temp :%f\n",a, test3,temps);
-	gmp_printf("**********************\n");
-	}
+		//~ float temps;
+    //~ clock_t t1, t2;
+ 	//~ t1 = clock();
+	//~ test3=Pepin(a);
+	//~ t2 = clock();
+	//~ temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    //~ gmp_printf("F%Zd \n pepin=%d\n temp :%f\n",a, test3,temps);
+	//~ gmp_printf("**********************\n");
+	//~ }
  	
- 	mpz_clears(a,NULL);
+ 	//~ mpz_clears(a,NULL);
 
 
 	// mpz_t resultatJ, randomNumber, aTraiter;
@@ -118,7 +118,6 @@ int main()
 	// }
  	
  // 	mpz_clears(a,NULL);
-
 
 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
 	// float temps;
