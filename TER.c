@@ -1,6 +1,7 @@
 #include <time.h>
 #include "mesureTemps/mesure.h"
-#include "testPrimalites/testPrimalites.h"
+#include "testPrimalites/testProbabilistes/testProbabilistes.h"
+#include "testPrimalites/testDeterministes/testDeterministes.h"
 
 /*! \file      TER.c
  *  \brief     Fichier contenant le programme principal
@@ -17,7 +18,7 @@
  */
 int main()
 {
-	
+	// gmp_printf("\n###################### test probabiliste ######################\n\n");
 	 // int test, test1, test2, iter, cont;
  	//  mpz_t m_test;
  	//  mpz_inits(m_test,NULL);
@@ -43,11 +44,11 @@ int main()
  		
  	// }	printf("cont = %d\n", cont);
  	// 	mpz_clears(m_test, NULL);
-
+	gmp_printf("\n###################### LUCAS ######################\n\n");
 	int luca;
 	mpz_t n;
 	mpz_init(n);
-	mpz_set_ui(n, 23205);
+	mpz_set_ui(n, 23209);
 	luca = Lucas(n);
 	printf("lucas = %d\n", luca);
 
@@ -83,13 +84,32 @@ int main()
  	
  	//~ mpz_clears(nbr_fermat,b,NULL);
  	
- // 	gmp_printf("\n###################### Pepin ######################\n\n");
+ 	gmp_printf("\n###################### Pepin ######################\n\n");
  	
- // 	mpz_t a;
- // 	int test3;
- // 	mpz_inits(a,NULL);
+ 	mpz_t a;
+ 	int test3,i;
+ 	mpz_inits(a,NULL);
 
-	// for(int i=1 ;i<=10;i++)
+	for(i=1 ;i<=17;i++)
+	{
+		mpz_set_ui(a,i);
+		
+		float temps;
+    clock_t t1, t2;
+ 	t1 = clock();
+	test3=Pepin(a);
+	t2 = clock();
+	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    gmp_printf("F%Zd \n pepin=%d\n temp :%f\n",a, test3,temps);
+	gmp_printf("**********************\n");
+	}
+ 	
+ 	mpz_clears(a,NULL);
+
+
+	// mpz_t resultatJ, randomNumber, aTraiter;
+	// mpz_inits(resultatJ, randomNumber, aTraiter, NULL);
+	// for (int i = 1; i < 10; ++i)
 	// {
 	// 	mpz_set_ui(a,i);
 	// 	test3=Pepin(a);
@@ -108,15 +128,6 @@ int main()
 	// t2 = clock();
 	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	// printf("temp : %f\n", temps);
-
- 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
- 	// float temps;
- 	// clock_t t1, t2;
- 	// t1 = clock();
- 	// mesureTempsFichier("mesureTemps/mesure.txt",20,1024);
- 	// t2 = clock();
- 	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
- 	// printf("temp : %f\n", temps);
 	
 
 	return 0;

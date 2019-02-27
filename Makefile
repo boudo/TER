@@ -8,39 +8,49 @@ NOM = -o $@
 ODIR  = binaires
 MTDIR = mesureTemps
 TPDIR = testPrimalites
+TDDIR = testDeterministes
+TPRDIR = testProbabilistes
 FDIR = fonctions
+SITE = Documentation/html
 
 
 
 run: clean principal
 
-all: test doc
+all: creation test doc
 
 principal: test
 	#time ./test
 	#valgrind ./test
 	./test
 
-test: $(ODIR)/TER.o $(ODIR)/mesure.o $(ODIR)/testPrimalites.o $(ODIR)/fonctions.o
+test: $(ODIR)/TER.o $(ODIR)/mesure.o $(ODIR)/testProbabilistes.o $(ODIR)/testDeterministes.o $(ODIR)/fonctions.o
 	$(CC) -o test $^ $(LIB)
 
-$(ODIR)/TER.o: creation TER.c 
+$(ODIR)/TER.o: TER.c 
 	$(CC) $(CFLAGS) $(NOM) TER.c
 
-$(ODIR)/mesure.o: creation $(MTDIR)/mesure.c $(MTDIR)/mesure.h
+$(ODIR)/mesure.o: $(MTDIR)/mesure.c $(MTDIR)/mesure.h
 	$(CC) $(CFLAGS) $(NOM) $(MTDIR)/mesure.c
 
-$(ODIR)/testPrimalites.o: creation $(TPDIR)/testPrimalites.c $(TPDIR)/testPrimalites.h
-	$(CC) $(CFLAGS) $(NOM) $(TPDIR)/testPrimalites.c
+$(ODIR)/testProbabilistes.o: $(TPDIR)/$(TPRDIR)/testProbabilistes.c $(TPDIR)/$(TPRDIR)/testProbabilistes.h
+	$(CC) $(CFLAGS) $(NOM) $(TPDIR)/$(TPRDIR)/testProbabilistes.c
 
-$(ODIR)/fonctions.o: creation $(FDIR)/fonctions.c $(FDIR)/fonctions.h
+$(ODIR)/testDeterministes.o: $(TPDIR)/$(TDDIR)/testDeterministes.c $(TPDIR)/$(TDDIR)/testDeterministes.h
+	$(CC) $(CFLAGS) $(NOM) $(TPDIR)/$(TDDIR)/testDeterministes.c
+
+$(ODIR)/fonctions.o: $(FDIR)/fonctions.c $(FDIR)/fonctions.h
 	$(CC) $(CFLAGS) $(NOM) $(FDIR)/fonctions.c
 	
 creation:
 	mkdir -p $(ODIR)
+	mkdir -p Documentation
 
 doc :
 	doxygen
+
+site:
+	xdg-open $(SITE)/index.html
 
 cleanAll:clean
 	rm -rf $(ODIR)

@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../testPrimalites/testPrimalites.h"
+#include "../testPrimalites/testProbabilistes/testProbabilistes.h"
+#include "../testPrimalites/testDeterministes/testDeterministes.h"
 
 /*! \file      mesure.h
  *  \brief     Fichier contenant les tests de mesures

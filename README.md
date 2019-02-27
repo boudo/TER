@@ -1,9 +1,17 @@
 # TER ( chacun travaille sur sa b.....)
 
-## Generations Doxygen
+## Construction de projet
+	pour construire le projet: " make all" (cree les doc neccessaire pour les bin et doxygen)
+	pour excecuter le projet : " make " ( les tes dans le main sont lancé)
+	pour nettoyer que les .0 : " make clean"
+	pour nettoyer tout l proj: " make cleanAll"
+	pour voir le site de projet: " make site" (assurez vous d'avoir fait au prealable "make all")
 
-Il faut juste taper "doxygen" dans le terminal au niveau du fichier doxyfile(ter/).
-Puis se déplacer dans Documentation/html/ et ouvrir le fichier index.html
+
+
+## Generations Doxygen
+	Il faut juste taper "doxygen" dans le terminal au niveau du fichier doxyfile(ter/).
+	Puis se déplacer dans Documentation/html/ et ouvrir le fichier index.html
 
 Travail a faire :
 
@@ -13,8 +21,9 @@ Travail a faire :
     voir les 2 fonctions de decomposition et en eliminer une
     Verifier le doxygen svp (pour le jacobi arezki faut que tu regardes)
 
+
 ## Test de Lucas
-	A implementer (nombre de mersen)
+	terminer
 
 ## Test de Pepin
 	A implementer
