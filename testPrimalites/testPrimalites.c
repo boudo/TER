@@ -240,3 +240,34 @@ int Eratosthene(mpz_t n)
 	libere_listegmp(premier);
 	return 1;
 }
+
+/*! \fn int Pepin(mpz_t n)
+ *  \brief Fonction Test De Pepin
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé
+ */
+int Pepin(mpz_t n)
+{
+	mpz_t Fn,trois,Ce,FnMoins1;
+	mpz_inits(Fn,trois,Ce,FnMoins1,NULL);
+	
+	mpz_set_ui(trois,3);
+	
+	nombre_fermat(Fn,n);
+	mpz_sub_ui(FnMoins1,Fn,1);
+	
+	gmp_printf("testfnbrfermat=%Zd\n",Fn);
+	
+	critere_euler(Ce,trois,Fn);
+	gmp_printf("testCe=%Zd\n",Ce);
+	
+	if(mpz_cmp(Ce,FnMoins1) == 0)
+	{
+		mpz_clears(Fn,trois,Ce,FnMoins1,NULL);
+		return 1;
+	}
+	
+	mpz_clears(Fn,trois,Ce,FnMoins1,NULL);
+	return 0;
+
+}

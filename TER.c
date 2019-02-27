@@ -42,19 +42,35 @@ int main()
  	//~ printf("compteur : %d\n", compteur);
  	//~ mpz_clears(m_test, NULL);
  	
- 	gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
+ 	//~ gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
  	
- 	mpz_t nbr_fermat,sept;
- 	mpz_inits(nbr_fermat,sept,NULL);
+ 	//~ mpz_t nbr_fermat,b;
+ 	//~ mpz_inits(nbr_fermat,b,NULL);
 
- 	mpz_set_ui(sept,3);
+ 	//~ mpz_set_ui(b,3);
  	
  	
- 	nombre_fermat(nbr_fermat,sept);
+ 	//~ nombre_fermat(nbr_fermat,b);
  	
- 	gmp_printf("F%Zd=%Zd\n",sept,nbr_fermat);
+ 	//~ gmp_printf("F%Zd=%Zd\n",b,nbr_fermat);
  	
- 	mpz_clears(nbr_fermat,sept,NULL);
+ 	//~ mpz_clears(nbr_fermat,b,NULL);
+ 	
+ 	gmp_printf("\n###################### Pepin ######################\n\n");
+ 	
+ 	mpz_t a;
+ 	int test3;
+ 	mpz_inits(a,NULL);
+
+	for(int i=1 ;i<=10;i++)
+	{
+		mpz_set_ui(a,i);
+		test3=Pepin(a);
+		gmp_printf("pepin=%d\n",test3);
+		gmp_printf("**********************\n");
+	}
+ 	
+ 	mpz_clears(a,NULL);
 
 
 	// mpz_t resultatJ, randomNumber, aTraiter;
