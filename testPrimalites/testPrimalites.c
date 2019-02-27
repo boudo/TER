@@ -169,7 +169,7 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	
 	gmp_randstate_t state;
 	gmp_randinit_default(state);
-	mpz_sub_ui(exposant,aTraiter,1); //On fait exposant-1
+	//mpz_sub_ui(exposant,aTraiter,1); //On fait exposant-1
 	mpz_sub_ui(aTraiterMoins1,aTraiter,1); //On fait exposant-1
 	for (mpz_set_ui(i,0); mpz_cmp(i,itt) < 0; mpz_add_ui(i, i, 1)) {
 		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));	
@@ -179,10 +179,12 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 			mpz_add_ui(randomNumber, randomNumber, 2);
 		
 		jacobi = jacobiSymbol(randomNumber, aTraiter);
-		mpz_cdiv_q_ui(exposant, aTraiterMoins1, 2);
-		mpz_mod_ui(r, aTraiterMoins1, 2);
-		mpz_sub(exposant,exposant,r);
-		squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
+		
+		critere_euler(resultatM, randomNumber,aTraiter);
+		//~ mpz_cdiv_q_ui(exposant, aTraiterMoins1, 2);
+		//~ mpz_mod_ui(r, aTraiterMoins1, 2);
+		//~ mpz_sub(exposant,exposant,r);
+		//~ squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
 		
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
 		if(jacobi == 0 || ( jacobi != -1 && mpz_cmp_ui(resultatM,jacobi) != 0) || (jacobi == -1 && mpz_cmp(resultatM, aTraiterMoins1) != 0)){
@@ -195,6 +197,9 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	gmp_randclear(state);
 	return 1;
 }
+
+int Lucas()
+
 
 /*! \fn int Eratosthene(mpz_t n)
  *  \brief Fonction Deterministe qui utilise le crible d'erastothene pour dire si un nombre est premier ou non

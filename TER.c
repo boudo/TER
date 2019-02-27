@@ -42,10 +42,23 @@ int main()
  		}
  		
  	}	printf("cont = %d\n", cont);
+ 		mpz_clears(m_test, NULL);
 
- 	mpz_clears(m_test, NULL);
 
 
+ 	// gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
+ 	
+ 	// mpz_t nbr_fermat,sept;
+ 	// mpz_inits(nbr_fermat,sept,NULL);
+
+ 	// mpz_set_ui(sept,3);
+ 	
+ 	
+ 	// nombre_fermat(nbr_fermat,sept);
+ 	
+ 	// gmp_printf("F%Zd=%Zd\n",sept,nbr_fermat);
+ 	
+ 	// mpz_clears(nbr_fermat,sept,NULL);
 
 
 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");

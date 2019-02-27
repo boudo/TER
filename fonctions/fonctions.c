@@ -512,7 +512,8 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
-int jacobiSymbol(mpz_t a, mpz_t b) {
+int jacobiSymbol(mpz_t a, mpz_t b) 
+{
 	mpz_t tmpa,tmpb,tmp,tmp2;
 	int t;
 	mpz_inits(tmpa,tmpb,tmp,tmp2,NULL);
@@ -548,4 +549,46 @@ int jacobiSymbol(mpz_t a, mpz_t b) {
 		mpz_clears(tmp,tmp2,tmpa,tmpb,NULL);
 		return 0;
 	}
+}
+
+/*! \fn critere_euler(mpz_t res,mpz_t random,mpz_t expo,mpz_t n)
+ * 	\brief Fonction permettant de calculer le critère d'Euler
+ * 	\param res : On renvoie le resultat.
+ * 	\param random : random est un nombre aléatoire
+ * 	\param expo : expo est un exposant
+ * 	\param aTraiter : aTraiter est le nombre à traiter
+ */
+void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter)
+{
+		mpz_t aTraiterMoins1,r,expo;
+		mpz_inits(aTraiterMoins1,r,expo,NULL);
+		
+		mpz_sub_ui(aTraiterMoins1,aTraiter,1);
+		
+		mpz_cdiv_q_ui(expo,aTraiterMoins1,2);
+		mpz_mod_ui(r, aTraiterMoins1, 2);
+		mpz_sub(expo,expo,r);
+		squareAndMultiply(res,random,expo,aTraiter);
+		
+		mpz_clears(aTraiterMoins1,r,expo,NULL);	
+}
+
+/*! \fn nombre_fermat(mpz_t res,mpz_t n)
+ * 	\brief Fonction permettant de calculer un nombre de fermat
+ * 	\param res : On renvoie le resultat.
+ * 	\param n : n est le n-ieme nombre de fermat
+ */
+void nombre_fermat(mpz_t res,mpz_t n)
+{
+	mpz_t DeuxPowN,Deux,DeuxPowDeuxN;
+	mpz_inits(DeuxPowN,DeuxPowDeuxN,Deux,NULL);
+	
+	mpz_set_ui(Deux,2);
+	
+	expoRapide(DeuxPowN,Deux,n);
+	expoRapide(DeuxPowDeuxN,Deux,DeuxPowN);
+	
+	mpz_add_ui(res,DeuxPowDeuxN,1);
+	
+	mpz_clears(DeuxPowN,Deux,DeuxPowDeuxN,NULL);	
 }
