@@ -181,13 +181,12 @@ void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
  * 	\param n : n est le nombre à tester
  */
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
-
 /*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
  * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
  * 	\param resultat : On renvoie le resultat.
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
-void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b);
+int jacobiSymbol(mpz_t a, mpz_t b);
 
 #endif

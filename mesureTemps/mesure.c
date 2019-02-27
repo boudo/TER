@@ -79,10 +79,12 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
     	fprintf(fichier,"  Fermat    Miller  Strassen Erastotene\n");
     	for(int i=1; i<=nbrBitMax; i++){
     		fprintf(fichier,"%d ", i);
+    		//printf("%d : ", i);
     		
     		if(i != 1)
     		{
     			generNbrPremier(nbrPremier,i,nbrIteration);
+    			//gmp_printf("%Zd\n",nbrPremier);
     		}
     		
     		else 
@@ -117,22 +119,25 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	        fprintf(fichier,"%f\n", temps);
+	        fprintf(fichier,"%f", temps);
 	        
 	        //Erastothene
-	   //      if(i != 1)
-	   //      {
-				// t1 = clock();
-				// Eratosthene(nbrPremier);
-				// t2 = clock();
-				// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	   //  	}	
-	   //  	else 
-	   //  	{
-	   //      	temps = 0.000000;
-	   //      }
-	   //       fprintf(fichier,"%f\n", temps);
-	        
+	        if(i < 33){
+	        	if(i != 1)
+		        {
+					t1 = clock();
+					Eratosthene(nbrPremier);
+					t2 = clock();
+					temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+		    	}	
+		    	else 
+		    	{
+		        	temps = 0.000000;
+		        }
+		        fprintf(fichier," %f\n", temps);
+	        }else {
+	        	fprintf(fichier,"\n");
+	        }
     	}
     	
         fclose(fichier);

@@ -512,32 +512,24 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
-void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
-{
-	mpz_t tmp,tmp2,i,tmpa,tmpb;
-	mpz_inits(tmp,tmp2,i,tmpa,tmpb,NULL); // on initialise la liste de variable
-	
+int jacobiSymbol(mpz_t a, mpz_t b) {
+	mpz_t tmpa,tmpb,tmp,tmp2;
+	int t;
+	mpz_inits(tmpa,tmpb,tmp,tmp2,NULL);
 	mpz_set(tmpa,a);
 	mpz_set(tmpb,b);
-	
-	mpz_mod_ui(tmp,tmpb,2); // tmp = b % 2
-	//Si b % 2 est egale a 0 ou b = 0
-	if ( mpz_cmp_ui(tmpb,0) <= 0 || mpz_cmp_ui(tmp,0) == 0 )
-		{mpz_set_ui(resultat, 0);return;}
-	mpz_set_ui(i,1);
-	if( mpz_cmp_ui(tmpa,0) < 0 ) { //Si a < 0
-		mpz_neg( tmpa, tmpa);
-		mpz_mod_ui(tmp,tmpb,4);
-		if (( mpz_cmp_ui(tmp,3) == 0)) //si b % 4 = 3
-			mpz_neg(i,i); // i =- i
+	if(mpz_cmp_ui(tmpa,1) == 0) {
+		return 1;
 	}
-	while (mpz_cmp_ui(tmpa,0) != 0) {
+	mpz_mod(tmpa,tmpa,tmpb);// a = a % b
+	t=1;
+	while(mpz_cmp_ui(tmpa,0) != 0) {
 		mpz_mod_ui(tmp,tmpa,2);
-		while (mpz_cmp_ui(tmp,0) == 0) { //Tant que a % 2 = 0
+		while(mpz_cmp_ui(tmp,0) == 0) { //Tant que a % 2 = 0
 			mpz_div_ui(tmpa,tmpa,2);
 			mpz_mod_ui(tmp,tmpb,8);
 			if ((mpz_cmp_ui(tmp,3) == 0 || mpz_cmp_ui(tmp,5) == 0)) //Si b % 8 = 3 ou b % 8 = 5
-				mpz_neg(i,i);
+				t = -t;
 			mpz_mod_ui(tmp,tmpa,2);
 		}
 		mpz_set(tmp,tmpa);
@@ -546,12 +538,14 @@ void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b)
 		mpz_mod_ui(tmp,tmpa,4);
 		mpz_mod_ui(tmp2,tmpb,4);
 		if (mpz_cmp_ui(tmp,3) == 0 && mpz_cmp_ui(tmp2,3) == 0) //Si a % 4 = 3 et b % 4 = 3
-			mpz_neg(i,i);
+			t = - t;
 		mpz_mod(tmpa,tmpa,tmpb);
 	}
-	if (mpz_cmp_ui(tmpb,1) == 0){ mpz_set(resultat,i); } //Si b = 1
-	else mpz_set_ui(resultat,0);
-
-	
-	mpz_clears(tmp,tmp2,i,tmpa,tmpb,NULL); // on libere la mémoire 
+	if (mpz_cmp_ui(tmpb,1) == 0){
+		mpz_clears(tmp,tmp2,tmpa,tmpb,NULL);
+		return t; //Si b = 1	
+	} else {
+		mpz_clears(tmp,tmp2,tmpa,tmpb,NULL);
+		return 0;
+	}
 }

@@ -21,9 +21,9 @@ int main()
 	 int test, test1, test2, iter, cont;
  	 mpz_t m_test;
  	 mpz_inits(m_test,NULL);
- 	 iter = 100;
+ 	 iter = 30;
  	 cont = 0;
- 	 for (int i = 0; i < 10; ++i)
+ 	 for (int i = 0; i < 10000000; ++i)
  	 {
  		mpz_set_ui(m_test,i);
  	
@@ -38,6 +38,7 @@ int main()
  		{
  			printf("************************************\n");
  			cont++;
+ 			break;
  		}
  		
  	}	printf("cont = %d\n", cont);
@@ -45,35 +46,6 @@ int main()
  	mpz_clears(m_test, NULL);
 
 
-	// mpz_t resultatJ, randomNumber, aTraiter;
-	// mpz_inits(resultatJ, randomNumber, aTraiter, NULL);
-	// for (int i = 1; i < 10; ++i)
-	// {
-	// 	mpz_set_ui(randomNumber, i*3+5-1);
-	// 	mpz_set_ui(aTraiter, (25*i) % 1000);
-	// 	jacobiSymbol(resultatJ, randomNumber, aTraiter);
-	// 	gmp_printf("randomNumber %Zd\n", randomNumber);
-	// 	gmp_printf("aTraiter %Zd\n", aTraiter);
-	// 	gmp_printf("resultatJ %Zd\n", resultatJ);
-	// 	printf("*****************************************\n");
-	// }
-	// mpz_clears(resultatJ, randomNumber, aTraiter,NULL);
-	
-
-	// int n = 5;
-	// mpz_t res;
-	// mpz_inits(res,NULL);
-	// gmp_randstate_t state;
-	// gmp_randinit_mt(state);
-	// for (int i = 0; i < 50; ++i)
-	// {
-	// 	// gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
-	// 	// mpz_urandomb(res, state, n);
-	// 	genereAlea(res, state, n);
-	// 	gmp_printf("res = %Zd\n", res);
-	// }
-	// mpz_clears(res,NULL);
-	// gmp_randclear(state);
 
 
 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
@@ -84,6 +56,16 @@ int main()
 	// t2 = clock();
 	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	// printf("temp : %f\n", temps);
+
+ 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
+ 	// float temps;
+ 	// clock_t t1, t2;
+ 	// t1 = clock();
+ 	// mesureTempsFichier("mesureTemps/mesure.txt",20,1024);
+ 	// t2 = clock();
+ 	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+ 	// printf("temp : %f\n", temps);
+	
 
 	return 0;
 }
