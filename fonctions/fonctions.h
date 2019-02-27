@@ -191,12 +191,19 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 int jacobiSymbol(mpz_t a, mpz_t b);
 
 /*! \fn critere_euler(mpz_t res,mpz_t random,mpz_t expo,mpz_t n)
- * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
+ * 	\brief Fonction permettant de calculer le critère d'Euler
  * 	\param res : On renvoie le resultat.
  * 	\param random : random est un nombre aléatoire
  * 	\param expo : expo est un exposant
  * 	\param aTraiter : aTraiter est le nombre à traiter
  */
 void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
+
+/*! \fn nombre_fermat(mpz_t res,mpz_t n)
+ * 	\brief Fonction permettant de calculer un nombre de fermat
+ * 	\param res : On renvoie le resultat.
+ * 	\param n : n est le n-ieme nombre de fermat
+ */
+void nombre_fermat(mpz_t res,mpz_t n);
 
 #endif

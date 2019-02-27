@@ -18,29 +18,43 @@
 int main()
 {
 	
-	 int test, test1, test2,compteur=0;
-  	mpz_t m_test;
-  	mpz_inits(m_test,NULL);
- 	for (int i = 1; i < 10000; ++i)
-  	{
- 		mpz_set_ui(m_test,i);
+	 //~ int test, test1, test2,compteur=0;
+  	//~ mpz_t m_test;
+  	//~ mpz_inits(m_test,NULL);
+ 	//~ for (int i = 1; i < 10000; ++i)
+  	//~ {
+ 		//~ mpz_set_ui(m_test,i);
  	
- 		test = Fermat(m_test,25);
- 		test1 = Miller_Rabin(m_test, 25);
- 		test2 = solovayStrassen(m_test, 25);
-  		printf("%d\n", i);
- 		printf("fermat = %d\n", test);
- 		printf("miller = %d\n", test1);
- 		printf("trassen  = %d\n", test2);
- 		if(test != test1 || test1 != test2 || test != test2){
- 			printf("merde!!!!!!!!!!!!!!!!!!!!\n");
- 			compteur++;
- 			return 0;
- 		}
+ 		//~ test = Fermat(m_test,25);
+ 		//~ test1 = Miller_Rabin(m_test, 25);
+ 		//~ test2 = solovayStrassen(m_test, 25);
+  		//~ printf("%d\n", i);
+ 		//~ printf("fermat = %d\n", test);
+ 		//~ printf("miller = %d\n", test1);
+ 		//~ printf("trassen  = %d\n", test2);
+ 		//~ if(test != test1 || test1 != test2 || test != test2){
+ 			//~ printf("merde!!!!!!!!!!!!!!!!!!!!\n");
+ 			//~ compteur++;
+ 			//~ return 0;
+ 		//~ }
  		
- 	}	
- 	printf("compteur : %d\n", compteur);
- 	mpz_clears(m_test, NULL);
+ 	//~ }	
+ 	//~ printf("compteur : %d\n", compteur);
+ 	//~ mpz_clears(m_test, NULL);
+ 	
+ 	gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
+ 	
+ 	mpz_t nbr_fermat,sept;
+ 	mpz_inits(nbr_fermat,sept,NULL);
+
+ 	mpz_set_ui(sept,3);
+ 	
+ 	
+ 	nombre_fermat(nbr_fermat,sept);
+ 	
+ 	gmp_printf("F%Zd=%Zd\n",sept,nbr_fermat);
+ 	
+ 	mpz_clears(nbr_fermat,sept,NULL);
 
 
 	// mpz_t resultatJ, randomNumber, aTraiter;
