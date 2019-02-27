@@ -56,6 +56,6 @@ void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1);
 void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
 
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
-void jacobiSymbol (mpz_t resultat, mpz_t a, mpz_t b);
+int jacobiSymbol(mpz_t a, mpz_t b);
 
 #endif

@@ -141,43 +141,39 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 		mpz_clear(tmp);
 		return 0;
 	}
-
-	mpz_t i,randomNumber,resultatJ,exposant,resultatM,itt;
-	mpz_inits(i,randomNumber,resultatJ,exposant,resultatM,itt,NULL);
+	
+	int jacobi = 0;
+	mpz_t i,randomNumber,exposant,resultatM,itt,r,aTraiterMoins1;
+	mpz_inits(i,randomNumber,exposant,resultatM,itt,r,aTraiterMoins1,NULL);
+	
 	mpz_set_ui(itt,iterations);
-	//on initialise tout les parametre pour avoir des nombres aleatoire
+	
 	gmp_randstate_t state;
 	gmp_randinit_default(state);
-	// gmp_randseed_ui(state,time(NULL));
+	
 	mpz_sub_ui(exposant,aTraiter,1); //On fait exposant-1
-	mpz_div_ui(exposant,exposant,2); // puis on fait (exposant-1)/2
-	// mpz_sub_ui(tmp, aTraiter, 2); // on soustrait 2 pour avoir l'ensemble de définition compris entre 2 et n-1 pour les nombre aléatoire
-
+	mpz_sub_ui(aTraiterMoins1,aTraiter,1); //On fait exposant-1
 	for (mpz_set_ui(i,0); mpz_cmp(i,itt) < 0; mpz_add_ui(i, i, 1)) {
-		//on creer notre nombre aleatoire
-		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));//on creer notre nombre aleatoire
 		mpz_urandomm (randomNumber , state , aTraiter);
-		// gmp_printf("randomNumber = %Zd\n", randomNumber);
-
-		// on rajoute le 2 qu'on a soustrait precedemment
+		
 		if(mpz_cmp_ui(randomNumber, 2) < 0)
-		{//printf("ici comp\n");
 			mpz_add_ui(randomNumber, randomNumber, 2);
-		}
-
-
-		jacobiSymbol(resultatJ, randomNumber, aTraiter);
+		
+		jacobi = jacobiSymbol(randomNumber, aTraiter);
+		mpz_cdiv_q_ui(exposant, aTraiterMoins1, 2);
+		mpz_mod_ui(r, aTraiterMoins1, 2);
+		mpz_sub(exposant,exposant,r);
 		squareAndMultiply(resultatM, randomNumber, exposant, aTraiter);
+		
 		// Si jacobie donne 0 et que jacobi est different de l'exponentiation modulaire, alors on renvoi 0
-		mpz_sub(tmp,resultatM,aTraiter);
-		if(mpz_cmp_ui(resultatJ,0) == 0 && (mpz_cmp(resultatJ,resultatM) != 0 || mpz_cmp(resultatJ,tmp) != 0)){
-
-			mpz_clears(i,randomNumber,tmp,resultatJ, exposant, itt, resultatM,NULL);
+		if(jacobi == 0 || ( jacobi != -1 && mpz_cmp_ui(resultatM,jacobi) != 0) || (jacobi == -1 && mpz_cmp(resultatM, aTraiterMoins1) != 0)){
+			mpz_clears(i,randomNumber,tmp, exposant, itt, resultatM,r,aTraiterMoins1,NULL);
 			gmp_randclear(state);
 			return 0;
 		}
 	}
-	mpz_clears(i,randomNumber,tmp,resultatJ,resultatM, exposant, itt, NULL);
+	mpz_clears(i,randomNumber,tmp,resultatM, exposant, itt, r, aTraiterMoins1,NULL);
 	gmp_randclear(state);
 	return 1;
 }
