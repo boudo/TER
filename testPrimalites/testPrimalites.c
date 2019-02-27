@@ -198,7 +198,34 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	return 1;
 }
 
-int Lucas()
+// ************* Lucas ***************************
+int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
+{
+	// initialisation
+	mpz_t seq, mersen, deux;
+	mpz_inits(seq, mersen, deux, NULL);
+	mpz_set_ui(seq,4);
+	mpz_set_ui(deux, 2);
+	// calcul de la sequence
+	expoRapide(mersen, deux, n);
+	mpz_sub_ui(mersen, mersen, 1);
+	calculSequence(seq, mersen, n);
+	// test du resultat de le sequence
+	if( mpz_cmp_ui(seq, 0) == 0)
+	{
+		expoRapide(mersen, deux, n);
+		mpz_sub_ui(mersen, mersen, 1);
+		gmp_printf("%Zd est 1er\n", mersen);
+		mpz_clears( seq, mersen, deux, NULL);
+		return 1;
+	}
+
+	expoRapide(mersen, deux, n);
+	mpz_sub_ui(mersen, mersen, 1);
+	gmp_printf("%Zd est composé\n", mersen);
+	mpz_clears(seq, mersen, deux, NULL);
+	return 0;
+}
 
 
 /*! \fn int Eratosthene(mpz_t n)
@@ -261,4 +288,35 @@ int Eratosthene(mpz_t n)
 	mpz_clears(resteDiv,racine_n,nmoins1,NULL);
 	libere_listegmp(premier);
 	return 1;
+}
+
+/*! \fn int Pepin(mpz_t n)
+ *  \brief Fonction Test De Pepin
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé
+ */
+int Pepin(mpz_t n)
+{
+	mpz_t Fn,trois,Ce,FnMoins1;
+	mpz_inits(Fn,trois,Ce,FnMoins1,NULL);
+	
+	mpz_set_ui(trois,3);
+	
+	nombre_fermat(Fn,n);
+	mpz_sub_ui(FnMoins1,Fn,1);
+	
+	gmp_printf("testfnbrfermat=%Zd\n",Fn);
+	
+	critere_euler(Ce,trois,Fn);
+	gmp_printf("testCe=%Zd\n",Ce);
+	
+	if(mpz_cmp(Ce,FnMoins1) == 0)
+	{
+		mpz_clears(Fn,trois,Ce,FnMoins1,NULL);
+		return 1;
+	}
+	
+	mpz_clears(Fn,trois,Ce,FnMoins1,NULL);
+	return 0;
+
 }

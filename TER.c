@@ -18,32 +18,38 @@
 int main()
 {
 	
-	 int test, test1, test2, iter, cont;
- 	 mpz_t m_test;
- 	 mpz_inits(m_test,NULL);
- 	 iter = 30;
- 	 cont = 0;
- 	 for (int i = 0; i < 10000000; ++i)
- 	 {
- 		mpz_set_ui(m_test,i);
+	 // int test, test1, test2, iter, cont;
+ 	//  mpz_t m_test;
+ 	//  mpz_inits(m_test,NULL);
+ 	//  iter = 30;
+ 	//  cont = 0;
+ 	//  for (int i = 0; i < 10000000; ++i)
+ 	//  {
+ 	// 	mpz_set_ui(m_test,i);
  	
- 		test = Fermat(m_test,iter);
- 		test1 = Miller_Rabin(m_test, iter);
- 		test2 = solovayStrassen(m_test, iter);
- 		printf("%d\n", i);
- 		printf("fermat = %d\n", test);
- 		printf("miller = %d\n", test1);
- 		printf("trassen  = %d\n", test2);
- 		if(test != test1 || test1 != test2 || test != test2)
- 		{
- 			printf("************************************\n");
- 			cont++;
- 			break;
- 		}
+ 	// 	test = Fermat(m_test,iter);
+ 	// 	test1 = Miller_Rabin(m_test, iter);
+ 	// 	test2 = solovayStrassen(m_test, iter);
+ 	// 	printf("%d\n", i);
+ 	// 	printf("fermat = %d\n", test);
+ 	// 	printf("miller = %d\n", test1);
+ 	// 	printf("trassen  = %d\n", test2);
+ 	// 	if(test != test1 || test1 != test2 || test != test2)
+ 	// 	{
+ 	// 		printf("************************************\n");
+ 	// 		cont++;
+ 	// 		break;
+ 	// 	}
  		
- 	}	printf("cont = %d\n", cont);
- 		mpz_clears(m_test, NULL);
+ 	// }	printf("cont = %d\n", cont);
+ 	// 	mpz_clears(m_test, NULL);
 
+	int luca;
+	mpz_t n;
+	mpz_init(n);
+	mpz_set_ui(n, 23205);
+	luca = Lucas(n);
+	printf("lucas = %d\n", luca);
 
 
  	// gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
@@ -59,6 +65,39 @@ int main()
  	// gmp_printf("F%Zd=%Zd\n",sept,nbr_fermat);
  	
  	// mpz_clears(nbr_fermat,sept,NULL);
+ 	//~ }	
+ 	//~ printf("compteur : %d\n", compteur);
+ 	//~ mpz_clears(m_test, NULL);
+ 	
+ 	//~ gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
+ 	
+ 	//~ mpz_t nbr_fermat,b;
+ 	//~ mpz_inits(nbr_fermat,b,NULL);
+
+ 	//~ mpz_set_ui(b,3);
+ 	
+ 	
+ 	//~ nombre_fermat(nbr_fermat,b);
+ 	
+ 	//~ gmp_printf("F%Zd=%Zd\n",b,nbr_fermat);
+ 	
+ 	//~ mpz_clears(nbr_fermat,b,NULL);
+ 	
+ // 	gmp_printf("\n###################### Pepin ######################\n\n");
+ 	
+ // 	mpz_t a;
+ // 	int test3;
+ // 	mpz_inits(a,NULL);
+
+	// for(int i=1 ;i<=10;i++)
+	// {
+	// 	mpz_set_ui(a,i);
+	// 	test3=Pepin(a);
+	// 	gmp_printf("pepin=%d\n",test3);
+	// 	gmp_printf("**********************\n");
+	// }
+ 	
+ // 	mpz_clears(a,NULL);
 
 
 	// gmp_printf("\n###################### generation nbr premier ######################\n\n");

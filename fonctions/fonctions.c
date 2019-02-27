@@ -592,3 +592,20 @@ void nombre_fermat(mpz_t res,mpz_t n)
 	
 	mpz_clears(DeuxPowN,Deux,DeuxPowDeuxN,NULL);	
 }
+
+void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
+{
+	mpz_t tmp, i;
+	mpz_inits(tmp, i, NULL);
+	mpz_sub_ui(tmp, k, 2);
+	// gmp_printf("tmp = %Zd\n", tmp);
+	for (mpz_set_ui(i,1);mpz_cmp(i, tmp) <= 0;mpz_add_ui(i,i,1))
+	{
+		mpz_mul(seq, seq, seq);
+		mpz_sub_ui(seq, seq, 2);
+		mpz_mod(seq, seq, modul);
+		// gmp_printf("seq = %Zd\n", seq);
+	}
+	gmp_printf("seq = %Zd\n", seq);
+	mpz_clears(tmp, i, NULL);
+}

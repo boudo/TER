@@ -43,8 +43,22 @@ int Miller_Rabin(mpz_t n, int rep);
  */
 int solovayStrassen(mpz_t aTraiter, int iterations);
 
+int Lucas(mpz_t n);
+
 //TESTS DETERMINISTES
 
+/*! \fn int Eratosthene(mpz_t n)
+ *  \brief Fonction Deterministe qui utilise le crible d'erastothene pour dire si un nombre est premier ou non
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé et -1 si erreur
+ */
 int Eratosthene(mpz_t n);
+
+/*! \fn int Pepin(mpz_t n)
+ *  \brief Fonction Test De Pepin
+ *  \param n : entier n
+ *  \return retourne 1 si premier ,0 si composé
+ */
+int Pepin(mpz_t n);
 
 #endif

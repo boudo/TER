@@ -206,4 +206,6 @@ void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
  */
 void nombre_fermat(mpz_t res,mpz_t n);
 
+void calculSequence(mpz_t seq, mpz_t modul, mpz_t k);
+
 #endif
