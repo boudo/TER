@@ -6,6 +6,15 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*! \file      fonctions.h
+ *  \brief     Fichier contenant les différentes fonctions nécessaires au bon fonctionnement du programme
+ *  \author    ROBIN JORAN
+ *  \author    BOUDO IBRAHIM
+ *  \author    SLIMANI AREZKI
+ *  \version   1.00
+ *  \date      24 fevrier 2019
+ */
+
 //LISTE
 
  /*! \struct elem listes.h
@@ -18,12 +27,52 @@ struct elem{
 
 typedef struct elem* liste;/*!< typedef de la structure */
 
-liste creer_liste();//Fonction qui créer une liste 
-int est_vide(liste l);//Fonction qui retourne si la liste est vide ou non
-void affiche_liste(liste l);// Fonction qui affiche le contenu de la liste
-liste libere_liste(liste l);// Fonction qui libere la liste
-liste ajoute_elem_debut(liste l,int i);//Fonction qui ajoute un element au debut dans la liste
-liste supprime_elem_debut(liste l);//Fonction qui supprime un element au debut dans la liste
+/*! \fn liste creer_liste()
+ *  \brief Fonction qui créer une liste vide
+ *  \return retourne la liste vide
+ */
+liste creer_liste();
+
+/*! \fn int est_vide(liste l)
+ *  \brief Fonction qui permet de savoir si une liste est vide ou non
+ *  \param l : liste l
+ *  \return retourne 1 si la liste est vide ,sinon 0
+ */
+int est_vide(liste l);
+
+/*! \fn void affiche_liste(liste l)
+ *  \brief Fonction qui permet d'afficher le contenu de la liste
+ *  \param l : liste l
+ */
+void affiche_liste(liste l);
+
+/*! \fn liste libere_liste(liste l)
+ *  \brief Fonction qui permet de liberer la liste
+ *  \param l : liste l
+ *  \return retourne NULL quand la liste est vide
+ */
+liste libere_liste(liste l);
+
+/*! \fn liste ajoute_elem_debut(liste l,mpz_t i,int p)
+ *  \brief Fonction qui ajoute au début un élément dans la liste
+ *  \param l : liste l
+ *  \param i : valeur i à ajouter
+ *  \return retourne la liste avec l'élément ajouté
+ */
+liste ajoute_elem_debut(liste l,int i);
+
+/*! \fn liste supprime_elem_debut(liste l)
+ *  \brief Fonction qui supprime au début un élément dans la liste
+ *  \param l : liste l
+ *  \return retourne la liste moins l'élément qu'on a supprimé
+ */
+liste supprime_elem_debut(liste l);
+
+/*! \fn liste getBinaire(const mpz_t expo)
+ *  \brief Fonction qui calcule l'exposant en binaire
+ *  \param expo : exposant
+ *  \return retourne la liste contenant le nombre en binaire
+ */
 liste getBinaire(const mpz_t expo);
 
 //LISTE GMP
@@ -39,23 +88,105 @@ struct elemgmp{
 
 typedef struct elemgmp* listegmp;/*!< typedef de la structure */
 
-listegmp creer_listegmp();//Fonction qui créer une liste gmp
-listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i,int p);//Fonction qui ajoute un element au debut dans la liste
-int est_videgmp(listegmp l);//Fonction qui retourne si la liste est vide ou non
-void affiche_listegmp(listegmp l);// Fonction qui affiche le contenu de la liste
-listegmp libere_listegmp(listegmp l);// Fonction qui libere la liste
-listegmp crible_era_gmp(mpz_t n);//Crible era
+/*! \fn listegmp creer_listegmp()
+ *  \brief Fonction qui créer une liste vide
+ *  \return retourne la liste vide
+ */
+listegmp creer_listegmp();
+
+/*! \fn listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i,int p)
+ *  \brief Fonction qui ajoute au début un élément dans la liste
+ *  \param l : liste l
+ *  \param i : valeur i à ajouter
+ *  \param p : entier p représenant la primalité
+ *  \return retourne la liste avec l'élément ajouté
+ */
+listegmp ajoute_elem_debutgmp(listegmp l,mpz_t i,int p);
+
+/*! \fn int est_videgmp(listegmp l)
+ *  \brief Fonction qui permet de savoir si une liste est vide ou non
+ *  \param l : liste l
+ *  \return retourne 1 si la liste est vide ,sinon 0
+ */
+int est_videgmp(listegmp l);
+
+/*! \fn void affiche_listegmp(listegmp l)
+ *  \brief Fonction qui permet d'afficher le contenu de la liste
+ *  \param l : liste l
+ */
+void affiche_listegmp(listegmp l);
+
+/*! \fn listegmp libere_listegmp(listegmp l)
+ *  \brief Fonction qui permet de liberer la liste
+ *  \param l : liste l
+ *  \return retourne NULL quand la liste est vide
+ */
+listegmp libere_listegmp(listegmp l);
+
+/*! \fn listegmp crible_era_gmp(mpz_t n)
+ *  \brief Fonction qui renvoie les nombres composés et premiers jusqu'à n
+ *  \param n : entier n
+ *  \return retourne la liste contenant les nombres composés et premiers de 2 jusqu'à n
+ */
+listegmp crible_era_gmp(mpz_t n);
 
 
 //FONCTIONS
 
+/*! \fn void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) 
+ *  \brief Fonction qui calcule le pgcd entre a et b
+ *  \param resultat : resultat
+ *  \param a : nombre a
+ *  \param b : nombre b
+ */
 void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b);
+
+/*! \fn void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
+ *  \brief Fonction qui calcule l'exponention rapide
+ *  \param resultat : resultat
+ *  \param x : entier x
+ *  \param expo : exposant
+ */
 void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo);
+
+/*! \fn void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
+ *  \brief Fonction qui calcule le square and multiply
+ *  \param resultat : resultat
+ *  \param x : entier x
+ *  \param expo : exposant
+ *  \param modul : modulo
+ */
 void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul);
+
+/*! \fn void decomposition(mpz_t s,mpz_t d,mpz_t nMoins1)
+ *  \brief Fonction qui decompose un entier x en 2^s * d
+ *  \param s : entier s
+ *  \param d : exposant d
+ *  \param nMoins1 : entier nMoins1
+ */
 void decomposition(mpz_t s,mpz_t d, mpz_t nMoins1);
+
+/*! \fn void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n)
+ * 	\brief Fonction permettant de generer un nombre aléatoire
+ * 	\param alea : nombre aléatoire
+ * 	\param state : etat pour modifier le random 
+ * 	\param n : nombre de bits
+ */
 void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
 
+/*! \fn void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
+ * 	\brief Fonction permettant de trouver les temoins de Miller
+ * 	\param res : On renvoie le resultat.
+ * 	\param a : a est le futur temoin de miller(ou non)
+ * 	\param n : n est le nombre à tester
+ */
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
+/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+ * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
+ * 	\param resultat : On renvoie le resultat.
+ * 	\param a : a est un résidu quadratique ou non de b
+ * 	\param b : b est un residu quadratique ou non de a ?
+ */
 int jacobiSymbol(mpz_t a, mpz_t b);
 
 #endif

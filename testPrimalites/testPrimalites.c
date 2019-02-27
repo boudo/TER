@@ -28,15 +28,16 @@ int Fermat(mpz_t n, int iter)
 	{
 		return 1;
 	}
-	
+
 	mpz_t pg, sqm, alea, nMoins1;
 	gmp_randstate_t state;
 	mpz_inits(pg, sqm, alea, nMoins1, NULL);
 	gmp_randinit_mt(state);
+	gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));	
 	mpz_sub_ui(nMoins1, n, 1); // nMoins1 = n - 1
 	for(int i=0; i<iter; i++)
 	{	
-		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));	
 		mpz_urandomm (alea , state , n);
 		// gmp_printf("alea = %Zd\n", alea);
 
@@ -92,10 +93,9 @@ int Miller_Rabin(mpz_t n, int rep)
 	gmp_randstate_t state;
 	gmp_randinit_mt(state);
 	mpz_sub_ui(nMoins1, n, 1); // n - 1
-
 	for(int i=0; i<rep; i++)
 	 { 	//printf("ici for\n");
-		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));			
 		mpz_urandomm (alea , state , nMoins1);
 		// gmp_printf("alea = %Zd\n", alea);
 
@@ -150,11 +150,10 @@ int solovayStrassen(mpz_t aTraiter, int iterations)
 	
 	gmp_randstate_t state;
 	gmp_randinit_default(state);
-	
 	mpz_sub_ui(exposant,aTraiter,1); //On fait exposant-1
 	mpz_sub_ui(aTraiterMoins1,aTraiter,1); //On fait exposant-1
 	for (mpz_set_ui(i,0); mpz_cmp(i,itt) < 0; mpz_add_ui(i, i, 1)) {
-		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));//on creer notre nombre aleatoire
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));	
 		mpz_urandomm (randomNumber , state , aTraiter);
 		
 		if(mpz_cmp_ui(randomNumber, 2) < 0)

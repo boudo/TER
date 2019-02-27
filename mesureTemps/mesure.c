@@ -56,12 +56,14 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration)
 	mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,NULL);
 }
 
-void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
 /*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
  *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
  *  \param nomFichier : nom du Fichier où seront stockés les mesures
  *  \param nbrIteration : nombre d'iterations
  */
+
+void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) 
+{
 	FILE* fichier = NULL;
 	fichier = fopen(nomFichier, "w");
 	
@@ -77,12 +79,12 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
     	fprintf(fichier,"  Fermat    Miller  Strassen Erastotene\n");
     	for(int i=1; i<=nbrBitMax; i++){
     		fprintf(fichier,"%d ", i);
-    		printf("%d : ", i);
+    		//printf("%d : ", i);
     		
     		if(i != 1)
     		{
     			generNbrPremier(nbrPremier,i,nbrIteration);
-    			gmp_printf("%Zd\n",nbrPremier);
+    			//gmp_printf("%Zd\n",nbrPremier);
     		}
     		
     		else 
@@ -117,7 +119,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	        fprintf(fichier,"%f ", temps);
+	        fprintf(fichier,"%f", temps);
 	        
 	        //Erastothene
 	        if(i < 33){
@@ -132,7 +134,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax) {
 		    	{
 		        	temps = 0.000000;
 		        }
-		        fprintf(fichier,"%f\n", temps);
+		        fprintf(fichier," %f\n", temps);
 	        }else {
 	        	fprintf(fichier,"\n");
 	        }
