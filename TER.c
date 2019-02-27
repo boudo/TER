@@ -59,15 +59,21 @@ int main()
  	gmp_printf("\n###################### Pepin ######################\n\n");
  	
  	mpz_t a;
- 	int test3;
+ 	int test3,i;
  	mpz_inits(a,NULL);
 
-	for(int i=1 ;i<=10;i++)
+	for(i=1 ;i<=17;i++)
 	{
 		mpz_set_ui(a,i);
-		test3=Pepin(a);
-		gmp_printf("pepin=%d\n",test3);
-		gmp_printf("**********************\n");
+		
+		float temps;
+    clock_t t1, t2;
+ 	t1 = clock();
+	test3=Pepin(a);
+	t2 = clock();
+	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    gmp_printf("F%Zd \n pepin=%d\n temp :%f\n",a, test3,temps);
+	gmp_printf("**********************\n");
 	}
  	
  	mpz_clears(a,NULL);

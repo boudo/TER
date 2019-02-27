@@ -256,10 +256,10 @@ int Pepin(mpz_t n)
 	nombre_fermat(Fn,n);
 	mpz_sub_ui(FnMoins1,Fn,1);
 	
-	gmp_printf("testfnbrfermat=%Zd\n",Fn);
+	//gmp_printf("testfnbrfermat=%Zd\n",Fn);
 	
 	critere_euler(Ce,trois,Fn);
-	gmp_printf("testCe=%Zd\n",Ce);
+	//gmp_printf("testCe=%Zd\n",Ce);
 	
 	if(mpz_cmp(Ce,FnMoins1) == 0)
 	{
