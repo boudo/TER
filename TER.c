@@ -44,13 +44,13 @@ int main()
  		
  	// }	printf("cont = %d\n", cont);
  	// 	mpz_clears(m_test, NULL);
-	gmp_printf("\n###################### LUCAS ######################\n\n");
-	int luca;
-	mpz_t n;
-	mpz_init(n);
-	mpz_set_ui(n, 23209);
-	luca = Lucas(n);
-	printf("lucas = %d\n", luca);
+	// gmp_printf("\n###################### LUCAS ######################\n\n");
+	// int luca;
+	// mpz_t n;
+	// mpz_init(n);
+	// mpz_set_ui(n, 23209);
+	// luca = Lucas(n);
+	// printf("lucas = %d\n", luca);
 
 
  	// gmp_printf("\n###################### Nombre De Fermat ######################\n\n");
@@ -119,14 +119,14 @@ int main()
  	
  // 	mpz_clears(a,NULL);
 
-	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
-	// float temps;
-	// clock_t t1, t2;
-	// t1 = clock();
-	// mesureTempsFichier("mesureTemps/mesure.txt",25,10);
-	// t2 = clock();
-	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	// printf("temp : %f\n", temps);
+	gmp_printf("\n###################### generation nbr premier ######################\n\n");
+	float temps;
+	clock_t t1, t2;
+	t1 = clock();
+	mesureTempsFichier("mesureTemps/mesure.txt",25,10);
+	t2 = clock();
+	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	printf("temp : %f\n", temps);
 	
 
 	return 0;

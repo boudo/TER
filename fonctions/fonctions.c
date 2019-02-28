@@ -216,6 +216,7 @@ listegmp crible_era_gmp(mpz_t n)//amelioré avec la condition des multiples de n
 			
 			if (mpz_cmp(carre_val_prim,borne_sup_premier)>0)
 			{
+				mpz_clears(i,j,x,borne_sup_premier,carre_val_prim,multiple_val,NULL);
 				return lg;
 			}
 			
