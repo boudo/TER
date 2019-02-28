@@ -1,6 +1,6 @@
 #include "testDeterministes.h"
 
-/*! \file      testPrimalites.c
+/*! \file      testDeterministes.c
  *  \brief     Fichier contenant les différents tests probabilistes
  *  \author    ROBIN JORAN
  *  \author    BOUDO IBRAHIM
@@ -17,7 +17,7 @@
  *  \return retourne 1 si premier ou sinon 0
  */
 
- /*! \fn int Eratosthene(mpz_t n)
+ /*!\fn int Eratosthene(mpz_t n)
  *  \brief Fonction Deterministe qui utilise le crible d'erastothene pour dire si un nombre est premier ou non
  *  \param n : entier n
  *  \return retourne 1 si premier ,0 si composé et -1 si erreur

@@ -66,7 +66,7 @@ liste libere_liste(liste l)
 	return NULL;
 }
 
-/*! \fn liste ajoute_elem_debut(liste l,mpz_t i,int p)
+/*! \fn liste liste ajoute_elem_debut(liste l,int i)
  *  \brief Fonction qui ajoute au début un élément dans la liste
  *  \param l : liste l
  *  \param i : valeur i à ajouter
@@ -216,6 +216,7 @@ listegmp crible_era_gmp(mpz_t n)//amelioré avec la condition des multiples de n
 			
 			if (mpz_cmp(carre_val_prim,borne_sup_premier)>0)
 			{
+				mpz_clears(i,j,x,borne_sup_premier,carre_val_prim,multiple_val,NULL);
 				return lg;
 			}
 			
@@ -506,9 +507,8 @@ void temoinMiller(mpz_t res, mpz_t a, mpz_t n)
 	return ;
 }
 
-/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+/*! \fn int jacobiSymbol(mpz_t a, mpz_t b) 
  * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
- * 	\param resultat : On renvoie le resultat.
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
@@ -551,11 +551,10 @@ int jacobiSymbol(mpz_t a, mpz_t b)
 	}
 }
 
-/*! \fn critere_euler(mpz_t res,mpz_t random,mpz_t expo,mpz_t n)
+/*! \fn void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter)
  * 	\brief Fonction permettant de calculer le critère d'Euler
  * 	\param res : On renvoie le resultat.
  * 	\param random : random est un nombre aléatoire
- * 	\param expo : expo est un exposant
  * 	\param aTraiter : aTraiter est le nombre à traiter
  */
 void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter)
@@ -593,6 +592,12 @@ void nombre_fermat(mpz_t res,mpz_t n)
 	mpz_clears(DeuxPowN,Deux,DeuxPowDeuxN,NULL);	
 }
 
+/*! \fn void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
+ * 	\brief Fonction permettant de calculer la sequence de lucas
+ * 	\param seq : On renvoie le resultat de la sequence.
+ * 	\param modul : modul est le nombre de merssen 2^n - 1
+ *	\param k : un nombre impaire
+ */
 void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
 {
 	mpz_t tmp, i;

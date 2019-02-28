@@ -34,10 +34,11 @@ int estPremier(mpz_t nombre,int nombreIteration);
  */
 void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);
 
-/*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration)
+/*! \fn void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax);
  *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
  *  \param nomFichier : nom du Fichier où seront stockés les mesures
  *  \param nbrIteration : nombre d'iterations
+ *  \param nbrBitMax : nombre maximal de bit
  */
 void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax);
 

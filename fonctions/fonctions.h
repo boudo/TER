@@ -17,7 +17,7 @@
 
 //LISTE
 
- /*! \struct elem listes.h
+/*! \struct elem
  *  \brief Structure elem qui va permettre de stocker un element dans une liste
  */
 struct elem{
@@ -53,7 +53,7 @@ void affiche_liste(liste l);
  */
 liste libere_liste(liste l);
 
-/*! \fn liste ajoute_elem_debut(liste l,mpz_t i,int p)
+/*! \fn liste ajoute_elem_debut(liste l,int i);
  *  \brief Fonction qui ajoute au début un élément dans la liste
  *  \param l : liste l
  *  \param i : valeur i à ajouter
@@ -77,7 +77,7 @@ liste getBinaire(const mpz_t expo);
 
 //LISTE GMP
 
- /*! \struct elemgmp listegmp.h
+/*! \struct elemgmp
  *  \brief Structure elemgmp qui va permettre de stocker un element dans une liste
  */
 struct elemgmp{
@@ -182,19 +182,17 @@ void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
  */
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 
-/*! \fn void jacobiSymbol(mpz_t resultat, mpz_t a, mpz_t b) 
+/*! \fn int jacobiSymbol(mpz_t a, mpz_t b);
  * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
- * 	\param resultat : On renvoie le resultat.
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
 int jacobiSymbol(mpz_t a, mpz_t b);
 
-/*! \fn critere_euler(mpz_t res,mpz_t random,mpz_t expo,mpz_t n)
+/*! \fn void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
  * 	\brief Fonction permettant de calculer le critère d'Euler
  * 	\param res : On renvoie le resultat.
  * 	\param random : random est un nombre aléatoire
- * 	\param expo : expo est un exposant
  * 	\param aTraiter : aTraiter est le nombre à traiter
  */
 void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
@@ -206,6 +204,12 @@ void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
  */
 void nombre_fermat(mpz_t res,mpz_t n);
 
+/*! \fn void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
+ * 	\brief Fonction permettant de calculer la sequence de lucas
+ * 	\param seq : On renvoie le resultat de la sequence.
+ * 	\param modul : modul est le nombre de merssen 2^n - 1
+ *	\param k : un nombre impaire
+ */
 void calculSequence(mpz_t seq, mpz_t modul, mpz_t k);
 
 #endif
