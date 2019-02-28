@@ -182,14 +182,14 @@ void genereAlea(mpz_t alea, gmp_randstate_t state, mp_bitcnt_t n);
  */
 void temoinMiller(mpz_t res, mpz_t a, mpz_t n);
 
-/*! \fn int jacobiSymbol(mpz_t a, mpz_t b);
+/*! \fn int jacobiSymbol(mpz_t a, mpz_t b)
  * 	\brief Fonction permettant de calculer le Symbole de jacobi (a/p) et de determiner si p divise a ou pas puis si a est un résidu quadratique modulo p ou non
  * 	\param a : a est un résidu quadratique ou non de b
  * 	\param b : b est un residu quadratique ou non de a ?
  */
 int jacobiSymbol(mpz_t a, mpz_t b);
 
-/*! \fn void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter);
+/*! \fn void critere_euler(mpz_t res,mpz_t random,mpz_t aTraiter)
  * 	\brief Fonction permettant de calculer le critère d'Euler
  * 	\param res : On renvoie le resultat.
  * 	\param random : random est un nombre aléatoire
@@ -211,5 +211,12 @@ void nombre_fermat(mpz_t res,mpz_t n);
  *	\param k : un nombre impaire
  */
 void calculSequence(mpz_t seq, mpz_t modul, mpz_t k);
+
+/*! \fn void mersen(mpz_t m, mpz_t n)
+ * 	\brief Fonction permettant de calculer la sequence de lucas
+ * 	\param m : On renvoie le resultat de calcul du nombre de mersen
+ *	\param n : un nombre impaire (premier)
+ */
+void mersen(mpz_t m, mpz_t n);
 
 #endif

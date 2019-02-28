@@ -123,7 +123,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	        fprintf(fichier,"%f", temps);
 	        
 	        //Erastothene
-	        if(i < 33){
+	        if(i < 35){
 	        	if(i != 1)
 		        {
 					t1 = clock();
@@ -144,4 +144,69 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
         fclose(fichier);
     }
     mpz_clears(nbrPremier,NULL);
+}
+
+/*! \fn void mesureTempsPepin(char *nomFichier,int max)
+ *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
+ *  \param nomFichier : nom du Fichier où seront stockés les mesures
+ *	\param max : nombre d'iteration max
+ */
+void mesureTempsPepin(char *nomFichier,int max){
+	FILE* fichier = NULL;
+	fichier = fopen(nomFichier, "w");
+	int retour;
+	mpz_t n;
+    mpz_inits(n,NULL);
+ 	float temps;
+    clock_t t1, t2;
+    if(fichier != NULL){
+	    fprintf(fichier,"F P   Temps\n");
+	    for(int i=1; i<=max;i++){
+	    	mpz_set_ui(n,i);
+	    	fprintf(fichier,"%d ", i);
+			t1 = clock();
+			retour = Pepin(n);
+			t2 = clock();
+			fprintf(fichier,"%d ", retour);
+			temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+			fprintf(fichier," %f\n", temps);
+		}
+		fclose(fichier);
+	}
+	mpz_clears(n,NULL);
+}
+
+/*! \fn void mesureTempsLucas(char *nomFichier,int max)
+ *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
+ *  \param nomFichier : nom du Fichier où seront stockés les mesures
+ *	\param max : nombre d'iteration max
+ */
+void mesureTempsLucas(char *nomFichier,int max){
+	FILE* fichier = NULL;
+	fichier = fopen(nomFichier, "w");
+	int retour;
+	mpz_t n;
+	int i = 1;
+    mpz_inits(n,NULL);
+    mpz_set_ui(n,3);
+	Lucas(n);
+ 	float temps;
+    clock_t t1, t2;
+    if(fichier != NULL){
+	    fprintf(fichier,"N P   Temps\n");
+	    while(i<=max){
+
+	    	mpz_set_ui(n,i);
+	    	fprintf(fichier,"%d ", i);
+			t1 = clock();
+			retour = Lucas(n);
+			t2 = clock();
+			fprintf(fichier,"%d ", retour);
+			temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+			fprintf(fichier," %f\n", temps);
+			i=i+1;
+		}
+		fclose(fichier);
+	}
+	mpz_clears(n,NULL);
 }

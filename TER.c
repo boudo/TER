@@ -48,7 +48,7 @@ int main()
 	// int luca;
 	// mpz_t n;
 	// mpz_init(n);
-	// mpz_set_ui(n, 23209);
+	// mpz_set_ui(n, 3);
 	// luca = Lucas(n);
 	// printf("lucas = %d\n", luca);
 	// mpz_clears(n, NULL);
@@ -128,15 +128,18 @@ int main()
  	
  // 	mpz_clears(a,NULL);
 
-	gmp_printf("\n###################### generation nbr premier ######################\n\n");
-	float temps;
-	clock_t t1, t2;
-	t1 = clock();
-	mesureTempsFichier("mesureTemps/mesure.txt",10,1024);
-	t2 = clock();
-	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	printf("temp : %f\n", temps);
+	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
+	// float temps;
+	// clock_t t1, t2;
+	// t1 = clock();
+	// mesureTempsFichier("mesureTemps/mesure.txt",25,1024);
+	// t2 = clock();
+	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	// printf("temp : %f\n", temps);
 	
+	// mesureTempsPepin("mesureTemps/pepin.txt",10);
+
+	mesureTempsLucas("mesureTemps/lucas.txt",521);
 
 	return 0;
 }

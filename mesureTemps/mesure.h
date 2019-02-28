@@ -42,4 +42,18 @@ void generNbrPremier(mpz_t resultat, int nbrBit,int nombreIteration);
  */
 void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax);
 
+/*! \fn void mesureTempsPepin(char *nomFichier,int max)
+ *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
+ *  \param nomFichier : nom du Fichier où seront stockés les mesures
+ *	\param max : nombre d'iteration max
+ */
+void mesureTempsPepin(char *nomFichier,int max);
+
+/*! \fn void mesureTempsLucas(char *nomFichier,int max)
+ *  \brief Fonction qui permet d'ecrire les mesures dans un fichier
+ *  \param nomFichier : nom du Fichier où seront stockés les mesures
+ *	\param max : nombre d'iteration max
+ */
+void mesureTempsLucas(char *nomFichier,int max);
+
 #endif

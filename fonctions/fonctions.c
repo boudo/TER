@@ -606,11 +606,29 @@ void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
 	// gmp_printf("tmp = %Zd\n", tmp);
 	for (mpz_set_ui(i,1);mpz_cmp(i, tmp) <= 0;mpz_add_ui(i,i,1))
 	{
+		// printf("ici\n");
 		mpz_mul(seq, seq, seq);
 		mpz_sub_ui(seq, seq, 2);
 		mpz_mod(seq, seq, modul);
 		// gmp_printf("seq = %Zd\n", seq);
 	}
-	gmp_printf("seq = %Zd\n", seq);
+	// gmp_printf("seq = %Zd\n", seq);
+	// gmp_printf("modul = %Zd\n", modul);
 	mpz_clears(tmp, i, NULL);
+}
+
+/*! \fn void mersen(mpz_t m, mpz_t n)
+ * 	\brief Fonction permettant de calculer la sequence de lucas
+ * 	\param m : On renvoie le resultat de calcul du nombre de mersen
+ *	\param n : un nombre impaire (premier)
+ */
+void mersen(mpz_t m, mpz_t n)
+{
+	mpz_t deux;
+	mpz_init(deux);
+	mpz_set_ui(deux, 2);
+	expoRapide(m, deux, n);
+	mpz_sub_ui(m, m, 1);
+	mpz_clear(deux);
+	// gmp_printf("meren = %Zd\n", m);
 }
