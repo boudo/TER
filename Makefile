@@ -11,7 +11,8 @@ TPDIR = testPrimalites
 TDDIR = testDeterministes
 TPRDIR = testProbabilistes
 FDIR = fonctions
-SITE = Documentation/html
+DOC = Documentation
+SITE = $(DOC)/html
 
 
 
@@ -44,7 +45,7 @@ $(ODIR)/fonctions.o: $(FDIR)/fonctions.c $(FDIR)/fonctions.h
 	
 creation:
 	mkdir -p $(ODIR)
-	mkdir -p Documentation
+	mkdir -p $(DOC)
 
 doc :
 	doxygen
@@ -52,9 +53,13 @@ doc :
 site:
 	xdg-open $(SITE)/index.html
 
+# graph:
+# 	gnuplot graph.gnu
+
+
 cleanAll:clean
 	rm -rf $(ODIR)
-	rm -rf Documentation
+	rm -rf $(DOC)
 
 clean:
 	rm -f test

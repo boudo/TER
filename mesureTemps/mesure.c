@@ -189,7 +189,7 @@ void mesureTempsLucas(char *nomFichier,int max){
 	int i = 1;
     mpz_inits(n,NULL);
     mpz_set_ui(n,3);
-	Lucas(n);
+	// Lucas(n);
  	float temps;
     clock_t t1, t2;
     if(fichier != NULL){

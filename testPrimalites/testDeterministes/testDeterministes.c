@@ -117,6 +117,14 @@ int Pepin(mpz_t n)
  */
 int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 {
+	mpz_t pair;
+	mpz_init(pair);
+	mpz_mod_ui(pair,n,2);
+	if (mpz_cmp_ui(pair,0) == 0)
+	{ // SI n % 2 est egale a 0
+		mpz_clear(pair);
+		return 0;
+	}
 	// initialisation
 	mpz_t seq, mers, deux;
 	mpz_inits(seq, mers, deux, NULL);
@@ -129,11 +137,11 @@ int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 	if( mpz_cmp_ui(seq, 0) == 0)
 	{
 		// gmp_printf("%Zd est 1er\n", mers);
-		mpz_clears( seq, mers, deux, /*pair,*/ NULL);
+		mpz_clears( seq, mers, deux, pair, NULL);
 		return 1;
 	}
 
 	// gmp_printf("%Zd est composé\n", mers);
-	mpz_clears(seq, mers, deux, /*pair,*/ NULL);
+	mpz_clears(seq, mers, deux, pair, NULL);
 	return 0;
 }
