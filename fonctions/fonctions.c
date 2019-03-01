@@ -632,3 +632,74 @@ void mersen(mpz_t m, mpz_t n)
 	mpz_clear(deux);
 	// gmp_printf("meren = %Zd\n", m);
 }
+
+/*! \fn suiteFibo(mpz_t res, mpz_t n);
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier
+ */
+void suiteFibo(mpz_t res, mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2;
+	mpz_inits(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
+	
+	if(mpz_cmp_ui(n,1)<=0)
+	{
+		mpz_set(res,n);
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		suiteFibo(FiboMoins1,nMoins1);
+		suiteFibo(FiboMoins2,nMoins2);
+		
+		mpz_add(rec,FiboMoins1,FiboMoins2);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
+	}
+}
+
+/*! \fn suiteLucas(mpz_t rez, mpz_t n);
+ * 	\brief Fonction permettant de calculer la suite de Lucas
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier 
+ */
+void nombreLucas(mpz_t res, mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2;
+	mpz_inits(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
+	
+	if(mpz_cmp_ui(n,0)==0)
+	{
+		mpz_add_ui(nPlus2,n,2);
+		mpz_set(res,nPlus2);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
+	}
+	
+	else if(mpz_cmp_ui(n,1)==0)
+	{
+		mpz_set(res,n);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		nombreLucas(nombreLucasMoins1,nMoins1);
+		nombreLucas(nombreLucasMoins2,nMoins2);
+	
+		mpz_add(rec,nombreLucasMoins1,nombreLucasMoins2);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
+	}
+}
