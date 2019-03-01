@@ -703,3 +703,33 @@ void nombreLucas(mpz_t res, mpz_t n)
 		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
 	}
 }
+
+/*! \fn nombreOr(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer le nombre d'or
+ * 	\param res : On renvoie le resultat
+ */
+void nombreOr(mpf_t res)
+{
+	mpf_t or,racineCinq,racineCinqPlusUn,Cinq;
+	mpf_inits(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
+	
+	mpf_set_ui(Cinq,5);
+	
+	mpf_sqrt(racineCinq,Cinq);
+	
+	mpf_add_ui(racineCinqPlusUn,racineCinq,1);
+	
+	mpf_div_ui(res,racineCinqPlusUn,2);
+	
+	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
+}
+
+/*! \fn suiteFibo_or(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier
+ */
+void suiteFibo_or(mpz_t res, mpz_t n)
+{
+	
+}

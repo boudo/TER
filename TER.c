@@ -156,20 +156,30 @@ int main()
 	 
 	 //~ mpz_clears(fibo,n,NULL);
 	 
-	 gmp_printf("\n###################### Suite Lucas ######################\n\n");
+	 //~ gmp_printf("\n###################### Suite Lucas ######################\n\n");
 	 
-	 mpz_t lucas,n;
-	 mpz_inits(lucas,n,NULL);
+	 //~ mpz_t lucas,n;
+	 //~ mpz_inits(lucas,n,NULL);
 	 
 	 
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
-	 {
-		  nombreLucas(lucas,n);
+	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
+	 //~ {
+		  //~ nombreLucas(lucas,n);
 	 
-		  gmp_printf("lucas%Zd=%Zd\n",n,lucas);
-	 }
+		  //~ gmp_printf("lucas%Zd=%Zd\n",n,lucas);
+	 //~ }
 	 
-	 mpz_clears(lucas,n,NULL);
+	 //~ mpz_clears(lucas,n,NULL);
+
+	gmp_printf("\n###################### Nombre d'or ######################\n\n");
+	
+	mpf_t or;
+	mpf_inits(or,NULL);
+	
+	nombreOr(or);
+	gmp_printf("nombre d'or = %Ff \n",or);
+	
+	mpf_clears(or,NULL);
 
 	return 0;
 }
