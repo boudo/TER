@@ -600,21 +600,43 @@ void nombre_fermat(mpz_t res,mpz_t n)
  */
 void calculSequence(mpz_t seq, mpz_t modul, mpz_t k)
 {
-	mpz_t tmp, i;
-	mpz_inits(tmp, i, NULL);
-	mpz_sub_ui(tmp, k, 2);
-	// gmp_printf("tmp = %Zd\n", tmp);
-	for (mpz_set_ui(i,1);mpz_cmp(i, tmp) <= 0;mpz_add_ui(i,i,1))
+	// mpz_t tmp, i;
+	// mpz_inits(tmp, i, NULL);
+	// mpz_sub_ui(tmp, k, 2);
+	// // gmp_printf("tmp = %Zd\n", tmp);
+	// for (mpz_set_ui(i,1);mpz_cmp(i, tmp) <= 0;mpz_add_ui(i,i,1))
+	// {
+	// 	// printf("ici\n");
+	// 	mpz_mul(seq, seq, seq);
+	// 	mpz_sub_ui(seq, seq, 2);
+	// 	mpz_mod(seq, seq, modul);
+	// 	// gmp_printf("seq = %Zd\n", seq);
+	// }
+	// // gmp_printf("seq = %Zd\n", seq);
+	// // gmp_printf("modul = %Zd\n", modul);
+	// mpz_clears(tmp, i, NULL);
+	mpz_t tmp, kk;
+	mpz_inits(tmp, kk, NULL);
+	mpz_set(kk, k);
+	if(mpz_cmp_ui(kk,0)<=0)
 	{
-		// printf("ici\n");
-		mpz_mul(seq, seq, seq);
+		mpz_set_ui(seq, 4);
+		mpz_clears(tmp, kk, NULL);
+		return;
+	}
+	else
+	{
+		mpz_sub_ui(kk, kk, 1);
+		calculSequence(tmp, modul, kk);
+		mpz_mul(seq, tmp, tmp);
 		mpz_sub_ui(seq, seq, 2);
 		mpz_mod(seq, seq, modul);
 		// gmp_printf("seq = %Zd\n", seq);
+		mpz_clears(tmp, kk, NULL);
+		return;
 	}
-	// gmp_printf("seq = %Zd\n", seq);
-	// gmp_printf("modul = %Zd\n", modul);
-	mpz_clears(tmp, i, NULL);
+
+
 }
 
 /*! \fn void mersen(mpz_t m, mpz_t n)

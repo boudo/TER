@@ -126,22 +126,23 @@ int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 		return 0;
 	}
 	// initialisation
-	mpz_t seq, mers, deux;
-	mpz_inits(seq, mers, deux, NULL);
-	mpz_set_ui(seq,4);
+	mpz_t seq, mers, deux, k;
+	mpz_inits(seq, mers, deux, k, NULL);
 	mpz_set_ui(deux, 2);
 	// calcul de la sequence
 	mersen(mers, n);
-	calculSequence(seq, mers, n);
+	mpz_sub_ui(k, n, 2);
+	// gmp_printf("k = %Zd\n", k);
+	calculSequence(seq, mers, k);
 	// test du resultat de le sequence
 	if( mpz_cmp_ui(seq, 0) == 0)
 	{
 		// gmp_printf("%Zd est 1er\n", mers);
-		mpz_clears( seq, mers, deux, pair, NULL);
+		mpz_clears( seq, mers, deux, pair, k, NULL);
 		return 1;
 	}
 
 	// gmp_printf("%Zd est composé\n", mers);
-	mpz_clears(seq, mers, deux, pair, NULL);
+	mpz_clears(seq, mers, deux, pair, k, NULL);
 	return 0;
 }
