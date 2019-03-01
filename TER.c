@@ -139,7 +139,37 @@ int main()
 	
 	// mesureTempsPepin("mesureTemps/pepin.txt",10);
 
-	mesureTempsLucas("mesureTemps/lucas.txt",521);
+	//mesureTempsLucas("mesureTemps/lucas.txt",521);
+	
+	 //~ gmp_printf("\n###################### Suite Fibo ######################\n\n");
+	 
+	 //~ mpz_t fibo,n;
+	 //~ mpz_inits(fibo,n,NULL);
+	 
+	 
+	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
+	 //~ {
+		  //~ suiteFibo(fibo,n);
+	 
+		  //~ gmp_printf("fibo%Zd=%Zd\n",n,fibo);
+	 //~ }
+	 
+	 //~ mpz_clears(fibo,n,NULL);
+	 
+	 gmp_printf("\n###################### Suite Lucas ######################\n\n");
+	 
+	 mpz_t lucas,n;
+	 mpz_inits(lucas,n,NULL);
+	 
+	 
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
+	 {
+		  nombreLucas(lucas,n);
+	 
+		  gmp_printf("lucas%Zd=%Zd\n",n,lucas);
+	 }
+	 
+	 mpz_clears(lucas,n,NULL);
 
 	return 0;
 }
