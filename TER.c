@@ -152,7 +152,7 @@ int main()
 	 float temps;
 	 clock_t t1, t2;
 	 t1 = clock();
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,100)<=0;mpz_add_ui(n,n,1))
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
 	 {
 		  suiteFibo_or(res, n);
 		  gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
@@ -164,7 +164,7 @@ int main()
 
 	 printf("############ Fibo normal ##############\n");
 	 t1 = clock();
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,100)<=0;mpz_add_ui(n,n,1))
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
 	 {
 		  suiteFibo(fibo,n);
 		  gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
@@ -174,7 +174,7 @@ int main()
 	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	 printf("\ntemp Fibo : %f\n", temps);
 
-	 mpz_clears(fibo,n,NULL);
+	 mpz_clears(fibo,n,res,NULL);
 	 
 	 //~ gmp_printf("\n###################### Suite Lucas ######################\n\n");
 	 
