@@ -725,3 +725,70 @@ void nombreLucas(mpz_t res, mpz_t n)
 		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins2,nPlus2,NULL);
 	}
 }
+
+/*! \fn nombreOr(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer le nombre d'or
+ * 	\param res : On renvoie le resultat
+ */
+void nombreOr(mpf_t res)
+{
+	mpf_t or,racineCinq,racineCinqPlusUn,Cinq;
+	mpf_inits(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
+	
+	mpf_set_ui(Cinq,5);
+	
+	mpf_sqrt(racineCinq,Cinq);
+	
+	mpf_add_ui(racineCinqPlusUn,racineCinq,1);
+	
+	mpf_div_ui(res,racineCinqPlusUn,2);
+	
+	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
+}
+
+/*! \fn suiteFibo_or(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier
+ */
+void suiteFibo_or(mpz_t res, mpz_t n)
+{
+	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
+	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	mpf_set_ui(un, 1);
+	mpf_set_ui(Cinq,5);
+	mpf_sqrt(racineCinq,Cinq);
+
+	// initialisation
+	nombreOr(fi);
+	mpf_div(tmp, un, fi);
+	mpf_neg(fiPrim, tmp);
+
+	mpf_pow_ui(fiPuisN, fi, mpz_get_ui(n));
+	mpf_pow_ui(fiPrim, fiPrim, mpz_get_ui(n));
+	mpf_sub(fibTmp, fiPuisN, fiPrimPuisN);
+	mpf_div(resTmp, fibTmp, racineCinq);
+	mpz_set_ui(res, arrondi(resTmp));
+	// mpf_trunc(res, res);
+	// mpz_set_ui(res, mpf_get_ui(resTmp));
+	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+
+}
+
+unsigned long arrondi(mpf_t n)
+{
+	mpf_t deci;
+	unsigned long ent;
+	mpf_inits(deci, NULL);
+	ent = mpf_get_ui(n);
+	mpf_sub_ui(deci, n, ent);
+
+	if( mpf_cmp_d(deci, 0.5) >= 0)
+	{
+		mpf_clears(deci, NULL);
+		return ent + 1;
+	}
+
+	mpf_clears(deci, NULL);
+	return ent;
+}

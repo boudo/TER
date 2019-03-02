@@ -141,35 +141,65 @@ int main()
 
 	// mesureTempsLucas("mesureTemps/lucas.txt",521);
 	
-	 //~ gmp_printf("\n###################### Suite Fibo ######################\n\n");
+	 gmp_printf("\n###################### Suite Fibo et suite Fibo ######################\n\n");
 	 
-	 //~ mpz_t fibo,n;
-	 //~ mpz_inits(fibo,n,NULL);
+	 mpz_t fibo,n;
+	 mpz_t res;
+	 mpz_inits(fibo,n,NULL);
+	 mpz_inits(res, NULL);
+
+	 printf("############ Fibo_or ##############\n");
+	 float temps;
+	 clock_t t1, t2;
+	 t1 = clock();
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,100)<=0;mpz_add_ui(n,n,1))
+	 {
+		  suiteFibo_or(res, n);
+		  gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
+
+	 }
+	 t2 = clock();
+	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	 printf("\ntemp Fibo_or : %f\n", temps);
+
+	 printf("############ Fibo normal ##############\n");
+	 t1 = clock();
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,100)<=0;mpz_add_ui(n,n,1))
+	 {
+		  suiteFibo(fibo,n);
+		  gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
+
+	 }
+	 t2 = clock();
+	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	 printf("\ntemp Fibo : %f\n", temps);
+
+	 mpz_clears(fibo,n,NULL);
+	 
+	 //~ gmp_printf("\n###################### Suite Lucas ######################\n\n");
+	 
+	 //~ mpz_t lucas,n;
+	 //~ mpz_inits(lucas,n,NULL);
 	 
 	 
 	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
 	 //~ {
-		  //~ suiteFibo(fibo,n);
+		  //~ nombreLucas(lucas,n);
 	 
-		  //~ gmp_printf("fibo%Zd=%Zd\n",n,fibo);
+		  //~ gmp_printf("lucas_%Zd = %Zd\n",n,lucas);
 	 //~ }
 	 
-	 // ~ mpz_clears(fibo,n,NULL);
-	 
-	 gmp_printf("\n###################### Suite Lucas ######################\n\n");
-	 
-	 mpz_t lucas,n;
-	 mpz_inits(lucas,n,NULL);
-	 
-	 
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
-	 {
-		  nombreLucas(lucas,n);
-	 
-		  gmp_printf("lucas_%Zd = %Zd\n",n,lucas);
-	 }
-	 
-	 mpz_clears(lucas,n,NULL);
+	 //~ mpz_clears(lucas,n,NULL);
+
+	// gmp_printf("\n###################### Nombre d'or ######################\n\n");
+	
+	// mpf_t or;
+	// mpf_inits(or,NULL);
+	
+	// nombreOr(or);
+	// gmp_printf("nombre d'or = %Ff \n",or);
+	
+	// mpf_clears(or,NULL);
 
 	return 0;
 }

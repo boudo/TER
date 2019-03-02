@@ -219,18 +219,33 @@ void calculSequence(mpz_t seq, mpz_t modul, mpz_t k);
  */
 void mersen(mpz_t m, mpz_t n);
 
-/*! \fn suiteFibo(mpz_t res, mpz_t n);
+/*! \fn suiteFibo(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
 void suiteFibo(mpz_t res, mpz_t n);
 
-/*! \fn suiteLucas(mpz_t rez, mpz_t n);
+/*! \fn suiteLucas(mpz_t rez, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Lucas
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier 
  */
 void nombreLucas(mpz_t res, mpz_t n);
+
+/*! \fn nombreOr(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer le nombre d'or
+ * 	\param res : On renvoie le resultat
+ */
+void nombreOr(mpf_t res);
+
+/*! \fn suiteFibo_or(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier
+ */
+void suiteFibo_or(mpz_t res, mpz_t n);
+
+unsigned long arrondi(mpf_t n);
 
 #endif
