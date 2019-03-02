@@ -687,7 +687,7 @@ void suiteFibo(mpz_t res, mpz_t n)
 	}
 }
 
-/*! \fn suiteLucas(mpz_t rez, mpz_t n);
+/*! \fn void nombreLucas(mpz_t res, mpz_t n);
  * 	\brief Fonction permettant de calculer la suite de Lucas
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier 
@@ -746,12 +746,12 @@ void nombreOr(mpf_t res)
 	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
 }
 
-/*! \fn suiteFibo_or(mpz_t res, mpz_t n)
+/*! \fn suiteFibo_or(mpf_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
-void suiteFibo_or(mpz_t res, mpz_t n)
+void suiteFibo_or(mpf_t res, mpz_t n)
 {
 	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
 	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
@@ -768,27 +768,35 @@ void suiteFibo_or(mpz_t res, mpz_t n)
 	mpf_pow_ui(fiPrim, fiPrim, mpz_get_ui(n));
 	mpf_sub(fibTmp, fiPuisN, fiPrimPuisN);
 	mpf_div(resTmp, fibTmp, racineCinq);
-	mpz_set_ui(res, arrondi(resTmp));
-	// mpf_trunc(res, res);
-	// mpz_set_ui(res, mpf_get_ui(resTmp));
+	// gmp_printf("resTmp      = %Ff \n",resTmp);
+	mpf_trunc(res, resTmp);
+	mpf_add_ui(res, res, arrondi(res, resTmp));
+	// gmp_printf("res      = %Ff \n",res);
 	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
 
 }
 
-unsigned long arrondi(mpf_t n)
+/*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param ent : On renvoie le resultat
+ *	\param n : un nombre entier
+ *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
+ */
+unsigned long int arrondi(mpf_t ent, mpf_t n)
 {
-	mpf_t deci;
-	unsigned long ent;
-	mpf_inits(deci, NULL);
-	ent = mpf_get_ui(n);
-	mpf_sub_ui(deci, n, ent);
+	// gmp_printf("ent = %Zd\n", ent);
+	mpf_t deci, tmpEnt;
+	mpf_inits(deci, tmpEnt, NULL);
+	// mpf_set_z(tmpEnt, ent);
+
+	mpf_sub(deci, n, ent);
 
 	if( mpf_cmp_d(deci, 0.5) >= 0)
 	{
-		mpf_clears(deci, NULL);
-		return ent + 1;
+		mpf_clears(deci, tmpEnt, NULL);
+		return 1;
 	}
 
-	mpf_clears(deci, NULL);
-	return ent;
+	mpf_clears(deci, tmpEnt, NULL);
+	return 0;
 }
