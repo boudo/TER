@@ -655,7 +655,7 @@ void mersen(mpz_t m, mpz_t n)
 	// gmp_printf("meren = %Zd\n", m);
 }
 
-/*! \fn suiteFibo(mpz_t res, mpz_t n);
+/*! \fn void suiteFibo(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
@@ -687,7 +687,7 @@ void suiteFibo(mpz_t res, mpz_t n)
 	}
 }
 
-/*! \fn void nombreLucas(mpz_t res, mpz_t n);
+/*! \fn void nombreLucas(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Lucas
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier 
@@ -726,7 +726,7 @@ void nombreLucas(mpz_t res, mpz_t n)
 	}
 }
 
-/*! \fn nombreOr(mpz_t res, mpz_t n)
+/*! \fn void nombreOr(mpf_t res)
  * 	\brief Fonction permettant de calculer le nombre d'or
  * 	\param res : On renvoie le resultat
  */
@@ -746,7 +746,7 @@ void nombreOr(mpf_t res)
 	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
 }
 
-/*! \fn suiteFibo_or(mpf_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpf_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier

@@ -156,24 +156,24 @@ int main()
 	 {
 		  suiteFibo_or(res, n);
 		  // gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
-		  gmp_printf("fibo_or_%Zd = %Ff \n",n,res);
+		  gmp_printf("fibo_or_%Zd = %Ff\n",n,res);
 
 	 }
 	 t2 = clock();
 	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 printf("\ntemp Fibo_or : %f\n", temps);
+	 printf("\ntemp Fibo_or : %f pour n de 0 à 1000\n", temps);
 
-	 // printf("############ Fibo normal ##############\n");
-	 // t1 = clock();
-	 // for(mpz_set_ui(n,0);mpz_cmp_ui(n,100)<=0;mpz_add_ui(n,n,1))
-	 // {
-		//   suiteFibo(fibo,n);
-		//   gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
+	 printf("############ Fibo normal ##############\n");
+	 t1 = clock();
+	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
+	 {
+		  suiteFibo(fibo,n);
+		  gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
 
-	 // }
-	 // t2 = clock();
-	 // temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 // printf("\ntemp Fibo : %f\n", temps);
+	 }
+	 t2 = clock();
+	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	 printf("\ntemp Fibo : %f pour n de 0 à 33\n", temps);
 
 	 mpz_clears(fibo,n,NULL);
 	 mpf_clears(res,NULL);

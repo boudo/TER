@@ -246,6 +246,7 @@ void nombreOr(mpf_t res);
  */
 void suiteFibo_or(mpf_t res, mpz_t n);
 
+
 /*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param ent : On renvoie le resultat
