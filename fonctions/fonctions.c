@@ -808,13 +808,19 @@ unsigned long int arrondi(mpf_t ent, mpf_t n)
  */
 void theoremeFiboLucas(mpz_t res,mpz_t n)
 {
-	mpz_t Un,UnMoinsen,engmp,cinq;
 	int en;
+	
+	mpf_t Unf;
+	mpf_inits(Unf,NULL);
+		
+	mpz_t Un,UnMoinsen,engmp,cinq;
 	mpz_inits(Un,engmp,UnMoinsen,cinq,NULL);
+	
 	
 	mpz_set_ui(cinq,5);
 	
-	suiteFibo_or(Un,n);
+	suiteFibo_or(Unf,n);
+	mpz_set_f(Un,Unf);
 	en=jacobiSymbol(n,cinq);
 	
 	gmp_printf("suitefibo%Zd=%Zd\n",n,Un);
@@ -840,4 +846,5 @@ void theoremeFiboLucas(mpz_t res,mpz_t n)
 	mpz_mod(res,UnMoinsen,n);
 	
 	mpz_clears(Un,engmp,UnMoinsen,cinq,NULL);
+	mpf_clears(Unf,NULL);
 }

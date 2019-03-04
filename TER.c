@@ -242,7 +242,7 @@ int main()
 	mpz_t fl,n;
 	mpz_inits(fl,n,NULL);
 	
-	mpz_set_ui(n,10);
+	mpz_set_ui(n,2);
 	
 	theoremeFiboLucas(fl,n);
 	
