@@ -279,4 +279,13 @@ void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
  */
 void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b);
 
+/*! \fn void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
 #endif

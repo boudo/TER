@@ -906,3 +906,47 @@ void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
 	
 	mpz_clears(carre_a,quatre,b4,disc,NULL);
 }
+
+/*! \fn void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2;
+	mpz_inits(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	
+	if(mpz_cmp_ui(n,0)==0)
+	{
+		mpz_add_ui(nPlus2,n,2);
+		mpz_set(res,nPlus2);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+	
+	else if(mpz_cmp_ui(n,1)==0)
+	{
+		mpz_set(res,a);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		nombreLucas(nombreLucasMoins1,nMoins1);
+		mpz_mul(nombreLucasMoins1_a,nombreLucasMoins1,a);
+		
+		nombreLucas(nombreLucasMoins2,nMoins2);
+		mpz_mul(nombreLucasMoins2_b,nombreLucasMoins2,b);
+	
+		mpz_sub(rec,nombreLucasMoins1_a,nombreLucasMoins2_b);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+}
