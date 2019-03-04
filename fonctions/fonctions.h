@@ -226,31 +226,34 @@ void mersen(mpz_t m, mpz_t n);
  */
 void suiteFibo(mpz_t res, mpz_t n);
 
-/*! \fn void nombreLucas(mpz_t rez, mpz_t n)
+/*! \fn void nombreLucas(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Lucas
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier 
  */
 void nombreLucas(mpz_t res, mpz_t n);
 
-/*! \fn void nombreOr(mpz_t res, mpz_t n)
+/*! \fn void nombreOr(mpf_t res)
  * 	\brief Fonction permettant de calculer le nombre d'or
  * 	\param res : On renvoie le resultat
  */
 void nombreOr(mpf_t res);
 
-/*! \fn void suiteFibo_or(mpz_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpf_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
-void suiteFibo_or(mpz_t res, mpz_t n);
+void suiteFibo_or(mpf_t res, mpz_t n);
 
-/*! \fn unsigned long arrondi(mpf_t n)
- * 	\brief Fonction permettant d'arrondir une valeur
- *	\param n : un nombre flottant à arrondir
+
+/*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param ent : On renvoie le resultat
+ *	\param n : un nombre entier
+ *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
  */
-unsigned long arrondi(mpf_t n);
+unsigned long int arrondi(mpf_t ent, mpf_t n);
 
 /*! \fn theoremeFiboLucas(mpz_t n)
  * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
