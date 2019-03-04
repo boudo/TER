@@ -848,3 +848,61 @@ void theoremeFiboLucas(mpz_t res,mpz_t n)
 	mpz_clears(Un,engmp,UnMoinsen,cinq,NULL);
 	mpf_clears(Unf,NULL);
 }
+
+/*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b;
+	mpz_inits(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b,NULL);
+	
+	if(mpz_cmp_ui(n,1)<=0)
+	{
+		mpz_set(res,n);
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		suiteFibo(FiboMoins1,nMoins1);
+		mpz_mul(FiboMoins1_a,a,FiboMoins1);
+		
+		suiteFibo(FiboMoins2,nMoins2);
+		mpz_mul(FiboMoins2_b,b,FiboMoins2);
+		
+		mpz_sub(rec,FiboMoins1_a,FiboMoins2_b);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b,NULL);
+	}
+}
+/*! \fn calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+ * 	\brief Fonction permettant de calculer le discriminant
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ */
+void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+{
+	mpz_t carre_a,quatre,b4,disc;
+	mpz_inits(carre_a,quatre,b4,disc,NULL);
+	
+	mpz_mul(carre_a,a,a);
+	mpz_set_ui(quatre,4);
+	mpz_mul_ui(b4,b,4);
+	
+	mpz_sub(disc,carre_a,b4);
+	
+	mpz_set(res,disc);
+	
+	mpz_clears(carre_a,quatre,b4,disc,NULL);
+}

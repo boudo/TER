@@ -262,4 +262,21 @@ unsigned long int arrondi(mpf_t ent, mpf_t n);
  */
 void theoremeFiboLucas(mpz_t res,mpz_t n);
 
+/*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
+/*! \fn calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+ * 	\brief Fonction permettant de calculer le discriminant
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ */
+void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b);
+
 #endif

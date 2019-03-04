@@ -237,18 +237,38 @@ int main()
 	
 	// mpf_clears(or,NULL);
 	
-	gmp_printf("\n###################### Nouveau Test ######################\n\n");
+	//~ gmp_printf("\n###################### TheoremeFiboLucas ######################\n\n");
 	
-	mpz_t fl,n;
-	mpz_inits(fl,n,NULL);
+	//~ mpz_t fl,n;
+	//~ mpz_inits(fl,n,NULL);
 	
-	mpz_set_ui(n,2);
+	//~ mpz_set_ui(n,323);
 	
-	theoremeFiboLucas(fl,n);
+	//~ theoremeFiboLucas(fl,n);
 	
-	gmp_printf("theoreme fiboLucas=%Zd \n",fl);
+	//~ gmp_printf("theoreme fiboLucas=%Zd \n",fl);
 	
-	mpz_clears(fl,n,NULL);
+	//~ mpz_clears(fl,n,NULL);
+	
+	gmp_printf("\n###################### Poly Fibo ######################\n\n");
+	
+	mpz_t poly,a,b,n,delta;
+	mpz_inits(poly,a,b,n,delta,NULL);
+	
+	mpz_set_ui(a,1);
+	mpz_set_ui(b,1);
+	mpz_neg(b,b);
+	
+	calcul_discriminant(delta,a,b);
+	gmp_printf("delta= %Zd\n",delta);
+	
+	for(mpz_set_ui(n,0);mpz_cmp_ui(n,5)<=0;mpz_add_ui(n,n,1))
+	{
+		PolyFibo(poly,a,b,n);
+		gmp_printf("fibo_%Zd = %Zd\n",n,poly);
+	}
+	
+	mpz_clears(poly,a,b,n,delta,NULL);
 
 	return 0;
 }
