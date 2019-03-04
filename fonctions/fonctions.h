@@ -252,4 +252,11 @@ void suiteFibo_or(mpz_t res, mpz_t n);
  */
 unsigned long arrondi(mpf_t n);
 
+/*! \fn theoremeFiboLucas(mpz_t n)
+ * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
+ * 	\param res : resultat
+ *	\param n : nombre entier
+ */
+void theoremeFiboLucas(mpz_t res,mpz_t n);
+
 #endif

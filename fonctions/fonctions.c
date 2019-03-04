@@ -796,3 +796,44 @@ unsigned long arrondi(mpf_t n)
 	mpf_clears(deci, NULL);
 	return ent;
 }
+
+/*! \fn theoremeFiboLucas(mpz_t n)
+ * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
+ * 	\param res : resultat
+ *	\param n : nombre entier premier
+ */
+void theoremeFiboLucas(mpz_t res,mpz_t n)
+{
+	mpz_t Un,UnMoinsen,engmp,cinq;
+	int en;
+	mpz_inits(Un,engmp,UnMoinsen,cinq,NULL);
+	
+	mpz_set_ui(cinq,5);
+	
+	suiteFibo_or(Un,n);
+	en=jacobiSymbol(n,cinq);
+	
+	gmp_printf("suitefibo%Zd=%Zd\n",n,Un);
+	gmp_printf("jacobi(%Zd,%Zd)=%d\n",n,cinq,en);
+	
+	
+	if(en == -1)
+	{
+		mpz_set_ui(engmp,1);
+		mpz_neg(engmp,engmp);
+		
+		mpz_sub(UnMoinsen,Un,engmp);
+		
+	}
+	
+	else
+	{
+		mpz_sub_ui(UnMoinsen,Un,en);
+	}
+	
+	gmp_printf("Un-en=%Zd\n",UnMoinsen);
+	
+	mpz_mod(res,UnMoinsen,n);
+	
+	mpz_clears(Un,engmp,UnMoinsen,cinq,NULL);
+}

@@ -141,40 +141,40 @@ int main()
 
 	// mesureTempsLucas("mesureTemps/lucas.txt",521);
 	
-	 gmp_printf("\n###################### Suite Fibo et suite Fibo ######################\n\n");
+	 //~ gmp_printf("\n###################### Suite Fibo et suite Fibo ######################\n\n");
 	 
-	 mpz_t fibo,n;
-	 mpz_t res;
-	 mpz_inits(fibo,n,NULL);
-	 mpz_inits(res, NULL);
+	 //~ mpz_t fibo,n;
+	 //~ mpz_t res;
+	 //~ mpz_inits(fibo,n,NULL);
+	 //~ mpz_inits(res, NULL);
 
-	 printf("############ Fibo_or ##############\n");
-	 float temps;
-	 clock_t t1, t2;
-	 t1 = clock();
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
-	 {
-		  suiteFibo_or(res, n);
-		  gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
+	 //~ printf("############ Fibo_or ##############\n");
+	 //~ float temps;
+	 //~ clock_t t1, t2;
+	 //~ t1 = clock();
+	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
+	 //~ {
+		  //~ suiteFibo_or(res, n);
+		  //~ gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
 
-	 }
-	 t2 = clock();
-	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 printf("\ntemp Fibo_or : %f\n", temps);
+	 //~ }
+	 //~ t2 = clock();
+	 //~ temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	 //~ printf("\ntemp Fibo_or : %f\n", temps);
 
-	 printf("############ Fibo normal ##############\n");
-	 t1 = clock();
-	 for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
-	 {
-		  suiteFibo(fibo,n);
-		  gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
+	 //~ printf("############ Fibo normal ##############\n");
+	 //~ t1 = clock();
+	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
+	 //~ {
+		  //~ suiteFibo(fibo,n);
+		  //~ gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
 
-	 }
-	 t2 = clock();
-	 temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 printf("\ntemp Fibo : %f\n", temps);
+	 //~ }
+	 //~ t2 = clock();
+	 //~ temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	 //~ printf("\ntemp Fibo : %f\n", temps);
 
-	 mpz_clears(fibo,n,res,NULL);
+	 //~ mpz_clears(fibo,n,res,NULL);
 	 
 	 //~ gmp_printf("\n###################### Suite Lucas ######################\n\n");
 	 
@@ -200,6 +200,19 @@ int main()
 	// gmp_printf("nombre d'or = %Ff \n",or);
 	
 	// mpf_clears(or,NULL);
+	
+	gmp_printf("\n###################### Nouveau Test ######################\n\n");
+	
+	mpz_t fl,n;
+	mpz_inits(fl,n,NULL);
+	
+	mpz_set_ui(n,10);
+	
+	theoremeFiboLucas(fl,n);
+	
+	gmp_printf("theoreme fiboLucas=%Zd \n",fl);
+	
+	mpz_clears(fl,n,NULL);
 
 	return 0;
 }
