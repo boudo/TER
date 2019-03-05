@@ -753,11 +753,13 @@ void nombreOr(mpf_t res)
  */
 void suiteFibo_or(mpf_t res, mpz_t n)
 {
-	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
+	mpf_t  fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
 	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
 	mpf_set_ui(un, 1);
 	mpf_set_ui(Cinq,5);
 	mpf_sqrt(racineCinq,Cinq);
+	mpz_t test;
+	mpz_init(test);
 
 	// initialisation
 	nombreOr(fi);
@@ -771,8 +773,10 @@ void suiteFibo_or(mpf_t res, mpz_t n)
 	// gmp_printf("resTmp      = %Ff \n",resTmp);
 	mpf_trunc(res, resTmp);
 	mpf_add_ui(res, res, arrondi(res, resTmp));
-	// gmp_printf("res      = %Ff \n",res);
+	mpz_set_f(test, resTmp);
+	// gmp_printf("test  %Zd = %Zd \n",n, test);
 	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	mpz_clear(test);
 
 }
 
