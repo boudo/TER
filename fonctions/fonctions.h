@@ -1,6 +1,8 @@
 #ifndef FONCTIONS_H
 #define FONCTIONS_H
 
+#define PRECISION 2048
+
 #include <gmp.h>
 #include <stdio.h>
 #include <stdlib.h>

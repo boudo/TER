@@ -753,6 +753,7 @@ void nombreOr(mpf_t res)
  */
 void suiteFibo_or(mpf_t res, mpz_t n)
 {
+	mpf_set_default_prec(PRECISION);
 	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
 	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
 	mpf_set_ui(un, 1);
@@ -809,7 +810,9 @@ unsigned long int arrondi(mpf_t ent, mpf_t n)
 void theoremeFiboLucas(mpz_t res,mpz_t n)
 {
 	int en;
-	
+	mpf_set_default_prec(PRECISION);
+	mp_bitcnt_t c= mpf_get_default_prec();
+	gmp_printf("voici la base dedans: %d\n",c);
 	mpf_t Unf;
 	mpf_inits(Unf,NULL);
 		
