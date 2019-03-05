@@ -237,22 +237,34 @@ int main()
 	
 	// mpf_clears(or,NULL);
 	
-	gmp_printf("\n###################### TheoremeFiboLucas ######################\n\n");
-	mp_bitcnt_t d = 1028;
-	mpf_set_default_prec(d);
+	gmp_printf("\n###################### Test Fibo ######################\n\n");
+	//mp_bitcnt_t d = 1028;
+	//mpf_set_default_prec(d);
 	mpz_t fl,n;
 	mpz_inits(fl,n,NULL);
 	mpf_t res;
 	mpf_inits(res,NULL);
 	
-	mpz_set_ui(n,97);//a partir de 97 probleme?
+	mpz_set_ui(n,0);
+	//mpz_neg(n,n);
+	//mpz_set_ui(n,521);//a partir de 97 probleme?
 	
-	theoremeFiboLucas(fl,n);
-	nombreOr(res);
+		//~ suiteFibo_or(res,n);
+		//~ gmp_printf("fibo%Zd : %Ff\n",n,res);
+	
+	 for(int i=3;i<=359;i+=2)
+	 {
+		mpz_set_ui(n,i);
+		Test_Fibo(fl,n);
+		gmp_printf("TestFibo(%Zd) : %Zd\n",n,fl);
+	}
+	
+	//theoremeFiboLucas(fl,n);
+	//nombreOr(res);
 	//mpf_get_default_prec
 	
-	gmp_printf("nombre d'or =%.300Ff \n\n",res);
-	gmp_printf("fibo : %Zd\n",fl);
+	//gmp_printf("nombre d'or =%.300Ff \n\n",res);
+	//gmp_printf("fibo : %Zd\n",fl);
 	mpf_clears(res,NULL);
 	mpz_clears(fl,n,NULL);
 	

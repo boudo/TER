@@ -665,7 +665,7 @@ void suiteFibo(mpz_t res, mpz_t n)
 	mpz_t nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2;
 	mpz_inits(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
 	
-	if(mpz_cmp_ui(n,1)<=0)
+	if(mpz_cmp_ui(n,1)<=0 && mpz_cmp_ui(n,0)>=0)
 	{
 		mpz_set(res,n);
 		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
@@ -746,16 +746,17 @@ void nombreOr(mpf_t res)
 	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
 }
 
-/*! \fn void suiteFibo_or(mpf_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
-void suiteFibo_or(mpf_t res, mpz_t n)
+void suiteFibo_or(mpz_t res, mpz_t n)
 {
 	mpf_set_default_prec(PRECISION);
 	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
 	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	
 	mpf_set_ui(un, 1);
 	mpf_set_ui(Cinq,5);
 	mpf_sqrt(racineCinq,Cinq);
@@ -770,8 +771,9 @@ void suiteFibo_or(mpf_t res, mpz_t n)
 	mpf_sub(fibTmp, fiPuisN, fiPrimPuisN);
 	mpf_div(resTmp, fibTmp, racineCinq);
 	// gmp_printf("resTmp      = %Ff \n",resTmp);
-	mpf_trunc(res, resTmp);
-	mpf_add_ui(res, res, arrondi(res, resTmp));
+	mpf_trunc(tmp, resTmp);
+	mpf_add_ui(tmp, tmp, arrondi(tmp, resTmp));
+	mpz_set_f(res,tmp);
 	// gmp_printf("res      = %Ff \n",res);
 	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
 
@@ -800,53 +802,6 @@ unsigned long int arrondi(mpf_t ent, mpf_t n)
 
 	mpf_clears(deci, tmpEnt, NULL);
 	return 0;
-}
-
-/*! \fn theoremeFiboLucas(mpz_t n)
- * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
- * 	\param res : resultat
- *	\param n : nombre entier premier
- */
-void theoremeFiboLucas(mpz_t res,mpz_t n)
-{
-	int en;
-	mpf_set_default_prec(PRECISION);
-	mp_bitcnt_t c= mpf_get_default_prec();
-	gmp_printf("voici la base dedans: %d\n",c);
-	mpf_t Unf;
-	mpf_inits(Unf,NULL);
-		
-	mpz_t Un,nMoinsen,engmp,cinq;
-	mpz_inits(Un,engmp,nMoinsen,cinq,NULL);
-	
-	
-	mpz_set_ui(cinq,5);
-	en=jacobiSymbol(n,cinq);
-
-	gmp_printf("jacobi(%Zd,%Zd)=%d\n",n,cinq,en);
-		
-	if(en == -1)
-	{
-		mpz_set_ui(engmp,1);
-		mpz_neg(engmp,engmp);
-		
-		mpz_sub(nMoinsen,n,engmp);	
-	}
-	else
-	{
-		mpz_sub_ui(nMoinsen,n,en);
-	}
-	
-	suiteFibo_or(Unf,nMoinsen);
-	mpz_set_f(Un,Unf);
-	
-	gmp_printf("suitefibo%Zd=%Zd\n",nMoinsen,Un);
-	gmp_printf("U(n-en)=%Zd\n",Un);
-	
-	mpz_mod(res,Un,n);
-	
-	mpz_clears(Un,engmp,nMoinsen,cinq,NULL);
-	mpf_clears(Unf,NULL);
 }
 
 /*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)

@@ -1,7 +1,7 @@
 #ifndef FONCTIONS_H
 #define FONCTIONS_H
 
-#define PRECISION 2048
+#define PRECISION 4096
 
 #include <gmp.h>
 #include <stdio.h>
@@ -241,12 +241,12 @@ void nombreLucas(mpz_t res, mpz_t n);
  */
 void nombreOr(mpf_t res);
 
-/*! \fn void suiteFibo_or(mpf_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
-void suiteFibo_or(mpf_t res, mpz_t n);
+void suiteFibo_or(mpz_t res, mpz_t n);
 
 
 /*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
@@ -256,13 +256,6 @@ void suiteFibo_or(mpf_t res, mpz_t n);
  *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
  */
 unsigned long int arrondi(mpf_t ent, mpf_t n);
-
-/*! \fn theoremeFiboLucas(mpz_t n)
- * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
- * 	\param res : resultat
- *	\param n : nombre entier
- */
-void theoremeFiboLucas(mpz_t res,mpz_t n);
 
 /*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci en Polynome
