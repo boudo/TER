@@ -237,18 +237,18 @@ int main()
 	
 	// mpf_clears(or,NULL);
 	
-	//~ gmp_printf("\n###################### TheoremeFiboLucas ######################\n\n");
+	gmp_printf("\n###################### TheoremeFiboLucas ######################\n\n");
 	
-	//~ mpz_t fl,n;
-	//~ mpz_inits(fl,n,NULL);
+	mpz_t fl,n;
+	mpz_inits(fl,n,NULL);
 	
-	//~ mpz_set_ui(n,323);
+	mpz_set_ui(n,101);//a partir de 97 probleme?
 	
-	//~ theoremeFiboLucas(fl,n);
+	theoremeFiboLucas(fl,n);
 	
-	//~ gmp_printf("theoreme fiboLucas=%Zd \n",fl);
+	gmp_printf("theoreme fiboLucas=%Zd \n",fl);
 	
-	//~ mpz_clears(fl,n,NULL);
+	mpz_clears(fl,n,NULL);
 	
 	//~ gmp_printf("\n###################### Poly Fibo ######################\n\n");
 	
@@ -270,25 +270,25 @@ int main()
 	
 	//~ mpz_clears(poly,a,b,n,delta,NULL);
 	
-	gmp_printf("\n###################### Poly Lucas ######################\n\n");
+	//~ gmp_printf("\n###################### Poly Lucas ######################\n\n");
 	
-	mpz_t poly,a,b,n,delta;
-	mpz_inits(poly,a,b,n,delta,NULL);
+	//~ mpz_t poly,a,b,n,delta;
+	//~ mpz_inits(poly,a,b,n,delta,NULL);
 	
-	mpz_set_ui(a,1);
-	mpz_set_ui(b,1);
-	mpz_neg(b,b);
+	//~ mpz_set_ui(a,1);
+	//~ mpz_set_ui(b,1);
+	//~ mpz_neg(b,b);
 	
-	calcul_discriminant(delta,a,b);
-	gmp_printf("delta= %Zd\n",delta);
+	//~ calcul_discriminant(delta,a,b);
+	//~ gmp_printf("delta= %Zd\n",delta);
 	
-	for(mpz_set_ui(n,0);mpz_cmp_ui(n,5)<=0;mpz_add_ui(n,n,1))
-	{
-		PolyLucas(poly,a,b,n);
-		gmp_printf("lucas_%Zd = %Zd\n",n,poly);
-	}
+	//~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,5)<=0;mpz_add_ui(n,n,1))
+	//~ {
+		//~ PolyLucas(poly,a,b,n);
+		//~ gmp_printf("lucas_%Zd = %Zd\n",n,poly);
+	//~ }
 	
-	mpz_clears(poly,a,b,n,delta,NULL);
+	//~ mpz_clears(poly,a,b,n,delta,NULL);
 
 	return 0;
 }

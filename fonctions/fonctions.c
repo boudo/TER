@@ -813,39 +813,36 @@ void theoremeFiboLucas(mpz_t res,mpz_t n)
 	mpf_t Unf;
 	mpf_inits(Unf,NULL);
 		
-	mpz_t Un,UnMoinsen,engmp,cinq;
-	mpz_inits(Un,engmp,UnMoinsen,cinq,NULL);
+	mpz_t Un,nMoinsen,engmp,cinq;
+	mpz_inits(Un,engmp,nMoinsen,cinq,NULL);
 	
 	
 	mpz_set_ui(cinq,5);
-	
-	suiteFibo_or(Unf,n);
-	mpz_set_f(Un,Unf);
 	en=jacobiSymbol(n,cinq);
-	
-	gmp_printf("suitefibo%Zd=%Zd\n",n,Un);
+
 	gmp_printf("jacobi(%Zd,%Zd)=%d\n",n,cinq,en);
-	
-	
+		
 	if(en == -1)
 	{
 		mpz_set_ui(engmp,1);
 		mpz_neg(engmp,engmp);
 		
-		mpz_sub(UnMoinsen,Un,engmp);
-		
+		mpz_sub(nMoinsen,n,engmp);	
 	}
-	
 	else
 	{
-		mpz_sub_ui(UnMoinsen,Un,en);
+		mpz_sub_ui(nMoinsen,n,en);
 	}
 	
-	gmp_printf("Un-en=%Zd\n",UnMoinsen);
+	suiteFibo_or(Unf,nMoinsen);
+	mpz_set_f(Un,Unf);
 	
-	mpz_mod(res,UnMoinsen,n);
+	gmp_printf("suitefibo%Zd=%Zd\n",nMoinsen,Un);
+	gmp_printf("U(n-en)=%Zd\n",Un);
 	
-	mpz_clears(Un,engmp,UnMoinsen,cinq,NULL);
+	mpz_mod(res,Un,n);
+	
+	mpz_clears(Un,engmp,nMoinsen,cinq,NULL);
 	mpf_clears(Unf,NULL);
 }
 
