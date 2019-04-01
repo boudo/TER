@@ -925,38 +925,40 @@ void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 
 // En cours !!!!!!!!!!!!!!
 
-/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v)
+/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
  * 	\brief Fonction permettant de calculer la chaine de Lucas
  * 	\param n : entier positive
  * 	\param u : le terme u
  * 	\param v : le terme v
+ * 	\param x0 : 1er valeur d'initialisation de la séquence
+ * 	\param x1 : 2ème valeur d'initialisation de la séquence
  */
-// void chaineLucas(mpz_t n, mpz_t u, mpz_t v)
-// {
-// 	x0 = 2;
-// 	x1 = A;
-// 	u = x0;
-// 	v = x1;
-// 	int nbBit = 0;
-// 	char* nEnBin = NULL;
-// 	nEnBin = mpz_get_str(NULL, 2, n);
-// 	nbBit = strlen(nEnBin);
-// 	for(int j = nbBit - 1; j >= 0; j--)
-// 	{
-// 		if(nEnBin[j] == 1)
-// 		{
-// 			u = u rond v;
+void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
+{
+	// x0 = 2;
+	// x1 = A;
+	u = x0;
+	v = x1;
+	int nbBit = 0;
+	char* nEnBin = NULL;
+	nEnBin = mpz_get_str(NULL, 2, n);
+	nbBit = strlen(nEnBin);
+	for(int j = nbBit - 1; j >= 0; j--)
+	{
+		if(nEnBin[j] == 1)
+		{
+			// u = u rond v;
 
-// 			v = v * v;
-// 			mpz_mul(v, v, v);
-// 		}
-// 		else
-// 		{
-// 			u = u * u;
-// 			mpz_mul(u, u, u);
+			// v = v * v;
+			mpz_mul(v, v, v);
+		}
+		else
+		{
+			// u = u * u;
+			mpz_mul(u, u, u);
 
-// 			v = u rond v;
-// 		}
-// 	}
-// 	free(nEnBin);
-// }
+			// v = u rond v;
+		}
+	}
+	free(nEnBin);
+}

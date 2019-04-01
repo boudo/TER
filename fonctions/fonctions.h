@@ -42,11 +42,6 @@ liste ajoute_elem_debut(liste l,int i);
 
 liste supprime_elem_debut(liste l);
 
-/*! \fn liste getBinaire(const mpz_t expo)
- *  \brief Fonction qui calcule l'exposant en binaire
- *  \param expo : exposant
- *  \return retourne la liste contenant le nombre en binaire
- */
 // liste getBinaire(const mpz_t expo);
 
 //LISTE GMP
@@ -116,12 +111,6 @@ void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b);
 
 void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 
-/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v)
- * 	\brief Fonction permettant de calculer la chaine de Lucas
- * 	\param n : entier positive
- * 	\param u : le terme u
- * 	\param v : le terme v
- */
-void chaineLucas(mpz_t n, mpz_t u, mpz_t v);
+void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1);
 
 #endif
