@@ -21,9 +21,9 @@ run: clean principal
 all: creation test doc
 
 principal: test
-	#time ./test
+	time ./test
 	#valgrind ./test
-	./test
+	#./test
 
 test: $(ODIR)/TER.o $(ODIR)/mesure.o $(ODIR)/testProbabilistes.o $(ODIR)/testDeterministes.o $(ODIR)/fonctions.o
 	$(CC) -o test $^ $(LIB)

@@ -1,9 +1,12 @@
 #ifndef FONCTIONS_H
 #define FONCTIONS_H
 
+#define PRECISION 4096
+
 #include <gmp.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 /*! \file      fonctions.h
@@ -73,7 +76,7 @@ liste supprime_elem_debut(liste l);
  *  \param expo : exposant
  *  \return retourne la liste contenant le nombre en binaire
  */
-liste getBinaire(const mpz_t expo);
+// liste getBinaire(const mpz_t expo);
 
 //LISTE GMP
 
@@ -239,12 +242,12 @@ void nombreLucas(mpz_t res, mpz_t n);
  */
 void nombreOr(mpf_t res);
 
-/*! \fn void suiteFibo_or(mpf_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
-void suiteFibo_or(mpf_t res, mpz_t n);
+void suiteFibo_or(mpz_t res, mpz_t n);
 
 
 /*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
@@ -254,5 +257,39 @@ void suiteFibo_or(mpf_t res, mpz_t n);
  *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
  */
 unsigned long int arrondi(mpf_t ent, mpf_t n);
+
+/*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
+/*! \fn calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+ * 	\brief Fonction permettant de calculer le discriminant
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ */
+void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b);
+
+/*! \fn void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
+/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v)
+ * 	\brief Fonction permettant de calculer la chaine de Lucas
+ * 	\param n : entier positive
+ * 	\param u : le terme u
+ * 	\param v : le terme v
+ */
+void chaineLucas(mpz_t n, mpz_t u, mpz_t v);
 
 #endif

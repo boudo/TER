@@ -43,5 +43,11 @@ int Miller_Rabin(mpz_t n, int rep);
  */
 int solovayStrassen(mpz_t aTraiter, int iterations);
 
+/*! \fn Test_Fibo(mpz_t res,mpz_t n)
+ * 	\brief Fonction permettant de calculer le theoreme de Fibo et Lucas
+ * 	\param res : resultat
+ *	\param n : nombre entier
+ */
+void Test_Fibo(mpz_t res,mpz_t n);
 
 #endif

@@ -123,7 +123,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	        fprintf(fichier,"%f", temps);
 	        
 	        //Erastothene
-	        if(i < 35){
+	        if(i < 1){
 	        	if(i != 1)
 		        {
 					t1 = clock();
