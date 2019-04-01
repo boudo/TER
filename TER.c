@@ -45,6 +45,7 @@ int main()
  // 	}
  // 	printf("cont = %d\n", cont);
  // 	mpz_clears(m_test, NULL);
+
 	// gmp_printf("\n###################### LUCAS ######################\n\n");
 	// int luca;
 	// mpz_t n;
@@ -117,8 +118,8 @@ int main()
  	//~ mpz_clears(a,NULL);
 
 
-	// mpz_t resultatJ, randomNumber, aTraiter;
-	// mpz_inits(resultatJ, randomNumber, aTraiter, NULL);
+	// mpz_t finalultatJ, randomNumber, aTraiter;
+	// mpz_inits(finalultatJ, randomNumber, aTraiter, NULL);
 	// for (int i = 1; i < 10; ++i)
 	// {
 	// 	mpz_set_ui(a,i);
@@ -129,112 +130,20 @@ int main()
  	
  // 	mpz_clears(a,NULL);
 
-	gmp_printf("\n###################### generation nbr premier ######################\n\n");
-	float temps;
-	clock_t t1, t2;
-	t1 = clock();
-	mesureTempsFichier("mesureTemps/mesure.txt",25,11);
-	t2 = clock();
-	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	printf("temp : %f\n", temps);
+	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
+	// float temps;
+	// clock_t t1, t2;
+	// t1 = clock();
+	// mesureTempsFichier("mesureTemps/mesure.txt",25,11);
+	// t2 = clock();
+	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	// printf("temp : %f\n", temps);
 	
 	// mesureTempsPepin("mesureTemps/pepin.txt",10);
 
 	// mesureTempsLucas("mesureTemps/lucas.txt",521);
 	
-	 // gmp_printf("\n###################### Suite Fibo et suite Fibo ######################\n\n");
-	 
-
-	 // mpz_t fibo,n;
-	 // mpz_t res;
-	 // mpz_inits(fibo,n,NULL);
-	 // mpz_inits(res, NULL);
-
-	 // printf("############ Fibo_or ##############\n");
-	 // float temps;
-	 // clock_t t1, t2;
-	 // t1 = clock();
-	 // for(mpz_set_ui(n,0);mpz_cmp_ui(n,1000)<=0;mpz_add_ui(n,n,1))
-	 // {
-		//   suiteFibo_or(res, n);
-		//   gmp_printf("fibo_or_%Zd = %Zd\n",n, res);
-
-	 // }
-	 // t2 = clock();
-	 // temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 // printf("\ntemp Fibo_or : %f\n", temps);
-
-	 // printf("############ Fibo normal ##############\n");
-	 // t1 = clock();
-	 // for(mpz_set_ui(n,0);mpz_cmp_ui(n,33)<=0;mpz_add_ui(n,n,1))
-	 // {
-		//   suiteFibo(fibo,n);
-		//   gmp_printf("fibo_%Zd = %Zd\n",n,fibo);
-
-	 // }
-	 // t2 = clock();
-	 // temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	 // printf("\ntemp Fibo : %f\n", temps);
-
-	 // mpz_clears(fibo,n,res,NULL);
-	 
-	 //~ gmp_printf("\n###################### Suite Lucas ######################\n\n");
-	 
-	 //~ mpz_t lucas,n;
-	 //~ mpz_inits(lucas,n,NULL);
-	 
-	 
-	 //~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,10)<=0;mpz_add_ui(n,n,1))
-	 //~ {
-		  //~ nombreLucas(lucas,n);
-	 
-		  //~ gmp_printf("lucas_%Zd = %Zd\n",n,lucas);
-	 //~ }
-	 
-	 //~ mpz_clears(lucas,n,NULL);
-
-	// gmp_printf("\n###################### Nombre d'or ######################\n\n");
-	
-	// mpf_t or;
-	// mpf_inits(or,NULL);
-	
-	// nombreOr(or);
-	// gmp_printf("nombre d'or = %Ff \n",or);
-	
-	// mpf_clears(or,NULL);
-	
-	// gmp_printf("\n###################### Test Fibo ######################\n\n");
-	// //mp_bitcnt_t d = 1028;
-	// //mpf_set_default_prec(d);
-	// mpz_t fl,n;
-	// mpz_inits(fl,n,NULL);
-	// mpf_t res;
-	// mpf_inits(res,NULL);
-	
-	// mpz_set_ui(n,0);
-	// //mpz_neg(n,n);
-	// //mpz_set_ui(n,521);//a partir de 97 probleme?
-	
-	// 	//~ suiteFibo_or(res,n);
-	// 	//~ gmp_printf("fibo%Zd : %Ff\n",n,res);
-	
-	//  for(int i=3;i<=100000;i+=2)
-	//  {
-	// 	mpz_set_ui(n,i);
-	// 	Test_Fibo(fl,n);
-	// 	gmp_printf("TestFibo(%Zd) : %Zd\n",n,fl);
-	// }
-	
-	// //theoremeFiboLucas(fl,n);
-	// //nombreOr(res);
-	// //mpf_get_default_prec
-	
-	// //gmp_printf("nombre d'or =%.300Ff \n\n",res);
-	// //gmp_printf("fibo : %Zd\n",fl);
-	// mpf_clears(res,NULL);
-	// mpz_clears(fl,n,NULL);
-
-	gmp_printf("\n###################### Test Fibo ######################\n\n");
+	gmp_printf("\n###################### Test binaire ######################\n\n");
 
 	char* valRetour = NULL;
 	mpz_t val;
@@ -246,46 +155,22 @@ int main()
 	printf("valRetour = %s\n", valRetour);
 	free(valRetour);
 	mpz_clears(val, NULL);
+
 	
-	//~ gmp_printf("\n###################### Poly Fibo ######################\n\n");
+	gmp_printf("\n###################### Test Lucas ######################\n\n");
+	int i;
+	mpz_t n,lucas;
+	mpz_inits(n,lucas,NULL);
 	
-	//~ mpz_t poly,a,b,n,delta;
-	//~ mpz_inits(poly,a,b,n,delta,NULL);
+	for(int i=3;i<=100;i+=2)
+	 {
+		mpz_set_ui(n,i);
+		//Test_Lucas(lucas,n);
+		Test_Fibo(lucas,n);
+		gmp_printf("TestLucas(%Zd) : %Zd\n",n,lucas);
+	}
 	
-	//~ mpz_set_ui(a,1);
-	//~ mpz_set_ui(b,1);
-	//~ mpz_neg(b,b);
-	
-	//~ calcul_discriminant(delta,a,b);
-	//~ gmp_printf("delta= %Zd\n",delta);
-	
-	//~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,5)<=0;mpz_add_ui(n,n,1))
-	//~ {
-		//~ PolyFibo(poly,a,b,n);
-		//~ gmp_printf("fibo_%Zd = %Zd\n",n,poly);
-	//~ }
-	
-	//~ mpz_clears(poly,a,b,n,delta,NULL);
-	
-	//~ gmp_printf("\n###################### Poly Lucas ######################\n\n");
-	
-	//~ mpz_t poly,a,b,n,delta;
-	//~ mpz_inits(poly,a,b,n,delta,NULL);
-	
-	//~ mpz_set_ui(a,1);
-	//~ mpz_set_ui(b,1);
-	//~ mpz_neg(b,b);
-	
-	//~ calcul_discriminant(delta,a,b);
-	//~ gmp_printf("delta= %Zd\n",delta);
-	
-	//~ for(mpz_set_ui(n,0);mpz_cmp_ui(n,5)<=0;mpz_add_ui(n,n,1))
-	//~ {
-		//~ PolyLucas(poly,a,b,n);
-		//~ gmp_printf("lucas_%Zd = %Zd\n",n,poly);
-	//~ }
-	
-	//~ mpz_clears(poly,a,b,n,delta,NULL);
+	mpz_clears(n,lucas,NULL);
 
 	return 0;
 }

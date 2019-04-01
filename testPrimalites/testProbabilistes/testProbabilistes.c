@@ -239,3 +239,55 @@ void Test_Fibo(mpz_t res,mpz_t n)
 	
 	mpz_clears(Un,engmp,nMoinsen,cinq,NULL);
 }
+
+/*! \fn Test_Lucas(mpz_t res,mpz_t n)
+ * 	\brief Fonction permettant de calculer le theoreme de Lucas
+ * 	\param res : resultat
+ *	\param n : nombre entier
+ */
+void Test_Lucas(mpz_t res,mpz_t n)
+{
+	int en;
+	mpf_set_default_prec(PRECISION);
+		
+	mpz_t Un,nMoinsen,engmp,cinq,a,b,delta,deltab2,pgcd_p_db2;
+	mpz_inits(Un,engmp,nMoinsen,cinq,a,b,delta,deltab2,pgcd_p_db2,NULL);
+	
+	mpz_set_ui(a,1);
+	mpz_set_ui(b,1);
+	mpz_neg(b,b);
+	
+	calcul_discriminant(delta,a,b);
+	
+	mpz_mod_ui(b,b,2);
+	mpz_mod(deltab2,b,delta);
+	
+	pgcd(pgcd_p_db2,n,deltab2);
+	
+	
+	mpz_set_ui(cinq,5);
+	en=jacobiSymbol(n,cinq);
+
+	//gmp_printf("jacobi(%Zd,%Zd)=%d\n",n,cinq,en);
+		
+	if(en == -1)
+	{
+		mpz_set_ui(engmp,1);
+		mpz_neg(engmp,engmp);
+		
+		mpz_sub(nMoinsen,n,engmp);	
+	}
+	else
+	{
+		mpz_sub_ui(nMoinsen,n,en);
+	}
+	
+	suiteFibo_or(Un,nMoinsen);
+	
+	//gmp_printf("suitefibo%Zd=%Zd\n",nMoinsen,Un);
+	//gmp_printf("U(n-en)=%Zd\n",Un);
+	
+	mpz_mod(res,Un,n);
+	
+	mpz_clears(Un,engmp,nMoinsen,cinq,a,b,delta,deltab2,pgcd_p_db2,NULL);
+}
