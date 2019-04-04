@@ -23,6 +23,6 @@ int Eratosthene(mpz_t n);
 
 int Pepin(mpz_t n);
 
-int Lucas(mpz_t n);
+int LucasLehmer(mpz_t n);
 
 #endif

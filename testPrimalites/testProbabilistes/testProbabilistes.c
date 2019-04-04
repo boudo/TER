@@ -291,3 +291,17 @@ void Test_Lucas(mpz_t res,mpz_t n)
 	
 	mpz_clears(Un,engmp,nMoinsen,cinq,a,b,delta,deltab2,pgcd_p_db2,NULL);
 }
+
+//En cours!!!!!!!!!!
+
+/*! \fn LucasFrobenius(mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
+ * 	\brief Fonction permettant de calculer le theoreme de Lucas
+ * 	\param n : nombre entier à tester strictement supérieur à 1
+ *	\param a : nombre entier aléatoire
+ *	\param b : nombre entier aléatoire
+ *	\param delta : nombre entier
+ */
+void LucasFrobenius(mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
+{
+
+}

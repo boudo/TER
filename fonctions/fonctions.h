@@ -103,6 +103,8 @@ void nombreOr(mpf_t res);
 
 void suiteFibo_or(mpz_t res, mpz_t n);
 
+void suiteLucas_or(mpz_t res, mpz_t a, mpz_t n);
+
 unsigned long int arrondi(mpf_t ent, mpf_t n);
 
 void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
@@ -110,6 +112,15 @@ void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b);
 
 void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
+// Mieux PolyLucas
+void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
+
+// Resultat pas bon
+void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n);
+
+// Afaire
+void PolyLucas_dinamyk(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 
 void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1);
 

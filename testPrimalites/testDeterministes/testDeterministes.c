@@ -102,12 +102,12 @@ int Pepin(mpz_t n)
 
 }
 
-/*! \fn int Lucas(mpz_t n)
- *  \brief Fonction Test De Lucas
+/*! \fn int LucasLehmer(mpz_t n)
+ *  \brief Fonction Test De Lucas pour les ombre de Mersen
  *  \param n : entier n
  *  \return retourne 1 si premier ,0 si composé
  */
-int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
+int LucasLehmer(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 {
 	mpz_t pair;
 	mpz_init(pair);
