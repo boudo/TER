@@ -123,7 +123,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	        fprintf(fichier,"%f", temps);
 	        
 	        //Erastothene
-	        if(i < 35){
+	        if(i < 1){
 	        	if(i != 1)
 		        {
 					t1 = clock();
@@ -189,7 +189,7 @@ void mesureTempsLucas(char *nomFichier,int max){
 	int i = 1;
     mpz_inits(n,NULL);
     mpz_set_ui(n,3);
-	Lucas(n);
+	LucasLehmer(n);
  	float temps;
     clock_t t1, t2;
     if(fichier != NULL){
@@ -199,7 +199,7 @@ void mesureTempsLucas(char *nomFichier,int max){
 	    	mpz_set_ui(n,i);
 	    	fprintf(fichier,"%d ", i);
 			t1 = clock();
-			retour = Lucas(n);
+			retour = LucasLehmer(n);
 			t2 = clock();
 			fprintf(fichier,"%d ", retour);
 			temps = (float)(t2-t1)/CLOCKS_PER_SEC;

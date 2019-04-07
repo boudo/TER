@@ -306,26 +306,33 @@ void pgcd(mpz_t resultat, const mpz_t a, const mpz_t b) // pgcd(1,1)
  */
 void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mpz_t modul)
 {
+	char* expoEnBin = NULL;
+	int taille = 0;
+	int i = 1;
 	mpz_set(resultat, x);
-	liste expoB = creer_liste();
-	expoB = getBinaire(expo);
+	expoEnBin = mpz_get_str(NULL, 2, expo);
+	taille = strlen(expoEnBin);
+	// liste expoB = creer_liste();
+	// expoB = getBinaire(expo);
 	//printf("OK pour expoBinMPZ\n");
-	expoB = supprime_elem_debut(expoB);
+	// expoB = supprime_elem_debut(expoB);
 
-	while(!est_vide(expoB))
+	while(i < taille)
 	{
 		mpz_mul(resultat, resultat, resultat);
 		mpz_mod(resultat, resultat, modul);
-		if(expoB->val == 1)
+		if(expoEnBin[i] == 1)
 		{
 			mpz_mul(resultat, resultat, x);
 			mpz_mod(resultat, resultat, modul);
 		}
 
-		expoB = supprime_elem_debut(expoB);
+		// expoB = supprime_elem_debut(expoB);
+		i++;
 	}
 	
-	expoB = libere_liste(expoB);
+	// expoB = libere_liste(expoB);
+	free(expoEnBin);
 }
 
 /*! \fn liste getBinaire(const mpz_t expo)
@@ -333,27 +340,27 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
  *  \param expo : exposant
  *  \return retourne la liste contenant le nombre en binaire
  */
-liste getBinaire(const mpz_t expo)
-{
-	int r = 0;
-	liste maListe = creer_liste();
-	mpz_t rest, tmp;
-	mpz_inits(rest, tmp, NULL);
-	mpz_set(tmp, expo);
+// liste getBinaire(const mpz_t expo)
+// {
+// 	int r = 0;
+// 	liste maListe = creer_liste();
+// 	mpz_t rest, tmp;
+// 	mpz_inits(rest, tmp, NULL);
+// 	mpz_set(tmp, expo);
 
-	while(mpz_cmp_ui(tmp, 0) > 0)
-	{
-		r = (int) mpz_cdiv_r_ui(rest, tmp, 2);
-		//printf("r = %d\n", r);
-		maListe = ajoute_elem_debut(maListe, r);
-		mpz_div_ui(tmp, tmp, 2);
+// 	while(mpz_cmp_ui(tmp, 0) > 0)
+// 	{
+// 		r = (int) mpz_cdiv_r_ui(rest, tmp, 2);
+// 		//printf("r = %d\n", r);
+// 		maListe = ajoute_elem_debut(maListe, r);
+// 		mpz_div_ui(tmp, tmp, 2);
 
-	}
-	mpz_clears(rest, tmp, NULL);
-	//affiche_liste(maListe);
-	//maListe = libere_liste(maListe);
-	return maListe;
-}
+// 	}
+// 	mpz_clears(rest, tmp, NULL);
+// 	//affiche_liste(maListe);
+// 	//maListe = libere_liste(maListe);
+// 	return maListe;
+// }
 
 /*! \fn void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
  *  \brief Fonction qui calcule l'exponention rapide
@@ -369,24 +376,33 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 		return ;
 	}
 
+	char* expoEnBin = NULL;
+	int taille = 0;
+	int i = 1;
 	mpz_set(resultat, x);
-	liste expoB = creer_liste();
-	expoB = getBinaire(expo);
-	// printf("expo en bin\n");
-	// affiche_liste(expoB);
-	expoB = supprime_elem_debut(expoB);
+	expoEnBin = mpz_get_str(NULL, 2, expo);
+	taille = strlen(expoEnBin);
+	// liste expoB = creer_liste();
+	// expoB = getBinaire(expo);
+	//printf("OK pour expoBinMPZ\n");
+	// expoB = supprime_elem_debut(expoB);
 
-	while(!est_vide(expoB))
+	while(i < taille)
 	{
 		mpz_mul(resultat, resultat, resultat);
-		//printf("sq\n");
-		if(expoB->val == 1)
+		// mpz_mod(resultat, resultat, modul);
+		if(expoEnBin[i] == 1)
 		{
 			mpz_mul(resultat, resultat, x);
-			//printf("mul\n");
+			// mpz_mod(resultat, resultat, modul);
 		}
-		expoB = supprime_elem_debut(expoB);
+
+		// expoB = supprime_elem_debut(expoB);
+		i++;
 	}
+	
+	// expoB = libere_liste(expoB);
+	free(expoEnBin);
 }
 
 
@@ -655,7 +671,7 @@ void mersen(mpz_t m, mpz_t n)
 	// gmp_printf("meren = %Zd\n", m);
 }
 
-/*! \fn suiteFibo(mpz_t res, mpz_t n);
+/*! \fn void suiteFibo(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
@@ -665,7 +681,7 @@ void suiteFibo(mpz_t res, mpz_t n)
 	mpz_t nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2;
 	mpz_inits(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
 	
-	if(mpz_cmp_ui(n,1)<=0)
+	if(mpz_cmp_ui(n,1)<=0 && mpz_cmp_ui(n,0)>=0)
 	{
 		mpz_set(res,n);
 		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins2,NULL);
@@ -687,7 +703,7 @@ void suiteFibo(mpz_t res, mpz_t n)
 	}
 }
 
-/*! \fn suiteLucas(mpz_t rez, mpz_t n);
+/*! \fn void nombreLucas(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Lucas
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier 
@@ -726,7 +742,7 @@ void nombreLucas(mpz_t res, mpz_t n)
 	}
 }
 
-/*! \fn nombreOr(mpz_t res, mpz_t n)
+/*! \fn void nombreOr(mpf_t res)
  * 	\brief Fonction permettant de calculer le nombre d'or
  * 	\param res : On renvoie le resultat
  */
@@ -746,18 +762,22 @@ void nombreOr(mpf_t res)
 	mpf_clears(or,racineCinq,racineCinqPlusUn,Cinq,NULL);
 }
 
-/*! \fn suiteFibo_or(mpz_t res, mpz_t n)
+/*! \fn void suiteFibo_or(mpz_t res, mpz_t n)
  * 	\brief Fonction permettant de calculer la suite de Fibonacci
  * 	\param res : On renvoie le resultat
  *	\param n : un nombre entier
  */
 void suiteFibo_or(mpz_t res, mpz_t n)
 {
+	mpf_set_default_prec(PRECISION);
 	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
 	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	
 	mpf_set_ui(un, 1);
 	mpf_set_ui(Cinq,5);
 	mpf_sqrt(racineCinq,Cinq);
+	mpz_t test;
+	mpz_init(test);
 
 	// initialisation
 	nombreOr(fi);
@@ -768,27 +788,310 @@ void suiteFibo_or(mpz_t res, mpz_t n)
 	mpf_pow_ui(fiPrim, fiPrim, mpz_get_ui(n));
 	mpf_sub(fibTmp, fiPuisN, fiPrimPuisN);
 	mpf_div(resTmp, fibTmp, racineCinq);
-	mpz_set_ui(res, arrondi(resTmp));
-	// mpf_trunc(res, res);
-	// mpz_set_ui(res, mpf_get_ui(resTmp));
+	mpf_trunc(tmp, resTmp);
+	mpf_add_ui(tmp, tmp, arrondi(tmp, resTmp));
+	mpz_set_f(res,tmp);
 	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	mpz_clear(test);
 
 }
 
-unsigned long arrondi(mpf_t n)
+/*! \fn void suiteLucas_or(mpz_t res, mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param res : On renvoie le resultat
+ *	\param n : un nombre entier
+ */
+void suiteLucas_or(mpz_t res, mpz_t a, mpz_t n)
 {
-	mpf_t deci;
-	unsigned long ent;
-	mpf_inits(deci, NULL);
-	ent = mpf_get_ui(n);
-	mpf_sub_ui(deci, n, ent);
+	// printf("suis dans suiteLucas_or\n");
+	if(mpz_cmp_ui(n, 0) == 0)
+	{
+		mpz_set_ui(res, 2);
+		// gmp_printf("res = %Zd\n", res);
+		return;
+	}
+	if(mpz_cmp_ui(n, 1) == 0)
+	{
+		mpz_set(res, a);
+		// gmp_printf("res = %Zd\n", res);
+		return;
+	}
+	mpf_set_default_prec(PRECISION);
+	mpf_t fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp;
+	mpf_inits(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	
+	mpf_set_ui(un, 1);
+	// mpf_set_ui(Cinq,5);
+	// mpf_sqrt(racineCinq,Cinq);
+	mpz_t test;
+	mpz_init(test);
+
+	// initialisation
+	nombreOr(fi);
+	mpf_div(tmp, un, fi);
+	mpf_neg(fiPrim, tmp);
+
+	mpf_pow_ui(fiPuisN, fi, mpz_get_ui(n));
+	mpf_pow_ui(fiPrim, fiPrim, mpz_get_ui(n));
+	mpf_add(fibTmp, fiPuisN, fiPrimPuisN);
+	mpf_set(resTmp, fibTmp);
+	// gmp_printf("fibTmp = %Ff\n", fibTmp);
+	// mpf_sub(fibTmp, fiPuisN, fiPrimPuisN);
+	// mpf_div(resTmp, fibTmp, racineCinq);
+	// gmp_printf("luc = %Ff\n", fibTmp);
+	mpf_trunc(tmp, resTmp);
+	mpf_add_ui(tmp, tmp, arrondi(tmp, resTmp));
+	mpz_set_f(res,tmp);
+	mpf_clears(fi, fiPrim, fiPuisN, fiPrimPuisN, tmp, un, racineCinq, Cinq, fibTmp, resTmp, NULL);
+	mpz_clear(test);
+
+}
+
+/*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\param ent : On renvoie le resultat
+ *	\param n : un nombre entier
+ *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
+ */
+unsigned long int arrondi(mpf_t ent, mpf_t n)
+{
+	// gmp_printf("ent = %Zd\n", ent);
+	mpf_t deci, tmpEnt;
+	mpf_inits(deci, tmpEnt, NULL);
+	// mpf_set_z(tmpEnt, ent);
+
+	mpf_sub(deci, n, ent);
 
 	if( mpf_cmp_d(deci, 0.5) >= 0)
 	{
-		mpf_clears(deci, NULL);
-		return ent + 1;
+		mpf_clears(deci, tmpEnt, NULL);
+		return 1;
 	}
 
-	mpf_clears(deci, NULL);
-	return ent;
+	mpf_clears(deci, tmpEnt, NULL);
+	return 0;
+}
+
+/*! \fn void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Fibonacci en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyFibo(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b;
+	mpz_inits(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b,NULL);
+	
+	if(mpz_cmp_ui(n,1)<=0)
+	{
+		mpz_set(res,n);
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b, NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		PolyFibo(FiboMoins1, a, b, nMoins1);
+		mpz_mul(FiboMoins1_a,a,FiboMoins1);
+		
+		PolyFibo(FiboMoins2, a, b, nMoins2);
+		mpz_mul(FiboMoins2_b,b,FiboMoins2);
+		
+		mpz_sub(rec,FiboMoins1_a,FiboMoins2_b);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,FiboMoins1,FiboMoins1_a,FiboMoins2,FiboMoins2_b,NULL);
+	}
+}
+/*! \fn calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+ * 	\brief Fonction permettant de calculer le discriminant
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ */
+void calcul_discriminant(mpz_t res,mpz_t a,mpz_t b)
+{
+	mpz_t carre_a,quatre,b4,disc;
+	mpz_inits(carre_a,quatre,b4,disc,NULL);
+	
+	mpz_mul(carre_a,a,a);
+	mpz_set_ui(quatre,4);
+	mpz_mul_ui(b4,b,4);
+	
+	mpz_sub(disc,carre_a,b4);
+	
+	mpz_set(res,disc);
+	
+	mpz_clears(carre_a,quatre,b4,disc,NULL);
+}
+
+/*! \fn void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas en Polynome
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
+void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	mpz_t nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2;
+	mpz_inits(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	
+	if(mpz_cmp_ui(n,0)==0)
+	{
+		mpz_add_ui(nPlus2,n,2);
+		mpz_set(res,nPlus2);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+	
+	else if(mpz_cmp_ui(n,1)==0)
+	{
+		mpz_set(res,a);
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+	
+	else
+	{
+		mpz_sub_ui(nMoins1,n,1);
+		mpz_sub_ui(nMoins2,n,2);
+	
+		// suiteLucas_or(nombreLucasMoins1,nMoins1);
+		PolyLucas(nombreLucasMoins1, a, b, nMoins1);
+		mpz_mul(nombreLucasMoins1_a,nombreLucasMoins1,a);
+		
+		// suiteLucas_or(nombreLucasMoins2,nMoins2);
+		PolyLucas(nombreLucasMoins2, a, b, nMoins2);
+		mpz_mul(nombreLucasMoins2_b,nombreLucasMoins2,b);
+	
+		mpz_sub(rec,nombreLucasMoins1_a,nombreLucasMoins2_b);
+		
+		mpz_set(res,rec);
+		
+		mpz_clears(nMoins1,nMoins2,rec,nombreLucasMoins1,nombreLucasMoins1_a,nombreLucasMoins2,nombreLucasMoins2_b,nPlus2,NULL);
+	}
+}
+
+void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	if(mpz_cmp_ui(n, 0) == 0)
+	{
+		mpz_set_ui(res, 2);
+		return;
+	}
+	if(mpz_cmp_ui(n, 1) == 0)
+	{
+		mpz_set(res, a);
+		return;
+	}
+	mpz_t resNmoins1, resNmoins2;
+	mpz_inits(resNmoins1, resNmoins2, NULL);
+	mpz_sub_ui(resNmoins1, n, 1);
+	// gmp_printf("resNmoins1 = %Zd\n", resNmoins1);
+	mpz_sub_ui(resNmoins2, n, 2);
+	// gmp_printf("resNmoins2 = %Zd\n", resNmoins2);
+	
+	if(mpz_cmp_ui(n, 2) == 0)
+	{
+		
+		
+
+
+		suiteLucas_or(resNmoins1, a, resNmoins1);
+		// gmp_printf("resNmoins1 = %Zd\n", resNmoins1);
+		suiteLucas_or(resNmoins2, a, resNmoins2);
+		// gmp_printf("resNmoins2 = %Zd\n", resNmoins2);
+		mpz_mul(resNmoins1, resNmoins1, a);
+		mpz_mul(resNmoins2, resNmoins2, b);
+		mpz_sub(res, resNmoins1, resNmoins2);
+		mpz_clears(resNmoins1, resNmoins2, NULL);
+		return;
+	}
+
+	PolyLucas_or(resNmoins1, a, b, resNmoins1);
+	PolyLucas_or(resNmoins2, a, b, resNmoins2);
+	mpz_mul(resNmoins1, resNmoins1, a);
+	mpz_mul(resNmoins2, resNmoins2, b);
+	mpz_sub(res, resNmoins1, resNmoins2);
+	mpz_clears(resNmoins1, resNmoins2, NULL);
+	return;
+
+}
+
+void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n)
+{
+	if(mpz_cmp_ui(n, 0) == 0)
+	{
+		mpz_set_ui(res, 2);
+		return;
+	}
+	if(mpz_cmp_ui(n, 1) == 0)
+	{
+		mpz_set(res, v1);
+		return;
+	}
+
+	mpz_t Nmoins1, tmp;
+	mpz_inits(Nmoins1, tmp, NULL);
+
+	mpz_set(v0, v1);
+	mpz_mul(v1, v1, a);
+	mpz_mul(tmp, v0, b);
+	mpz_sub(v1, v1, tmp);
+
+	
+	mpz_sub_ui(Nmoins1, n, 1);
+
+	PolyLucas_or(res, v1, v0, Nmoins1);
+	mpz_set(res, v1);
+	mpz_clears(Nmoins1, tmp, NULL);
+	return;
+}
+
+// En cours !!!!!!!!!!!!!!
+
+/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
+ * 	\brief Fonction permettant de calculer la chaine de Lucas
+ * 	\param n : entier positive
+ * 	\param u : le terme u
+ * 	\param v : le terme v
+ * 	\param x0 : 1er valeur d'initialisation de la séquence
+ * 	\param x1 : 2ème valeur d'initialisation de la séquence
+ */
+void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
+{
+	// x0 = 2;
+	// x1 = A;
+	// u = x0;
+	mpz_set(u, x0);
+	// v = x1;
+	mpz_set(u, x1);
+	int nbBit = 0;
+	char* nEnBin = NULL;
+	nEnBin = mpz_get_str(NULL, 2, n);
+	nbBit = strlen(nEnBin);
+	for(int j = nbBit - 1; j >= 0; j--)
+	{
+		if(nEnBin[j] == 1)
+		{
+			// u = u rond v;
+			mpz_mul(u, u, v);
+
+			// v = v * v;
+			mpz_mul(v, v, v);
+		}
+		else
+		{
+			// u = u * u;
+			mpz_mul(u, u, u);
+
+			// v = u rond v;
+			mpz_mul(u, u, v);
+		}
+	}
+	free(nEnBin);
 }

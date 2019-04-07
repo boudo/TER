@@ -9,14 +9,6 @@
  *  \date      24 fevrier 2019
  */
 
-
-/*! \fn int Fermat(mpz_t n, int iter)
- *  \brief Fonction test de Fermat qui permet de tester si un nombre est premier ou non
- *  \param n : nombre à tester
- *  \param iter : nombre d'iterations
- *  \return retourne 1 si premier ou sinon 0
- */
-
  /*!\fn int Eratosthene(mpz_t n)
  *  \brief Fonction Deterministe qui utilise le crible d'erastothene pour dire si un nombre est premier ou non
  *  \param n : entier n
@@ -36,10 +28,10 @@ int Eratosthene(mpz_t n)
 		return 1;
 	}
 
-	mpz_t racine_n,resteDiv,nmoins1;
-	mpz_inits(racine_n,resteDiv,nmoins1,NULL);
+	mpz_t racine_n,finalteDiv,nmoins1;
+	mpz_inits(racine_n,finalteDiv,nmoins1,NULL);
 
-	//Liste des nombres premiers < à racine_n
+	//Liste des nombfinal premiers < à racine_n
 	mpz_sqrt(racine_n,n);
 	listegmp premier = creer_listegmp();
 	
@@ -53,19 +45,19 @@ int Eratosthene(mpz_t n)
 		premier = crible_era_gmp(racine_n); 
 	}
 
-	//On teste si chacun de ces nombres premiers / n
+	//On teste si chacun de ces nombfinal premiers / n
 	listegmp tmp = premier;
 
 	while (tmp->val != NULL)
 	{
 		if (tmp->primalite == 1)
 		{
-			mpz_mod(resteDiv,n,tmp->val);
+			mpz_mod(finalteDiv,n,tmp->val);
 			
 			//Cas quand composé
-			if (mpz_cmp_ui(resteDiv,0) == 0 ) 
+			if (mpz_cmp_ui(finalteDiv,0) == 0 ) 
 			{
-				mpz_clears(resteDiv, racine_n,nmoins1, NULL);
+				mpz_clears(finalteDiv, racine_n,nmoins1, NULL);
 				libere_listegmp(premier);
 				return 0;
 			}
@@ -74,7 +66,7 @@ int Eratosthene(mpz_t n)
 	}
 		
 	//Cas quand 1er
-	mpz_clears(resteDiv,racine_n,nmoins1,NULL);
+	mpz_clears(finalteDiv,racine_n,nmoins1,NULL);
 	libere_listegmp(premier);
 	return 1;
 }
@@ -110,12 +102,12 @@ int Pepin(mpz_t n)
 
 }
 
-/*! \fn int Lucas(mpz_t n)
- *  \brief Fonction Test De Lucas
+/*! \fn int LucasLehmer(mpz_t n)
+ *  \brief Fonction Test De Lucas pour les ombre de Mersen
  *  \param n : entier n
  *  \return retourne 1 si premier ,0 si composé
  */
-int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
+int LucasLehmer(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 {
 	mpz_t pair;
 	mpz_init(pair);
@@ -134,7 +126,7 @@ int Lucas(mpz_t n) // on a n impaire, on veut savoir si 2^n - 1 est premier
 	mpz_sub_ui(k, n, 2);
 	// gmp_printf("k = %Zd\n", k);
 	calculSequence(seq, mers, k);
-	// test du resultat de le sequence
+	// test du finalultat de le sequence
 	if( mpz_cmp_ui(seq, 0) == 0)
 	{
 		// gmp_printf("%Zd est 1er\n", mers);

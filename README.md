@@ -40,3 +40,6 @@ Travail a faire :
 
 ## Afficher les resultats sur un graphe
 	A implementer
+
+
+site pour lucas et fibo : http://fracademic.com/dic.nsf/frwiki/1240121
