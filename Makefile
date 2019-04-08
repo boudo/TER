@@ -20,6 +20,10 @@ run: clean principal
 
 all: creation test doc
 
+graphe:
+	gcc gnuplot_i/src/gnuplot_i.c mesureGraphe.c -o $(ODIR)/main
+	./$(ODIR)/main
+
 principal: test
 	time ./test
 	#valgrind ./test
