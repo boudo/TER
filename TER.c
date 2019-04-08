@@ -172,65 +172,69 @@ int main()
 	
 	// mpz_clears(n,lucas,NULL);
 
-	gmp_printf("\n###################### Test chaine de Lucas ######################\n\n");
-	mpz_t nn, u, v, x0, x1, A, a, b;
-	mpz_inits(nn, u, v, x0, x1, A, a, b, NULL);
-	mpz_set_ui(nn, 10);
-	mpz_set_ui(u, 1);
-	mpz_set_ui(v, 1);
-	mpz_set_ui(x0, 2);
-	mpz_set_ui(a, 5);
-	mpz_set_ui(b, 3);
-
-	mpz_invert(A, b , nn);
-	mpz_mul(a, a, a);
-	mpz_mod(a, a, nn);
-	mpz_mul(A, A, a);
-	mpz_mod(A, A, nn);
-	mpz_sub_ui(A, A, 2);
-	mpz_mod(A, A, nn);
-	mpz_set(x1, A);
-
-	chaineLucas(nn, u, v, x0, x1);
-	gmp_printf("x0 = %Zd\n", x0);
-	gmp_printf("x1 = %Zd\n", x1);
-	gmp_printf("u = %Zd\n", u);
-	gmp_printf("v = %Zd\n", v);
-
-
-	mpz_clears(nn, u, v, x0, x1, A, a, b, NULL);
-
 	gmp_printf("\n###################### Poly Lucas ######################\n\n");
 	
 	mpz_t P,Q,n,poly, v1, v0;
-	mpz_inits(P,Q,n, v1, v0, a, b, poly,NULL);
+	mpz_inits(P,Q,n, v1, v0, poly,NULL);
 	
 	mpz_set_ui(Q,1);
-	mpz_set_ui(n,3);
+	mpz_set_ui(n,11);
 	mpz_set_ui(poly,1);
 	mpz_neg(Q,Q);
 	
 	// mpz_set_ui(n,10);
-	mpz_set_ui(P,2);
+	mpz_set_ui(P,3);
 	
-	for(mpz_set_ui(P,1);mpz_cmp_ui(P,1)<=0;mpz_add_ui(P,P,1))
-	{
-		mpz_set(a,P);
-		mpz_set(b,Q);
-		mpz_set(v1,a);
-		mpz_set_ui(v0,2);
-		gmp_printf("Suite de parametres P=%Zd et Q=%Zd\n\n",P,Q);
-		for(mpz_set_ui(n,0);mpz_cmp_ui(n, 40)<=0;mpz_add_ui(n,n,1))
-		{
+	// for(mpz_set_ui(P,1);mpz_cmp_ui(P,1)<=0;mpz_add_ui(P,P,1))
+	// {
+	// 	gmp_printf("Suite de parametres P=%Zd et Q=%Zd\n\n",P,Q);
+	// 	for(mpz_set_ui(n,0);mpz_cmp_ui(n, 10)<=0;mpz_add_ui(n,n,1))
+	// 	{
 			
 			// PolyLucas(poly,P,Q,n);
 			// gmp_printf("TestPoly(%Zd) : %Zd\n",n,poly);
 			PolyLucas_or(poly,P,Q,n);
 			gmp_printf("TPoly_or(%Zd) : %Zd\n",n,poly);
-		}
+	// 	}
 	
+	// }
+	mpz_clears(P,Q,n, poly,NULL);
+
+	gmp_printf("\n###################### LucasFrobenius ######################\n\n");
+	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd;
+	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
+	mpz_set_ui(res_t, -1);
+	// mpz_set_ui(n_t, 12);
+	mpz_set_ui(a_t, 3);
+	mpz_set_ui(b_t, 1);
+	mpz_set_ui(delta_t, 5);
+
+	mpz_mul(abdelta, a_t, b_t);
+	mpz_mul(abdelta, abdelta, delta_t);
+	mpz_mul_ui(abdelta, abdelta, 2);
+	// gmp_printf("abdelta = %Zd\n\n", abdelta);
+	for (int i = 11; i < 13; ++i)
+	{
+		mpz_set_ui(n_t, i);
+		pgcd(gcd, n_t, abdelta);
+		// if(mpz_cmp_ui(gcd, 1) == 0)
+		// {
+			gmp_printf("*****************************************\n");
+			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
+			gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
+			gmp_printf("*****************************************\n\n");
+		// }
+		// else
+		// {
+		// 	gmp_printf("pgcd = %Zd\n", gcd);
+		// 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
+		// }
+		
 	}
-	mpz_clears(P,Q,n, v1, v0, a, b, poly,NULL);
+	mpz_set_ui(n_t, 12);
+	printf("jac = %d\n", mpz_jacobi(delta_t, n_t));
+	// gmp_printf("pgcd = %Zd\n\n", gcd);
+	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
 
 	// gmp_printf("\n###################### lucas_or ######################\n\n");
 	// mpz_t n_test, suite;

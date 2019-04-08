@@ -29,6 +29,6 @@ void Test_Fibo(mpz_t res,mpz_t n);
 
 void Test_Lucas(mpz_t res,mpz_t n);
 
-void LucasFrobenius(mpz_t n, mpz_t a, mpz_t b, mpz_t delta);
+void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta);
 
 #endif

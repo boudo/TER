@@ -122,6 +122,10 @@ void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n);
 // Afaire
 void PolyLucas_dinamyk(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 
-void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1);
+void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t modul);
+
+void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul);
+
+void etoile(mpz_t res, mpz_t u, mpz_t V0, mpz_t modul);
 
 #endif

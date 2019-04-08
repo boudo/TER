@@ -976,6 +976,7 @@ void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 	}
 }
 
+// Mieux PolyLucas
 void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 {
 	if(mpz_cmp_ui(n, 0) == 0)
@@ -1022,6 +1023,7 @@ void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 
 }
 
+// resultat pas bon
 void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n)
 {
 	if(mpz_cmp_ui(n, 0) == 0)
@@ -1052,46 +1054,84 @@ void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n)
 	return;
 }
 
+// Afaire
+void PolyLucas_dinamyk(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+{
+	
+}
+
 // En cours !!!!!!!!!!!!!!
 
-/*! \fn void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
+/*! \fn void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t modul)
  * 	\brief Fonction permettant de calculer la chaine de Lucas
+ * 	\param u : le terme u = Vn
+ * 	\param v : le terme v = Vn+1
+ * 	\param V0 : 1er valeur d'initialisation de la séquence
+ * 	\param V1 : 2ème valeur d'initialisation de la séquence
  * 	\param n : entier positive
- * 	\param u : le terme u
- * 	\param v : le terme v
- * 	\param x0 : 1er valeur d'initialisation de la séquence
- * 	\param x1 : 2ème valeur d'initialisation de la séquence
+ * 	\param modul : entier positive servant pour le modulo
  */
-void chaineLucas(mpz_t n, mpz_t u, mpz_t v, mpz_t x0, mpz_t x1)
+void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t modul)
 {
+	mpz_t resU, resV, Vj;
+	mpz_inits(resU, resV, Vj,NULL);
 	// x0 = 2;
 	// x1 = A;
 	// u = x0;
-	mpz_set(u, x0);
+	mpz_set(u, V0);
 	// v = x1;
-	mpz_set(u, x1);
+	mpz_set(v, V1);
 	int nbBit = 0;
 	char* nEnBin = NULL;
 	nEnBin = mpz_get_str(NULL, 2, n);
 	nbBit = strlen(nEnBin);
+	printf("m_bin = %s\n", nEnBin);
+	printf("taille m = %d\n", nbBit);
 	for(int j = nbBit - 1; j >= 0; j--)
 	{
 		if(nEnBin[j] == 1)
 		{
-			// u = u rond v;
-			mpz_mul(u, u, v);
-
+			// u = u rond v mod modul;
+			rond(resU, u, v, V1, modul);
 			// v = v * v;
-			mpz_mul(v, v, v);
+			etoile(resV, u, V0, modul);
+
+			mpz_set(u, resU);
+			gmp_printf("u = %Zd\n", u);
+			mpz_set(v, resV);
+			gmp_printf("v = %Zd\n", v);
+			
 		}
 		else
 		{
 			// u = u * u;
-			mpz_mul(u, u, u);
-
+			etoile(resU, u, V0, modul);
 			// v = u rond v;
-			mpz_mul(u, u, v);
+			rond(resV, u, v, V1, modul);
+			mpz_set(u, resU);
+			gmp_printf("u = %Zd\n", u);
+			mpz_set(v, resV);
+			gmp_printf("v = %Zd\n", v);
 		}
 	}
 	free(nEnBin);
+	mpz_clears(resU, resV, Vj, NULL);
+}
+
+void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul)
+{
+	// V2j+1 = Vj Vj+1 - b^j
+	mpz_mul(res, u, v);
+	mpz_mod(res, res, modul);
+	mpz_sub(res, res, V1);
+	mpz_mod(res, res, modul);
+}
+
+void etoile(mpz_t res, mpz_t u, mpz_t V0, mpz_t modul)
+{
+	// V2j = Vj Vj - 2
+	mpz_mul(res, u, u);
+	mpz_mod(res, res, modul);
+	mpz_sub(res, res, V0);
+	mpz_mod(res, res, modul);
 }

@@ -301,7 +301,87 @@ void Test_Lucas(mpz_t res,mpz_t n)
  *	\param b : nombre entier aléatoire
  *	\param delta : nombre entier
  */
-void LucasFrobenius(mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
+void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 {
+	int jac = -40;
+	mpz_t u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3;
+	mpz_inits(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 
+
+	// 1) [Auxiliary parameters
+	// A = a² b^(-1)  -  2 mod n
+	// m = (n - (delta/n) ) / 2
+	int exist = mpz_invert (invB , b , n );
+	if(exist == 0)
+	{
+		printf("inverse de b n'exist pas\n");
+		return;
+	}
+	mpz_mul(A, aCarre, invB);
+	mpz_mod(A, A, n);
+	mpz_sub_ui(A, A, 2);
+	mpz_mod(A, A, n);
+	gmp_printf("A = %Zd\n", A);
+
+	// jac = jacobiSymbol(delta, n);
+	// printf("jac = %d\n", jac);
+	jac = mpz_jacobi(delta, n);
+	mpz_set_si(jacobi, jac);
+	gmp_printf("jacobi(%Zd/%Zd) = %Zd\n", delta, n, jacobi);
+	mpz_sub(m, n, jacobi);
+	gmp_printf("m = %Zd\n", m);
+	mpz_cdiv_q_ui(m, m, 2);
+	gmp_printf("m = %Zd\n", m);
+	
+
+
+	mpz_set_ui(V0, 2);
+	mpz_set(V1, A);
+	// [Binary Lucas chain]
+	// 2) u = Vm, v = Vm+1
+	chaineLucasBinaire(u, v, V0, V1, m, n);
+	gmp_printf("u = %Zd et v = %Zd\n", u, v);
+
+	// 3) [Declaration]
+	// test1 = AVm mod n
+	// test2 = 2Vm+1 mod n
+	mpz_mul(test1, A, u);
+	mpz_mod(test1Mod, test1, n);
+	mpz_mul(test2, V0, v);
+	mpz_mod(test2Mod, test2, n);
+	gmp_printf("test1 = %Zd et test2 = %Zd\n", test1, test2);
+	// gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
+	// if(mpz_cmp(test1Mod, test2Mod) == 0)
+	// {
+	// 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	// 	mpz_set_ui(res, 1);
+	// 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	// 	return;
+	// }
+	// 3')  [Lucas test]
+	if(mpz_cmp(test1, test2) == 0)
+	{
+		gmp_printf("%Zd est un nombre composé\n", n);
+		mpz_set_ui(res, 0);
+		mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+		return;
+	}
+	
+	// 4)  [Frobenius test]
+	mpz_sub_ui(nMoins1, n, 1);
+	mpz_cdiv_q_ui(expo, nMoins1, 2);
+	squareAndMultiply(B, b, expo, n);
+	mpz_mul(test3, B, u);
+	mpz_mod(test3, test3, n);
+	if(mpz_cmp(test3, V0) == 0)
+	{
+		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
+		mpz_set_ui(res, 1);
+		return;
+	}
+
+
+	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
+	gmp_printf("%Zd est un nombre composé\n", n);
+	mpz_set_ui(res, 0);
 }
