@@ -217,18 +217,18 @@ int main()
 	{
 		mpz_set_ui(n_t, i);
 		pgcd(gcd, n_t, abdelta);
-		// if(mpz_cmp_ui(gcd, 1) == 0)
-		// {
+		 if(mpz_cmp_ui(gcd, 1) == 0)
+		 {
 			gmp_printf("*****************************************\n");
 			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
 			gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
 			gmp_printf("*****************************************\n\n");
-		// }
-		// else
-		// {
-		// 	gmp_printf("pgcd = %Zd\n", gcd);
-		// 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
-		// }
+		 }
+		 else
+		 {
+		 	gmp_printf("pgcd = %Zd\n", gcd);
+		 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
+		 }
 		
 	}
 	mpz_set_ui(n_t, 12);

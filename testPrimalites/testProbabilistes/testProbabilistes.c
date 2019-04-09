@@ -317,20 +317,21 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 		printf("inverse de b n'exist pas\n");
 		return;
 	}
+	
+	mpz_mul(aCarre, a, a);
 	mpz_mul(A, aCarre, invB);
-	mpz_mod(A, A, n);
 	mpz_sub_ui(A, A, 2);
 	mpz_mod(A, A, n);
 	gmp_printf("A = %Zd\n", A);
 
 	// jac = jacobiSymbol(delta, n);
 	// printf("jac = %d\n", jac);
-	jac = mpz_jacobi(delta, n);
+	jac = jacobiSymbol(delta, n);
 	mpz_set_si(jacobi, jac);
 	gmp_printf("jacobi(%Zd/%Zd) = %Zd\n", delta, n, jacobi);
 	mpz_sub(m, n, jacobi);
 	gmp_printf("m = %Zd\n", m);
-	mpz_cdiv_q_ui(m, m, 2);
+	mpz_div_ui(m, m, 2);
 	gmp_printf("m = %Zd\n", m);
 	
 
