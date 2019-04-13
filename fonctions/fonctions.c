@@ -1087,9 +1087,9 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 	nbBit = strlen(nEnBin);
 	printf("m_bin = %s\n", nEnBin);
 	printf("taille m = %d\n", nbBit);
-	for(int j = nbBit - 1; j >= 0; j--)
+	for(int j = 0; j < nbBit; j++)
 	{
-		if(nEnBin[j] == 1)
+		if(nEnBin[j] == '1')
 		{
 			// u = u rond v mod modul;
 			rond(resU, u, v, V1, modul);
@@ -1122,7 +1122,6 @@ void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul)
 {
 	// V2j+1 = Vj Vj+1 - b^j
 	mpz_mul(res, u, v);
-	mpz_mod(res, res, modul);
 	mpz_sub(res, res, V1);
 	mpz_mod(res, res, modul);
 }
@@ -1131,7 +1130,6 @@ void etoile(mpz_t res, mpz_t u, mpz_t V0, mpz_t modul)
 {
 	// V2j = Vj Vj - 2
 	mpz_mul(res, u, u);
-	mpz_mod(res, res, modul);
 	mpz_sub(res, res, V0);
 	mpz_mod(res, res, modul);
 }

@@ -317,20 +317,21 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 		printf("inverse de b n'exist pas\n");
 		return;
 	}
+	
+	mpz_mul(aCarre, a, a);
 	mpz_mul(A, aCarre, invB);
-	mpz_mod(A, A, n);
 	mpz_sub_ui(A, A, 2);
 	mpz_mod(A, A, n);
 	gmp_printf("A = %Zd\n", A);
 
 	// jac = jacobiSymbol(delta, n);
 	// printf("jac = %d\n", jac);
-	jac = mpz_jacobi(delta, n);
+	jac = jacobiSymbol(delta, n);
 	mpz_set_si(jacobi, jac);
 	gmp_printf("jacobi(%Zd/%Zd) = %Zd\n", delta, n, jacobi);
 	mpz_sub(m, n, jacobi);
 	gmp_printf("m = %Zd\n", m);
-	mpz_cdiv_q_ui(m, m, 2);
+	mpz_div_ui(m, m, 2);
 	gmp_printf("m = %Zd\n", m);
 	
 
@@ -350,22 +351,22 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	mpz_mul(test2, V0, v);
 	mpz_mod(test2Mod, test2, n);
 	gmp_printf("test1 = %Zd et test2 = %Zd\n", test1, test2);
-	// gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
-	// if(mpz_cmp(test1Mod, test2Mod) == 0)
-	// {
-	// 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
-	// 	mpz_set_ui(res, 1);
-	// 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-	// 	return;
-	// }
+	 gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
+	 if(mpz_cmp(test1Mod, test2Mod) == 0)
+	 {
+	 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	 	mpz_set_ui(res, 1);
+	 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	 	return;
+	 }
 	// 3')  [Lucas test]
-	if(mpz_cmp(test1, test2) == 0)
-	{
-		gmp_printf("%Zd est un nombre composé\n", n);
-		mpz_set_ui(res, 0);
-		mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-		return;
-	}
+	//~ if(mpz_cmp(test1Mod, test2Mod) != 0)
+	//~ {
+		//~ gmp_printf("%Zd est un nombre composé\n", n);
+		//~ mpz_set_ui(res, 0);
+		//~ mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+		//~ return;
+	//~ }
 	
 	// 4)  [Frobenius test]
 	mpz_sub_ui(nMoins1, n, 1);
