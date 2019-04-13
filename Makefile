@@ -20,7 +20,7 @@ run: clean principal
 
 all: creation test doc
 
-graphe:
+graphe: test
 	gcc gnuplot_i/src/gnuplot_i.c mesureGraphe.c -o $(ODIR)/main
 	./$(ODIR)/main
 
