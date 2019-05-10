@@ -321,7 +321,7 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 	{
 		mpz_mul(resultat, resultat, resultat);
 		mpz_mod(resultat, resultat, modul);
-		if(expoEnBin[i] == 1)
+		if(expoEnBin[i] == '1')
 		{
 			mpz_mul(resultat, resultat, x);
 			mpz_mod(resultat, resultat, modul);
@@ -391,7 +391,7 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 	{
 		mpz_mul(resultat, resultat, resultat);
 		// mpz_mod(resultat, resultat, modul);
-		if(expoEnBin[i] == 1)
+		if(expoEnBin[i] == '1')
 		{
 			mpz_mul(resultat, resultat, x);
 			// mpz_mod(resultat, resultat, modul);

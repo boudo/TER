@@ -352,28 +352,31 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	mpz_mod(test2Mod, test2, n);
 	gmp_printf("test1 = %Zd et test2 = %Zd\n", test1, test2);
 	 gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
-	 if(mpz_cmp(test1Mod, test2Mod) == 0)
-	 {
-	 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
-	 	mpz_set_ui(res, 1);
-	 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-	 	return;
-	 }
+	 // if(mpz_cmp(test1Mod, test2Mod) == 0)
+	 // {
+	 // 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	 // 	mpz_set_ui(res, 1);
+	 // 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	 // 	return;
+	 // }
 	// 3')  [Lucas test]
-	//~ if(mpz_cmp(test1Mod, test2Mod) != 0)
-	//~ {
-		//~ gmp_printf("%Zd est un nombre composé\n", n);
-		//~ mpz_set_ui(res, 0);
-		//~ mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-		//~ return;
-	//~ }
+	// if(mpz_cmp(test1Mod, test2Mod) != 0)
+	// {
+	// 	gmp_printf("%Zd est un nombre composé\n", n);
+	// 	mpz_set_ui(res, 0);
+	// 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	// 	return;
+	// }
 	
 	// 4)  [Frobenius test]
 	mpz_sub_ui(nMoins1, n, 1);
-	mpz_cdiv_q_ui(expo, nMoins1, 2);
+	mpz_div_ui(expo, nMoins1, 2);
+	gmp_printf("expo = %Zd\n", expo);
 	squareAndMultiply(B, b, expo, n);
 	mpz_mul(test3, B, u);
+	gmp_printf("test3 = %Zd\n", test3);
 	mpz_mod(test3, test3, n);
+	gmp_printf("test3 = %Zd\n", test3);
 	if(mpz_cmp(test3, V0) == 0)
 	{
 		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);

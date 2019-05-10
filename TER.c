@@ -18,33 +18,33 @@
  */
 int main()
 {
-	// gmp_printf("\n###################### test probabiliste ######################\n\n");
-	//  int test, test1, test2, iter, cont;
- // 	 mpz_t m_test;
- // 	 mpz_inits(m_test,NULL);
- // 	 iter = 30;
- // 	 cont = 0;
- // 	 for (int i = 0; i < 100000; ++i)
- // 	 {
- // 		mpz_set_ui(m_test,i);
+	gmp_printf("\n###################### test probabiliste ######################\n\n");
+	 int test, test1, test2, iter, cont;
+ 	 mpz_t m_test;
+ 	 mpz_inits(m_test,NULL);
+ 	 iter = 30;
+ 	 cont = 0;
+ 	 for (int i = 0; i < 1000; ++i)
+ 	 {
+ 		mpz_set_ui(m_test,i);
  	
- // 		test = Fermat(m_test,iter);
- // 		test1 = Miller_Rabin(m_test, iter);
- // 		test2 = solovayStrassen(m_test, iter);
- // 		printf("%d\n", i);
- // 		printf("fermat = %d\n", test);
- // 		printf("miller = %d\n", test1);
- // 		printf("trassen  = %d\n", test2);
- // 		if(test != test1 || test1 != test2 || test != test2)
- // 		{
- // 			printf("************************************\n");
- // 			cont++;
- // 			// break;
- // 		}
+ 		test = Fermat(m_test,iter);
+ 		test1 = Miller_Rabin(m_test, iter);
+ 		test2 = solovayStrassen(m_test, iter);
+ 		printf("%d\n", i);
+ 		printf("fermat = %d\n", test);
+ 		printf("miller = %d\n", test1);
+ 		printf("trassen  = %d\n", test2);
+ 		if(test != test1 || test1 != test2 || test != test2)
+ 		{
+ 			printf("************************************\n");
+ 			cont++;
+ 			// break;
+ 		}
  		
- // 	}
- // 	printf("cont = %d\n", cont);
- // 	mpz_clears(m_test, NULL);
+ 	}
+ 	printf("cont = %d\n", cont);
+ 	mpz_clears(m_test, NULL);
 
 	// gmp_printf("\n###################### LUCAS ######################\n\n");
 	// int luca;
@@ -213,7 +213,7 @@ int main()
 	mpz_mul(abdelta, abdelta, delta_t);
 	mpz_mul_ui(abdelta, abdelta, 2);
 	// gmp_printf("abdelta = %Zd\n\n", abdelta);
-	for (int i = 11; i < 13; ++i)
+	for (int i = 31; i < 32; ++i)
 	{
 		mpz_set_ui(n_t, i);
 		pgcd(gcd, n_t, abdelta);
@@ -231,9 +231,6 @@ int main()
 		 }
 		
 	}
-	mpz_set_ui(n_t, 12);
-	printf("jac = %d\n", mpz_jacobi(delta_t, n_t));
-	// gmp_printf("pgcd = %Zd\n\n", gcd);
 	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
 
 	// gmp_printf("\n###################### lucas_or ######################\n\n");
