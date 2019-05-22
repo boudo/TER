@@ -18,33 +18,33 @@
  */
 int main()
 {
-	gmp_printf("\n###################### test probabiliste ######################\n\n");
-	 int test, test1, test2, iter, cont;
- 	 mpz_t m_test;
- 	 mpz_inits(m_test,NULL);
- 	 iter = 30;
- 	 cont = 0;
- 	 for (int i = 0; i < 1000; ++i)
- 	 {
- 		mpz_set_ui(m_test,i);
+	//~ gmp_printf("\n###################### test probabiliste ######################\n\n");
+	 //~ int test, test1, test2, iter, cont;
+ 	 //~ mpz_t m_test;
+ 	 //~ mpz_inits(m_test,NULL);
+ 	 //~ iter = 30;
+ 	 //~ cont = 0;
+ 	 //~ for (int i = 0; i < 1000; ++i)
+ 	 //~ {
+ 		//~ mpz_set_ui(m_test,i);
  	
- 		test = Fermat(m_test,iter);
- 		test1 = Miller_Rabin(m_test, iter);
- 		test2 = solovayStrassen(m_test, iter);
- 		printf("%d\n", i);
- 		printf("fermat = %d\n", test);
- 		printf("miller = %d\n", test1);
- 		printf("trassen  = %d\n", test2);
- 		if(test != test1 || test1 != test2 || test != test2)
- 		{
- 			printf("************************************\n");
- 			cont++;
- 			// break;
- 		}
+ 		//~ test = Fermat(m_test,iter);
+ 		//~ test1 = Miller_Rabin(m_test, iter);
+ 		//~ test2 = solovayStrassen(m_test, iter);
+ 		//~ printf("%d\n", i);
+ 		//~ printf("fermat = %d\n", test);
+ 		//~ printf("miller = %d\n", test1);
+ 		//~ printf("trassen  = %d\n", test2);
+ 		//~ if(test != test1 || test1 != test2 || test != test2)
+ 		//~ {
+ 			//~ printf("************************************\n");
+ 			//~ cont++;
+ 			//~ // break;
+ 		//~ }
  		
- 	}
- 	printf("cont = %d\n", cont);
- 	mpz_clears(m_test, NULL);
+ 	//~ }
+ 	//~ printf("cont = %d\n", cont);
+ 	//~ mpz_clears(m_test, NULL);
 
 	// gmp_printf("\n###################### LUCAS ######################\n\n");
 	// int luca;
@@ -172,52 +172,52 @@ int main()
 	
 	// mpz_clears(n,lucas,NULL);
 
-	gmp_printf("\n###################### Poly Lucas ######################\n\n");
+	//~ gmp_printf("\n###################### Poly Lucas ######################\n\n");
 	
-	mpz_t P,Q,n,poly, v1, v0;
-	mpz_inits(P,Q,n, v1, v0, poly,NULL);
+	//~ mpz_t P,Q,n,poly, v1, v0;
+	//~ mpz_inits(P,Q,n, v1, v0, poly,NULL);
 	
-	mpz_set_ui(Q,1);
-	mpz_set_ui(n,11);
-	mpz_set_ui(poly,1);
-	mpz_neg(Q,Q);
+	//~ mpz_set_ui(Q,1);
+	//~ mpz_set_ui(n,11);
+	//~ mpz_set_ui(poly,1);
+	//~ mpz_neg(Q,Q);
 	
-	// mpz_set_ui(n,10);
-	mpz_set_ui(P,3);
+	//~ // mpz_set_ui(n,10);
+	//~ mpz_set_ui(P,3);
 	
-	// for(mpz_set_ui(P,1);mpz_cmp_ui(P,1)<=0;mpz_add_ui(P,P,1))
-	// {
-	// 	gmp_printf("Suite de parametres P=%Zd et Q=%Zd\n\n",P,Q);
-	// 	for(mpz_set_ui(n,0);mpz_cmp_ui(n, 10)<=0;mpz_add_ui(n,n,1))
-	// 	{
+	//~ // for(mpz_set_ui(P,1);mpz_cmp_ui(P,1)<=0;mpz_add_ui(P,P,1))
+	//~ // {
+	//~ // 	gmp_printf("Suite de parametres P=%Zd et Q=%Zd\n\n",P,Q);
+	//~ // 	for(mpz_set_ui(n,0);mpz_cmp_ui(n, 10)<=0;mpz_add_ui(n,n,1))
+	//~ // 	{
 			
-			// PolyLucas(poly,P,Q,n);
-			// gmp_printf("TestPoly(%Zd) : %Zd\n",n,poly);
-			PolyLucas_or(poly,P,Q,n);
-			gmp_printf("TPoly_or(%Zd) : %Zd\n",n,poly);
-	// 	}
+			//~ // PolyLucas(poly,P,Q,n);
+			//~ // gmp_printf("TestPoly(%Zd) : %Zd\n",n,poly);
+			//~ PolyLucas_or(poly,P,Q,n);
+			//~ gmp_printf("TPoly_or(%Zd) : %Zd\n",n,poly);
+	//~ // 	}
 	
-	// }
-	mpz_clears(P,Q,n, poly,NULL);
+	//~ // }
+	//~ mpz_clears(P,Q,n, poly,NULL);
 
 	gmp_printf("\n###################### LucasFrobenius ######################\n\n");
 	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd;
 	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
-	mpz_set_ui(res_t, -1);
+	//mpz_set_ui(res_t, -1);
 	// mpz_set_ui(n_t, 12);
 	mpz_set_ui(a_t, 3);
 	mpz_set_ui(b_t, 1);
-	mpz_set_ui(delta_t, 5);
+	calcul_discriminant(delta_t,a_t,b_t);
 
 	mpz_mul(abdelta, a_t, b_t);
 	mpz_mul(abdelta, abdelta, delta_t);
 	mpz_mul_ui(abdelta, abdelta, 2);
 	// gmp_printf("abdelta = %Zd\n\n", abdelta);
-	for (int i = 31; i < 32; ++i)
+	for (int i = 1; i < 100; ++i)
 	{
 		mpz_set_ui(n_t, i);
 		pgcd(gcd, n_t, abdelta);
-		 if(mpz_cmp_ui(gcd, 1) == 0)
+		 if(mpz_cmp_ui(gcd, 1) == 0 && mpz_cmp(n_t, abdelta) > 0)
 		 {
 			gmp_printf("*****************************************\n");
 			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);

@@ -314,7 +314,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	int exist = mpz_invert (invB , b , n );
 	if(exist == 0)
 	{
-		printf("inverse de b n'exist pas\n");
+		printf("inverse de b n'existe pas\n");
 		return;
 	}
 	
@@ -352,21 +352,21 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	mpz_mod(test2Mod, test2, n);
 	gmp_printf("test1 = %Zd et test2 = %Zd\n", test1, test2);
 	 gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
-	 // if(mpz_cmp(test1Mod, test2Mod) == 0)
-	 // {
-	 // 	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
-	 // 	mpz_set_ui(res, 1);
-	 // 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-	 // 	return;
-	 // }
+	  if(mpz_cmp(test1Mod, test2Mod) == 0)
+	  {
+	  	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	  	//mpz_set_ui(res, 1);
+	  	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	  	//return;
+	  }
 	// 3')  [Lucas test]
-	// if(mpz_cmp(test1Mod, test2Mod) != 0)
-	// {
-	// 	gmp_printf("%Zd est un nombre composé\n", n);
-	// 	mpz_set_ui(res, 0);
-	// 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-	// 	return;
-	// }
+	 if(mpz_cmp(test1Mod, test2Mod) != 0)
+	 {
+	 	gmp_printf("%Zd est un nombre composé de lucas\n", n);
+	 	mpz_set_ui(res, 0);
+	 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	 	return;
+	 }
 	
 	// 4)  [Frobenius test]
 	mpz_sub_ui(nMoins1, n, 1);

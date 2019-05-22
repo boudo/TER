@@ -1093,12 +1093,10 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 		{
 			// u = u rond v mod modul;
 			rond(resU, u, v, V1, modul);
-			// v = v * v;
-			etoile(resV, u, V0, modul);
-
 			mpz_set(u, resU);
-			gmp_printf("u = %Zd\n", u);
+			etoile(resV, v, V0, modul);
 			mpz_set(v, resV);
+			gmp_printf("u = %Zd\n", u);
 			gmp_printf("v = %Zd\n", v);
 			
 		}
