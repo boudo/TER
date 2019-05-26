@@ -135,29 +135,33 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 			expoRapide(bornInf,exposer,exposant);
 			mpz_sub(diff,bornSup,bornInf);
 			mpz_add_ui(alea,bornInf,1);*/
-			t1 = clock();
-			gmp_randstate_t state;
-			gmp_randinit_mt(state);
-			do {
-				gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
-				mpz_urandomm (alea , state , nbrPremier);
-				//mpz_add_ui(alea,alea,2);
-				//mpz_add(a_t,alea,bornInf);
-				mpz_set(a_t,alea);
-				mpz_set_ui(b_t,1);
-				calcul_discriminant(delta_t,a_t,b_t);
-				mpz_mul(abdelta, a_t, b_t);
-				mpz_mul(abdelta, abdelta, delta_t);
-				mpz_mul_ui(abdelta, abdelta, 2);
-				pgcd(gcd, nbrPremier, abdelta);
-			}while(mpz_cmp_ui(gcd,1) != 0);
-			gmp_printf("gcd : %Zd \n", gcd);
-			
-			LucasFrobenius(resultat, nbrPremier, a_t, b_t, delta_t);
-			t2 = clock();
-			temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+			if(i>3){
+				gmp_randstate_t state;
+				gmp_randinit_mt(state);
+				do {
+					gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+					mpz_urandomm (alea , state , nbrPremier);
+					//mpz_add_ui(alea,alea,2);
+					//mpz_add(a_t,alea,bornInf);
+					mpz_set(a_t,alea);
+					mpz_set_ui(b_t,1);
+					calcul_discriminant(delta_t,a_t,b_t);
+					mpz_mul(abdelta, a_t, b_t);
+					mpz_mul(abdelta, abdelta, delta_t);
+					mpz_mul_ui(abdelta, abdelta, 2);
+					pgcd(gcd, nbrPremier, abdelta);
+				}while(mpz_cmp_ui(gcd,1) != 0);
+				gmp_printf("gcd : %Zd \n", gcd);
+				t1 = clock();
+				LucasFrobenius(resultat, nbrPremier, a_t, b_t, delta_t);
+				t2 = clock();
+				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+				gmp_randclear(state);
+			}else {
+				temps = 0.000000;
+			}
 			fprintf(fichier," %f ", temps);
-			gmp_randclear(state);
+
 	        //Erastothene
 	        if(i > 1 && i<35){
 	        	if(i != 1)

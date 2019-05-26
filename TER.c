@@ -139,9 +139,9 @@ int main()
 	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	printf("temp : %f\n", temps);
 	
-	mesureTempsPepin("mesureTemps/pepin.txt",15);
+	// mesureTempsPepin("mesureTemps/pepin.txt",15);
 
-	mesureTempsLucas("mesureTemps/lucas.txt",1024);
+	// mesureTempsLucas("mesureTemps/lucas.txt",1024);
 	
 	// gmp_printf("\n###################### Test binaire ######################\n\n");
 
