@@ -130,18 +130,18 @@ int main()
  	
  // 	mpz_clears(a,NULL);
 
-	// gmp_printf("\n###################### generation nbr premier ######################\n\n");
-	// float temps;
-	// clock_t t1, t2;
-	// t1 = clock();
-	// mesureTempsFichier("mesureTemps/mesure.txt",25,11);
-	// t2 = clock();
-	// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	// printf("temp : %f\n", temps);
+	gmp_printf("\n###################### generation nbr premier ######################\n\n");
+	float temps;
+	clock_t t1, t2;
+	t1 = clock();
+	mesureTempsFichier("mesureTemps/mesure.txt",10,1024);
+	t2 = clock();
+	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	printf("temp : %f\n", temps);
 	
-	// mesureTempsPepin("mesureTemps/pepin.txt",10);
+	mesureTempsPepin("mesureTemps/pepin.txt",15);
 
-	// mesureTempsLucas("mesureTemps/lucas.txt",521);
+	mesureTempsLucas("mesureTemps/lucas.txt",1024);
 	
 	// gmp_printf("\n###################### Test binaire ######################\n\n");
 
@@ -200,38 +200,38 @@ int main()
 	//~ // }
 	//~ mpz_clears(P,Q,n, poly,NULL);
 
-	gmp_printf("\n###################### LucasFrobenius ######################\n\n");
-	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd;
-	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
-	//mpz_set_ui(res_t, -1);
-	// mpz_set_ui(n_t, 12);
-	mpz_set_ui(a_t, 3);
-	mpz_set_ui(b_t, 1);
-	calcul_discriminant(delta_t,a_t,b_t);
+	// gmp_printf("\n###################### LucasFrobenius ######################\n\n");
+	// mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd;
+	// mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
+	// //mpz_set_ui(res_t, -1);
+	// // mpz_set_ui(n_t, 12);
+	// mpz_set_ui(a_t, 3);
+	// mpz_set_ui(b_t, 1);
+	// calcul_discriminant(delta_t,a_t,b_t);
 
-	mpz_mul(abdelta, a_t, b_t);
-	mpz_mul(abdelta, abdelta, delta_t);
-	mpz_mul_ui(abdelta, abdelta, 2);
-	// gmp_printf("abdelta = %Zd\n\n", abdelta);
-	for (int i = 1; i < 100; ++i)
-	{
-		mpz_set_ui(n_t, i);
-		pgcd(gcd, n_t, abdelta);
-		 if(mpz_cmp_ui(gcd, 1) == 0 && mpz_cmp(n_t, abdelta) > 0)
-		 {
-			gmp_printf("*****************************************\n");
-			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
-			gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
-			gmp_printf("*****************************************\n\n");
-		 }
-		 else
-		 {
-		 	gmp_printf("pgcd = %Zd\n", gcd);
-		 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
-		 }
+	// mpz_mul(abdelta, a_t, b_t);
+	// mpz_mul(abdelta, abdelta, delta_t);
+	// mpz_mul_ui(abdelta, abdelta, 2);
+	// // gmp_printf("abdelta = %Zd\n\n", abdelta);
+	// for (int i = 1; i < 100; i++)
+	// {
+	// 	mpz_set_ui(n_t, i);
+	// 	pgcd(gcd, n_t, abdelta);
+	// 	 if(mpz_cmp_ui(gcd, 1) == 0 && mpz_cmp(n_t, abdelta) > 0)
+	// 	 {
+	// 		gmp_printf("*****************************************\n");
+	// 		LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
+	// 		gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
+	// 		gmp_printf("*****************************************\n\n");
+	// 	 }
+	// 	 else
+	// 	 {
+	// 	 	gmp_printf("pgcd = %Zd\n", gcd);
+	// 	 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
+	// 	 }
 		
-	}
-	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
+	// }
+	// mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
 
 	// gmp_printf("\n###################### lucas_or ######################\n\n");
 	// mpz_t n_test, suite;

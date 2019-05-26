@@ -10,7 +10,8 @@ void grapheMesure(){
     gnuplot_cmd(g, "set output \"mesureTemps/mesure.pdf\"");
     gnuplot_cmd(g, "set xlabel 'Nombre de bits'");
     gnuplot_cmd(g, "set ylabel 'temps(seconde)'");
-    gnuplot_cmd(g, "plot \"mesureTemps/mesure.txt\" u 1:2 every 2 title 'fermat' with lines , \"mesureTemps/mesure.txt\" u 1:3 every 2 title 'miller' with lines, \"mesureTemps/mesure.txt\" u 1:4 every 2 title 'strassen' with lines, \"mesureTemps/mesure.txt\" u 1:5 every 2 title 'erastothene' with lines");
+    gnuplot_cmd(g, "set yrange [0:0.03]");
+    gnuplot_cmd(g, "plot \"mesureTemps/mesure.txt\" u 1:2 every 2 title 'fermat' with lines , \"mesureTemps/mesure.txt\" u 1:3 every 2 title 'miller' with lines, \"mesureTemps/mesure.txt\" u 1:4 every 2 title 'strassen' with lines, \"mesureTemps/mesure.txt\" u 1:5 every 2 title 'Lucas Frobinius' with lines, \"mesureTemps/mesure.txt\" u 1:6 every 2 title 'erastothene' with lines");
     gnuplot_close(g);
 }
 
