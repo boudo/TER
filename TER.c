@@ -134,7 +134,7 @@ int main()
 	float temps;
 	clock_t t1, t2;
 	t1 = clock();
-	mesureTempsFichier("mesureTemps/mesure.txt",10,1024);
+	mesureTempsFichier("mesureTemps/mesure.txt",1,2048);
 	t2 = clock();
 	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 	printf("temp : %f\n", temps);

@@ -135,7 +135,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 			expoRapide(bornInf,exposer,exposant);
 			mpz_sub(diff,bornSup,bornInf);
 			mpz_add_ui(alea,bornInf,1);*/
-			if(i>3){
+			if(i>1){
 				gmp_randstate_t state;
 				gmp_randinit_mt(state);
 				do {
