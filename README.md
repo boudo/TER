@@ -19,24 +19,20 @@
 
 ### 3) Génération Des Fichiers De Mesures
 
-    " make testTemps " 
+    " make testTemps " (Le Test peut prendre maximum 5 minutes donc il faut patienter)
 
-### 4) Génération Des Fichiers De Mesures
-
-    " make testTemps " 
-
-### 5) Génération Des Graphes
+### 4) Génération Des Graphes
 
     " make graphe "
 
-### 6) Pour Nettoyer Les Fichiers Binaires
+### 5) Pour Nettoyer Les Fichiers Binaires
 
     " make clean "
 
-### 7) Pour Nettoyer Tout Le Projet
+### 6) Pour Nettoyer Tout Le Projet
 
     " make cleanAll "
 
-### 8) Pour Voir Le Site De Projet
+### 7) Pour Voir Le Site De Projet
 
     " make site " (assurez-vous d'avoir fait au préalable " make all ")
