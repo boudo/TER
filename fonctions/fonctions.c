@@ -1085,8 +1085,8 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 	char* nEnBin = NULL;
 	nEnBin = mpz_get_str(NULL, 2, n);
 	nbBit = strlen(nEnBin);
-	printf("m_bin = %s\n", nEnBin);
-	printf("taille m = %d\n", nbBit);
+	// printf("m_bin = %s\n", nEnBin);
+	// printf("taille m = %d\n", nbBit);
 	for(int j = 0; j < nbBit; j++)
 	{
 		if(nEnBin[j] == '1')
@@ -1096,8 +1096,8 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 			mpz_set(u, resU);
 			etoile(resV, v, V0, modul);
 			mpz_set(v, resV);
-			gmp_printf("u = %Zd\n", u);
-			gmp_printf("v = %Zd\n", v);
+			// gmp_printf("u = %Zd\n", u);
+			// gmp_printf("v = %Zd\n", v);
 			
 		}
 		else
@@ -1107,9 +1107,9 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 			// v = u rond v;
 			rond(resV, u, v, V1, modul);
 			mpz_set(u, resU);
-			gmp_printf("u = %Zd\n", u);
+			// gmp_printf("u = %Zd\n", u);
 			mpz_set(v, resV);
-			gmp_printf("v = %Zd\n", v);
+			// gmp_printf("v = %Zd\n", v);
 		}
 	}
 	free(nEnBin);

@@ -18,40 +18,183 @@
  */
 int main()
 {
-	//~ gmp_printf("\n###################### test probabiliste ######################\n\n");
-	 //~ int test, test1, test2, iter, cont;
- 	 //~ mpz_t m_test;
- 	 //~ mpz_inits(m_test,NULL);
- 	 //~ iter = 30;
- 	 //~ cont = 0;
- 	 //~ for (int i = 0; i < 1000; ++i)
- 	 //~ {
- 		//~ mpz_set_ui(m_test,i);
- 	
- 		//~ test = Fermat(m_test,iter);
- 		//~ test1 = Miller_Rabin(m_test, iter);
- 		//~ test2 = solovayStrassen(m_test, iter);
- 		//~ printf("%d\n", i);
- 		//~ printf("fermat = %d\n", test);
- 		//~ printf("miller = %d\n", test1);
- 		//~ printf("trassen  = %d\n", test2);
- 		//~ if(test != test1 || test1 != test2 || test != test2)
- 		//~ {
- 			//~ printf("************************************\n");
- 			//~ cont++;
- 			//~ // break;
- 		//~ }
- 		
- 	//~ }
- 	//~ printf("cont = %d\n", cont);
- 	//~ mpz_clears(m_test, NULL);
+	gmp_printf("\n###################### test probabiliste ######################\n\n");
 
-	// gmp_printf("\n###################### LUCAS ######################\n\n");
+
+	gmp_printf("\n###################### Fermat Miller Strassen ######################\n\n");
+	int test, test1, test2, iter, cont;
+ 	mpz_t m_test;
+ 	mpz_inits(m_test,NULL);
+ 	iter = 30;
+ 	cont = 0;
+ 	printf("Pour %d iération on: (1: premier, 0: composé)\n\n", iter);
+ 	for (int i = 86265959; i < 86265964; ++i)
+ 	{
+ 		mpz_set_ui(m_test,i);
+ 	
+ 		test = Fermat(m_test,iter);
+ 		test1 = Miller_Rabin(m_test, iter);
+ 		test2 = solovayStrassen(m_test, iter);
+ 		printf("************************************\n");
+ 		printf("pour n = %d\n\n", i);
+ 		printf("fermat = %d\n", test);
+ 		printf("miller = %d\n", test1);
+ 		printf("trassen  = %d\n", test2);
+ 		if(test != test1 || test1 != test2 || test != test2)
+ 		{
+ 			printf("************************************\n");
+ 			cont++;
+ 			// break;
+ 		}
+ 		
+ 	}
+ 	printf("cont = %d\n", cont);
+ 	mpz_clears(m_test, NULL);
+
+ 	gmp_printf("\n######################      LucasFrobenius     ######################\n\n");
+	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea;
+	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo,racine,Test,alea, NULL);
+	mpz_set_ui(x, 2);
+	mpz_set_ui(expo, 10);
+	expoRapide(n, x, expo);
+	gmp_randstate_t state;
+	gmp_randinit_mt(state);
+
+	do
+	{
+		gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+		mpz_urandomm (alea , state , n);
+		//mpz_set_ui(res_t, -1);
+		// mpz_set_ui(n_t, 12);
+		mpz_set(a_t, alea);
+		gmp_printf("alea %Zd\n", a_t);
+		mpz_set_ui(b_t, 1);
+		calcul_discriminant(delta_t,a_t,b_t);
+		mpz_sqrtrem(racine, Test, delta_t);
+		gmp_printf("delta %Zd\n", delta_t);
+		gmp_printf("racine %Zd\n", racine);
+		gmp_printf("test %Zd\n", Test);
+	}while(mpz_cmp_ui(Test, 0) == 0 && (mpz_cmp_ui(a_t, 0) == 0));
+
+	mpz_mul(abdelta, a_t, b_t);
+	mpz_mul(abdelta, abdelta, delta_t);
+	mpz_mul_ui(abdelta, abdelta, 2);
+	gmp_printf("abdelta = %Zd\n\n", abdelta);
+	int nb = 0;
+	for (int i = mpz_get_ui(abdelta)+2; i < mpz_get_ui(abdelta)+mpz_get_ui(abdelta); ++i)
+	{
+		mpz_set_ui(n_t, i);
+		pgcd(gcd, n_t, abdelta);
+		 if(mpz_cmp_ui(gcd, 1) == 0 && mpz_cmp(n_t, abdelta) > 0)
+		 {
+			gmp_printf("*****************************************\n");
+			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
+			gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
+			gmp_printf("*****************************************\n\n");
+			if(mpz_cmp_ui(res_t, 1) == 0)
+			{
+				nb++;
+			}
+			if(nb == 5)
+			{
+				break;
+			}
+		 }
+		
+	}
+	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea, NULL);
+	gmp_randclear(state);
+
+	gmp_printf("\n######################      test deterministes       ######################\n\n");
+
+
+
+	gmp_printf("\n###################### test Eratosthene ######################\n\n");
+	mpz_t era;
+	int earaN = 0;
+	mpz_init(era);
+	for (int i = 5484186; i < 5484196; ++i)
+	{
+		mpz_set_ui(era,i);
+		gmp_printf("*****************************************\n");
+		earaN = Eratosthene(era);
+		gmp_printf("Eratosthene(%Zd) = %d\n",era , earaN);
+		gmp_printf("*****************************************\n\n");
+	}
+	mpz_clears(era, NULL);
+		
+	gmp_printf("\n###################### Pepin ######################\n\n");
+
+	mpz_t pepin;
+	mpz_init(pepin);
+	int pepinN = 0;
+	
+	for (int i = 10; i < 16; ++i)
+	{
+		mpz_set_ui(pepin,i);
+		gmp_printf("*****************************************\n");
+		pepinN = Pepin(pepin);
+		gmp_printf("Pepin(%Zd) = %d\n",pepin , pepinN);
+		gmp_printf("*****************************************\n\n");
+	}
+	mpz_clears(pepin, NULL);
+
+	gmp_printf("\n###################### LucasLehmer ######################\n\n");
+
+	mpz_t lucas;
+	int i = 0;
+	mpz_init(lucas);
+	int lucasN = 0;
+	lucasN = Pepin(lucas);
+	i = 521;
+	mpz_set_ui(lucas,i);
+	gmp_printf("*****************************************\n");
+	lucasN = LucasLehmer(lucas);
+	gmp_printf("LucasLehmer(%Zd) = %d\n",lucas , lucasN);
+	gmp_printf("*****************************************\n\n");
+	i = 3217;
+	mpz_set_ui(lucas,i);
+	gmp_printf("*****************************************\n");
+	lucasN = LucasLehmer(lucas);
+	gmp_printf("LucasLehmer(%Zd) = %d\n",lucas , lucasN);
+	gmp_printf("*****************************************\n\n");
+
+	i = 9941;
+	mpz_set_ui(lucas,i);
+	gmp_printf("*****************************************\n");
+	lucasN = LucasLehmer(lucas);
+	gmp_printf("LucasLehmer(%Zd) = %d\n",lucas , lucasN);
+	gmp_printf("*****************************************\n\n");
+
+	i = 9940;
+	mpz_set_ui(lucas,i);
+	gmp_printf("*****************************************\n");
+	lucasN = LucasLehmer(lucas);
+	gmp_printf("LucasLehmer(%Zd) = %d\n",lucas , lucasN);
+	gmp_printf("*****************************************\n\n");
+
+	i = 23209;
+	mpz_set_ui(lucas,i);
+	gmp_printf("*****************************************\n");
+	lucasN = LucasLehmer(lucas);
+	gmp_printf("LucasLehmer(%Zd) = %d\n",lucas , lucasN);
+	gmp_printf("*****************************************\n\n");
+
+	mpz_clears(lucas, NULL);
+
+
+
+
+
+
+
+
+	// gmp_printf("\n###################### LUCAS ######################\n\n");LucasLehmer(mpz_t n);
 	// int luca;
 	// mpz_t n;
 	// mpz_init(n);
 	// mpz_set_ui(n, 521);
-	// luca = Lucas(n);
+	// luca = Lucas(n);	
 	// printf("lucas = %d\n", luca);
 	// mpz_clears(n, NULL);
 
@@ -200,38 +343,7 @@ int main()
 	//~ // }
 	//~ mpz_clears(P,Q,n, poly,NULL);
 
-	gmp_printf("\n###################### LucasFrobenius ######################\n\n");
-	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd;
-	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
-	//mpz_set_ui(res_t, -1);
-	// mpz_set_ui(n_t, 12);
-	mpz_set_ui(a_t, 3);
-	mpz_set_ui(b_t, 1);
-	calcul_discriminant(delta_t,a_t,b_t);
 
-	mpz_mul(abdelta, a_t, b_t);
-	mpz_mul(abdelta, abdelta, delta_t);
-	mpz_mul_ui(abdelta, abdelta, 2);
-	// gmp_printf("abdelta = %Zd\n\n", abdelta);
-	for (int i = 1; i < 100; ++i)
-	{
-		mpz_set_ui(n_t, i);
-		pgcd(gcd, n_t, abdelta);
-		 if(mpz_cmp_ui(gcd, 1) == 0 && mpz_cmp(n_t, abdelta) > 0)
-		 {
-			gmp_printf("*****************************************\n");
-			LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
-			gmp_printf("LucasFrobenius(%Zd) = %Zd\n",n_t , res_t);
-			gmp_printf("*****************************************\n\n");
-		 }
-		 else
-		 {
-		 	gmp_printf("pgcd = %Zd\n", gcd);
-		 	gmp_printf("LucasFrobenius(%Zd) = indéfinit car pgcd != 1\n\n",n_t);
-		 }
-		
-	}
-	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd, NULL);
 
 	// gmp_printf("\n###################### lucas_or ######################\n\n");
 	// mpz_t n_test, suite;
