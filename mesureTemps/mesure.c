@@ -147,9 +147,9 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 			expoRapide(bornInf,exposer,exposant);
 			mpz_sub(diff,bornSup,bornInf);
 			mpz_add_ui(alea,bornInf,1);*/
-			if(i>1){
+			if(i>2){
 				t1 = clock();
-				LucasFrobenius_avecIteration(resultat, nbrPremier, nbrIteration, nbrBitMax);
+				LucasFrobenius_avecIteration(resultat, nbrPremier, nbrIteration, i);
 				t2 = clock();
 				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
 				// gmp_randstate_t state;

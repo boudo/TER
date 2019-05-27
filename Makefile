@@ -29,7 +29,6 @@ graphe: test
 	./$(ODIR)/main
 
 principal: test
-	#time ./test
 	#valgrind ./test
 	./test
 

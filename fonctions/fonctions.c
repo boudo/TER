@@ -9,94 +9,7 @@
  *  \date      24 fevrier 2019
  */
  
-//LISTE
 
-/*! \fn liste creer_liste()
- *  \brief Fonction qui créer une liste vide
- *  \return retourne la liste vide
- */
-liste creer_liste(){return NULL;}
-
-/*! \fn int est_vide(liste l)
- *  \brief Fonction qui permet de savoir si une liste est vide ou non
- *  \param l : liste l
- *  \return retourne 1 si la liste est vide ,sinon 0
- */
-int est_vide(liste l)
-{
-	if(l == NULL)
-		return 1;
-	return 0;
-}
-
-/*! \fn void affiche_liste(liste l)
- *  \brief Fonction qui permet d'afficher le contenu de la liste
- *  \param l : liste l
- */
-void affiche_liste(liste l)
-{
-	
-	if(est_vide(l))
-	{
-		printf("La liste est vide \n");
-		return;
-	}
-	while(l)
-	{
-		printf("%d ",l->val);
-		l = l->suiv;
-	}
-	printf("\n");
-}
-
-/*! \fn liste libere_liste(liste l)
- *  \brief Fonction qui permet de liberer la liste
- *  \param l : liste l
- *  \return retourne NULL quand la liste est vide
- */
-liste libere_liste(liste l)
-{
-	liste tmp;
-	while(l)
-	{
-		tmp = l->suiv;
-		free(l);
-		l = tmp;
-	}
-	return NULL;
-}
-
-/*! \fn liste liste ajoute_elem_debut(liste l,int i)
- *  \brief Fonction qui ajoute au début un élément dans la liste
- *  \param l : liste l
- *  \param i : valeur i à ajouter
- *  \return retourne la liste avec l'élément ajouté
- */
-liste ajoute_elem_debut(liste l,int i)
-{
-	liste new = malloc(sizeof(struct elem));
-	new->val = i;
-	new->suiv = l;
-	return new;
-}
-
-/*! \fn liste supprime_elem_debut(liste l)
- *  \brief Fonction qui supprime au début un élément dans la liste
- *  \param l : liste l
- *  \return retourne la liste moins l'élément qu'on a supprimé
- */
-liste supprime_elem_debut(liste l)
-{
-	if(est_vide(l))
-	{
-		return l;
-	}
-
-	liste tmp;
-	tmp = l->suiv;
-	free(l);
-	return tmp;
-}
 
 //LISTE GMP
 
@@ -312,10 +225,6 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 	mpz_set(resultat, x);
 	expoEnBin = mpz_get_str(NULL, 2, expo);
 	taille = strlen(expoEnBin);
-	// liste expoB = creer_liste();
-	// expoB = getBinaire(expo);
-	//printf("OK pour expoBinMPZ\n");
-	// expoB = supprime_elem_debut(expoB);
 
 	while(i < taille)
 	{
@@ -327,40 +236,12 @@ void squareAndMultiply(mpz_t resultat, const mpz_t x, const mpz_t expo, const mp
 			mpz_mod(resultat, resultat, modul);
 		}
 
-		// expoB = supprime_elem_debut(expoB);
 		i++;
 	}
 	
-	// expoB = libere_liste(expoB);
 	free(expoEnBin);
 }
 
-/*! \fn liste getBinaire(const mpz_t expo)
- *  \brief Fonction qui calcule l'exposant en binaire
- *  \param expo : exposant
- *  \return retourne la liste contenant le nombre en binaire
- */
-// liste getBinaire(const mpz_t expo)
-// {
-// 	int r = 0;
-// 	liste maListe = creer_liste();
-// 	mpz_t rest, tmp;
-// 	mpz_inits(rest, tmp, NULL);
-// 	mpz_set(tmp, expo);
-
-// 	while(mpz_cmp_ui(tmp, 0) > 0)
-// 	{
-// 		r = (int) mpz_cdiv_r_ui(rest, tmp, 2);
-// 		//printf("r = %d\n", r);
-// 		maListe = ajoute_elem_debut(maListe, r);
-// 		mpz_div_ui(tmp, tmp, 2);
-
-// 	}
-// 	mpz_clears(rest, tmp, NULL);
-// 	//affiche_liste(maListe);
-// 	//maListe = libere_liste(maListe);
-// 	return maListe;
-// }
 
 /*! \fn void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
  *  \brief Fonction qui calcule l'exponention rapide
@@ -382,26 +263,18 @@ void expoRapide(mpz_t resultat, const mpz_t x, const mpz_t expo)
 	mpz_set(resultat, x);
 	expoEnBin = mpz_get_str(NULL, 2, expo);
 	taille = strlen(expoEnBin);
-	// liste expoB = creer_liste();
-	// expoB = getBinaire(expo);
-	//printf("OK pour expoBinMPZ\n");
-	// expoB = supprime_elem_debut(expoB);
 
 	while(i < taille)
 	{
 		mpz_mul(resultat, resultat, resultat);
-		// mpz_mod(resultat, resultat, modul);
 		if(expoEnBin[i] == '1')
 		{
 			mpz_mul(resultat, resultat, x);
-			// mpz_mod(resultat, resultat, modul);
 		}
 
-		// expoB = supprime_elem_debut(expoB);
 		i++;
 	}
 	
-	// expoB = libere_liste(expoB);
 	free(expoEnBin);
 }
 
@@ -796,9 +669,10 @@ void suiteFibo_or(mpz_t res, mpz_t n)
 
 }
 
-/*! \fn void suiteLucas_or(mpz_t res, mpz_t n)
- * 	\brief Fonction permettant de calculer la suite de Fibonacci
+/*! \fn void suiteLucas_or(mpz_t res, mpz_t a, mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas avec le nombre d'or
  * 	\param res : On renvoie le resultat
+ *  \param a : un nombre entier aléatoire
  *	\param n : un nombre entier
  */
 void suiteLucas_or(mpz_t res, mpz_t a, mpz_t n)
@@ -848,7 +722,7 @@ void suiteLucas_or(mpz_t res, mpz_t a, mpz_t n)
 }
 
 /*! \fn unsigned long int arrondi(mpf_t ent, mpf_t n)
- * 	\brief Fonction permettant de calculer la suite de Fibonacci
+ * 	\brief Fonction permettant d'arrondir
  * 	\param ent : On renvoie le resultat
  *	\param n : un nombre entier
  *	\return : 0 pour la partie entiere inférieur ou 1 pour la partie entiere superieur
@@ -976,7 +850,13 @@ void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 	}
 }
 
-// Mieux PolyLucas
+/*! \fn void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
+ * 	\brief Fonction permettant de calculer la suite de Lucas en Polynome avec le nombre d'or
+ * 	\param res : On renvoie le resultat
+ * 	\param a : un nombre aléatoire a
+ * 	\param b : un nombre aléatoire b
+ *	\param n : un nombre entier
+ */
 void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 {
 	if(mpz_cmp_ui(n, 0) == 0)
@@ -1022,45 +902,6 @@ void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
 	return;
 
 }
-
-// resultat pas bon
-void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n)
-{
-	if(mpz_cmp_ui(n, 0) == 0)
-	{
-		mpz_set_ui(res, 2);
-		return;
-	}
-	if(mpz_cmp_ui(n, 1) == 0)
-	{
-		mpz_set(res, v1);
-		return;
-	}
-
-	mpz_t Nmoins1, tmp;
-	mpz_inits(Nmoins1, tmp, NULL);
-
-	mpz_set(v0, v1);
-	mpz_mul(v1, v1, a);
-	mpz_mul(tmp, v0, b);
-	mpz_sub(v1, v1, tmp);
-
-	
-	mpz_sub_ui(Nmoins1, n, 1);
-
-	PolyLucas_or(res, v1, v0, Nmoins1);
-	mpz_set(res, v1);
-	mpz_clears(Nmoins1, tmp, NULL);
-	return;
-}
-
-// Afaire
-void PolyLucas_dinamyk(mpz_t res,mpz_t a,mpz_t b,mpz_t n)
-{
-	
-}
-
-// En cours !!!!!!!!!!!!!!
 
 /*! \fn void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t modul)
  * 	\brief Fonction permettant de calculer la chaine de Lucas
@@ -1116,6 +957,14 @@ void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t mod
 	mpz_clears(resU, resV, Vj, NULL);
 }
 
+/*! \fn void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul)
+ * 	\brief Fonction permettant de calculer la fonction rond
+ * 	\param res : renvoie le resultat
+ * 	\param u : le terme u = Vn
+ * 	\param v : le terme v = Vn+1
+ * 	\param V1 : 2ème valeur d'initialisation de la séquence
+ * 	\param modul : entier positive servant pour le modulo
+ */
 void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul)
 {
 	// V2j+1 = Vj Vj+1 - b^j
@@ -1124,6 +973,13 @@ void rond(mpz_t res, mpz_t u, mpz_t v, mpz_t V1, mpz_t modul)
 	mpz_mod(res, res, modul);
 }
 
+/*! \fn void etoile(mpz_t res, mpz_t u, mpz_t V0, mpz_t modul)
+ * 	\brief Fonction permettant de calculer la fonction rond
+ * 	\param res : renvoie le resultat
+ * 	\param u : le terme u = Vn
+ * 	\param V0 : 1er valeur d'initialisation de la séquence
+ * 	\param modul : entier positive servant pour le modulo
+ */
 void etoile(mpz_t res, mpz_t u, mpz_t V0, mpz_t modul)
 {
 	// V2j = Vj Vj - 2
