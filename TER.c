@@ -183,7 +183,7 @@ int main()
 	mpz_clears(lucas, NULL);
 
 
-	/*printf("\n###################### LucasFrobenius_avecIteration ######################\n\n");
+	printf("\n###################### LucasFrobenius_avecIteration ######################\n\n");
 
 	mpz_t res_tt, n_ttt;
 	mpz_inits(res_tt, n_ttt, NULL);
@@ -195,7 +195,7 @@ int main()
 	LucasFrobenius_avecIteration(res_tt, n_ttt, iterr, intervalAlea);
 	printf("*****************************************\n\n");
 
-	mpz_clears(res_tt, n_ttt, NULL);*/
+	mpz_clears(res_tt, n_ttt, NULL);
 
 
 
