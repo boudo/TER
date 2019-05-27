@@ -31,4 +31,6 @@ void Test_Lucas(mpz_t res,mpz_t n);
 
 void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta);
 
+void LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int intervalAlea);
+
 #endif

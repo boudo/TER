@@ -303,7 +303,7 @@ void Test_Lucas(mpz_t res,mpz_t n)
  */
 void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 {
-	int jac = -40;
+	int jac = -40; // juste une initialisation
 	mpz_t u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3;
 	mpz_inits(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 
@@ -355,7 +355,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 
 	  if(mpz_cmp(test1Mod, test2Mod) == 0)
 	  {
-	  	//gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	  	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
 	  	//mpz_set_ui(res, 1);
 	  	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 	  	//return;
@@ -363,10 +363,10 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	// 3')  [Lucas test]
 	if(mpz_cmp(test1Mod, test2Mod) != 0)
 	{
-	 	//gmp_printf("%Zd est un nombre composé de lucas\n", n);
+	 	gmp_printf("%Zd est un nombre composé de lucas\n", n);
 	 	mpz_set_ui(res, 0);
-	 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
-	 	return;
+	 	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
+	 	//return;
 	}
 	
 	// 4)  [Frobenius test]
@@ -380,13 +380,55 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	//gmp_printf("test3 = %Zd\n", test3);
 	if(mpz_cmp(test3, V0) == 0)
 	{
-		//gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
+		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
 		mpz_set_ui(res, 1);
 		return;
 	}
 
 
-	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
-	//gmp_printf("%Zd est un nombre composé\n", n);
+	gmp_printf("%Zd est un nombre composé de frobenius\n", n);
 	mpz_set_ui(res, 0);
+	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
+}
+
+
+void LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int intervalAlea)
+{
+	mpz_t  a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea;
+	mpz_inits( a_t, b_t, delta_t, abdelta, gcd,n,x, expo,racine,Test,alea, NULL);
+	mpz_set_ui(x, 2);
+	mpz_set_ui(expo, intervalAlea);
+	expoRapide(n, x, expo);
+	gmp_randstate_t state;
+	gmp_randinit_mt(state);
+	for(int i = 0; i<iter; i++)
+	{
+		do
+		{
+			gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+			mpz_urandomm (alea , state , n);
+			//mpz_set_ui(res_t, -1);
+			// mpz_set_ui(n_t, 12);
+			mpz_set(a_t, alea);
+			
+			mpz_set_ui(b_t, 1);
+			calcul_discriminant(delta_t,a_t,b_t);
+			mpz_sqrtrem(racine, Test, delta_t);;
+			mpz_mul(abdelta, a_t, b_t);
+			mpz_mul(abdelta, abdelta, delta_t);
+			mpz_mul_ui(abdelta, abdelta, 2);
+			pgcd(gcd, n_t, abdelta);
+		}while(mpz_cmp_ui(Test, 0) == 0 && (mpz_cmp_ui(a_t, 0) == 0) && mpz_cmp_ui(gcd, 1) == 0);
+
+		gmp_printf("alea %Zd\n", a_t);
+		gmp_printf("delta %Zd\n", delta_t);
+		gmp_printf("abdelta = %Zd\n\n", abdelta);
+
+		LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
+		
+	}
+	
+		
+	mpz_clears( a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea, NULL);
+	gmp_randclear(state);
 }
