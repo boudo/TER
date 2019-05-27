@@ -9,6 +9,14 @@
  *  \date      24 fevrier 2019
  */
 
+double pow(double a, double b) {
+	if(a == 1.0 || b == 0.0) {
+		return 1.0;
+	} 
+
+	return a * pow(a,b-1);
+}
+
 /*! \fn int estPremier(mpz_t nombre,int nombreIteration)
  *  \brief Fonction qui permet de dire si un nombre est premier ou non
  *  \param nombre : nombre à tester
@@ -69,6 +77,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	fichier = fopen(nomFichier, "w");
 	
  	float temps;
+ 	float pfermat,pmiller,pstrassen,plucasfrob;
     clock_t t1, t2;
     mpz_t bornSup,bornInf,diff,exposant,exposer,alea,delta_t,a_t,b_t,abdelta,gcd,resultat;
 	mpz_inits(bornSup,bornInf,diff,exposant,exposer,alea,delta_t,a_t,b_t,abdelta,gcd,resultat,NULL);
@@ -78,7 +87,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
     if(fichier != NULL)
     {
     	//fprintf(fichier,"  Fermat    Miller  Strassen   Eratos\n");
-    	fprintf(fichier,"  Fermat    Miller  Strassen LucasFrob Erastotene\n");
+    	fprintf(fichier,"  Fermat    Miller  Strassen LucasFrob PFermat PMiller PStrassen PFrobinius Erastotene\n");
     	for(int i=1; i<=nbrBitMax; i++){
     		fprintf(fichier,"%d ", i);
     		//printf("%d : ", i);
@@ -99,6 +108,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	    	Fermat(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	    	pfermat = (float)pow(0.5,nbrIteration)*temps;
 	        fprintf(fichier,"%f ", temps);
 	        
 	        //Miller
@@ -108,11 +118,12 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 		    	Miller_Rabin(nbrPremier,nbrIteration);
 		    	t2 = clock();
 		    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+		    	pmiller = (float)pow(0.25,nbrIteration)*temps;
 	        }
 	        
 	        else 
 	        {
-	        	temps = 0.000000;
+	        	temps = 0.000001;
 	        }
 	        fprintf(fichier,"%f ", temps);
 	        
@@ -121,6 +132,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+	    	pstrassen = (float)pow(0.5,nbrIteration)*temps;
 	        fprintf(fichier,"%f ", temps);
 	        
 	        //Lucas Frobinius
@@ -136,32 +148,41 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 			mpz_sub(diff,bornSup,bornInf);
 			mpz_add_ui(alea,bornInf,1);*/
 			if(i>1){
-				gmp_randstate_t state;
-				gmp_randinit_mt(state);
-				do {
-					gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
-					mpz_urandomm (alea , state , nbrPremier);
-					//mpz_add_ui(alea,alea,2);
-					//mpz_add(a_t,alea,bornInf);
-					mpz_set(a_t,alea);
-					mpz_set_ui(b_t,1);
-					calcul_discriminant(delta_t,a_t,b_t);
-					mpz_mul(abdelta, a_t, b_t);
-					mpz_mul(abdelta, abdelta, delta_t);
-					mpz_mul_ui(abdelta, abdelta, 2);
-					pgcd(gcd, nbrPremier, abdelta);
-				}while(mpz_cmp_ui(gcd,1) != 0);
-				gmp_printf("gcd : %Zd \n", gcd);
 				t1 = clock();
-				LucasFrobenius(resultat, nbrPremier, a_t, b_t, delta_t);
+				LucasFrobenius_avecIteration(resultat, nbrPremier, nbrIteration, nbrBitMax);
 				t2 = clock();
 				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-				gmp_randclear(state);
+				// gmp_randstate_t state;
+				// gmp_randinit_mt(state);
+				// do {
+				// 	gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+				// 	mpz_urandomm (alea , state , nbrPremier);
+				// 	//mpz_add_ui(alea,alea,2);
+				// 	//mpz_add(a_t,alea,bornInf);
+				// 	mpz_set(a_t,alea);
+				// 	mpz_set_ui(b_t,1);
+				// 	calcul_discriminant(delta_t,a_t,b_t);
+				// 	mpz_mul(abdelta, a_t, b_t);
+				// 	mpz_mul(abdelta, abdelta, delta_t);
+				// 	mpz_mul_ui(abdelta, abdelta, 2);
+				// 	pgcd(gcd, nbrPremier, abdelta);
+				// }while(mpz_cmp_ui(gcd,1) != 0);
+				// gmp_printf("gcd : %Zd \n", gcd);
+				// t1 = clock();
+				// LucasFrobenius(resultat, nbrPremier, a_t, b_t, delta_t);
+				// t2 = clock();
+				// temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+				// gmp_randclear(state);
 			}else {
-				temps = 0.000000;
+				temps = 0.000001;
 			}
+			plucasfrob = (float)pow((float)(1.0/7710.0),nbrIteration)*temps;
 			fprintf(fichier," %f ", temps);
 
+			fprintf(fichier, "%f ", pfermat);
+			fprintf(fichier, "%f ", pmiller);
+			fprintf(fichier, "%f ", pstrassen);
+			fprintf(fichier, "%f ", plucasfrob);
 	        //Erastothene
 	        if(i > 1 && i<35){
 	        	if(i != 1)
@@ -173,7 +194,7 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 		    	}	
 		    	else 
 		    	{
-		        	temps = 0.000000;
+		        	temps = 0.000001;
 		        }
 		        fprintf(fichier," %f\n", temps);
 	        }

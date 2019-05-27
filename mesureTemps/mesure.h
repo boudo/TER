@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 #include "../testPrimalites/testProbabilistes/testProbabilistes.h"
 #include "../testPrimalites/testDeterministes/testDeterministes.h"

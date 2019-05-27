@@ -355,7 +355,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 
 	  if(mpz_cmp(test1Mod, test2Mod) == 0)
 	  {
-	  	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	  	//gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
 	  	//mpz_set_ui(res, 1);
 	  	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 	  	//return;
@@ -363,7 +363,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	// 3')  [Lucas test]
 	if(mpz_cmp(test1Mod, test2Mod) != 0)
 	{
-	 	gmp_printf("%Zd est un nombre composé de lucas\n", n);
+	 	//gmp_printf("%Zd est un nombre composé de lucas\n", n);
 	 	mpz_set_ui(res, 0);
 	 	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 	 	//return;
@@ -380,13 +380,13 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	//gmp_printf("test3 = %Zd\n", test3);
 	if(mpz_cmp(test3, V0) == 0)
 	{
-		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
+		//gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
 		mpz_set_ui(res, 1);
 		return;
 	}
 
 
-	gmp_printf("%Zd est un nombre composé de frobenius\n", n);
+	//gmp_printf("%Zd est un nombre composé de frobenius\n", n);
 	mpz_set_ui(res, 0);
 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
 }
@@ -420,9 +420,9 @@ void LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int interval
 			pgcd(gcd, n_t, abdelta);
 		}while(mpz_cmp_ui(Test, 0) == 0 && (mpz_cmp_ui(a_t, 0) == 0) && mpz_cmp_ui(gcd, 1) == 0);
 
-		gmp_printf("alea %Zd\n", a_t);
-		gmp_printf("delta %Zd\n", delta_t);
-		gmp_printf("abdelta = %Zd\n\n", abdelta);
+		// gmp_printf("alea %Zd\n", a_t);
+		// gmp_printf("delta %Zd\n", delta_t);
+		// gmp_printf("abdelta = %Zd\n\n", abdelta);
 
 		LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
 		

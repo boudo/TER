@@ -20,6 +20,10 @@ run: clean principal
 
 all: creation test doc
 
+testTemps: $(ODIR)/testTemps.o $(ODIR)/mesure.o $(ODIR)/testProbabilistes.o $(ODIR)/testDeterministes.o $(ODIR)/fonctions.o
+	$(CC) -o testTemps $^ $(LIB)
+	./testTemps
+
 graphe: test
 	$(CC) gnuplot_i/src/gnuplot_i.c mesureGraphe.c -o $(ODIR)/main
 	./$(ODIR)/main
@@ -35,8 +39,11 @@ test: $(ODIR)/TER.o $(ODIR)/mesure.o $(ODIR)/testProbabilistes.o $(ODIR)/testDet
 $(ODIR)/TER.o: TER.c 
 	$(CC) $(CFLAGS) $(NOM) TER.c
 
+$(ODIR)/testTemps.o: testTemps.c 
+	$(CC) $(CFLAGS) $(NOM) testTemps.c
+
 $(ODIR)/mesure.o: $(MTDIR)/mesure.c $(MTDIR)/mesure.h
-	$(CC) $(CFLAGS) $(NOM) $(MTDIR)/mesure.c
+	$(CC) $(CFLAGS) $(NOM) $(MTDIR)/mesure.c 
 
 $(ODIR)/testProbabilistes.o: $(TPDIR)/$(TPRDIR)/testProbabilistes.c $(TPDIR)/$(TPRDIR)/testProbabilistes.h
 	$(CC) $(CFLAGS) $(NOM) $(TPDIR)/$(TPRDIR)/testProbabilistes.c
@@ -59,6 +66,7 @@ site:
 
 # graph:
 # 	gnuplot graph.gnu
+
 
 
 cleanAll:clean
