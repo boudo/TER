@@ -352,9 +352,10 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	mpz_mod(test2Mod, test2, n);
 	// gmp_printf("test1 = %Zd et test2 = %Zd\n", test1, test2);
 	// gmp_printf("test1Mod = %Zd et test2Mod = %Zd\n", test1Mod, test2Mod);
+
 	  if(mpz_cmp(test1Mod, test2Mod) == 0)
 	  {
-	  	gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
+	  	//gmp_printf("%Zd est un nombre de lucas problement 1er\n", n);
 	  	//mpz_set_ui(res, 1);
 	  	//mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi,nMoins1, B, expo, test3, NULL);
 	  	//return;
@@ -379,7 +380,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	//gmp_printf("test3 = %Zd\n", test3);
 	if(mpz_cmp(test3, V0) == 0)
 	{
-		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
+		//gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
 		mpz_set_ui(res, 1);
 		return;
 	}

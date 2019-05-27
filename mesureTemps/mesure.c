@@ -70,14 +70,15 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	
  	float temps;
     clock_t t1, t2;
-    
+    mpz_t bornSup,bornInf,diff,exposant,exposer,alea,delta_t,a_t,b_t,abdelta,gcd,resultat;
+	mpz_inits(bornSup,bornInf,diff,exposant,exposer,alea,delta_t,a_t,b_t,abdelta,gcd,resultat,NULL);
     mpz_t nbrPremier;
     mpz_inits(nbrPremier,NULL);
     
     if(fichier != NULL)
     {
     	//fprintf(fichier,"  Fermat    Miller  Strassen   Eratos\n");
-    	fprintf(fichier,"  Fermat    Miller  Strassen Erastotene\n");
+    	fprintf(fichier,"  Fermat    Miller  Strassen LucasFrob Erastotene\n");
     	for(int i=1; i<=nbrBitMax; i++){
     		fprintf(fichier,"%d ", i);
     		//printf("%d : ", i);
@@ -120,10 +121,49 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 	    	solovayStrassen(nbrPremier,nbrIteration);
 	    	t2 = clock();
 	    	temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-	        fprintf(fichier,"%f", temps);
+	        fprintf(fichier,"%f ", temps);
 	        
+	        //Lucas Frobinius
+
+			
+			/*mpz_set_ui(exposer,2);
+			mpz_set_ui(exposant,i);
+			
+			expoRapide(bornSup,exposer,exposant);
+			mpz_sub_ui(exposant,exposant,1);
+			
+			expoRapide(bornInf,exposer,exposant);
+			mpz_sub(diff,bornSup,bornInf);
+			mpz_add_ui(alea,bornInf,1);*/
+			if(i>1){
+				gmp_randstate_t state;
+				gmp_randinit_mt(state);
+				do {
+					gmp_randseed_ui(state, time(NULL)*(rand()%100 +1));
+					mpz_urandomm (alea , state , nbrPremier);
+					//mpz_add_ui(alea,alea,2);
+					//mpz_add(a_t,alea,bornInf);
+					mpz_set(a_t,alea);
+					mpz_set_ui(b_t,1);
+					calcul_discriminant(delta_t,a_t,b_t);
+					mpz_mul(abdelta, a_t, b_t);
+					mpz_mul(abdelta, abdelta, delta_t);
+					mpz_mul_ui(abdelta, abdelta, 2);
+					pgcd(gcd, nbrPremier, abdelta);
+				}while(mpz_cmp_ui(gcd,1) != 0);
+				gmp_printf("gcd : %Zd \n", gcd);
+				t1 = clock();
+				LucasFrobenius(resultat, nbrPremier, a_t, b_t, delta_t);
+				t2 = clock();
+				temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+				gmp_randclear(state);
+			}else {
+				temps = 0.000000;
+			}
+			fprintf(fichier," %f ", temps);
+
 	        //Erastothene
-	        if(i < 1){
+	        if(i > 1 && i<35){
 	        	if(i != 1)
 		        {
 					t1 = clock();
@@ -136,13 +176,15 @@ void mesureTempsFichier(char *nomFichier,int nbrIteration,int nbrBitMax)
 		        	temps = 0.000000;
 		        }
 		        fprintf(fichier," %f\n", temps);
-	        }else {
-	        	fprintf(fichier,"\n");
+	        }
+			else {
+	        fprintf(fichier,"\n");
 	        }
     	}
     	
         fclose(fichier);
     }
+    mpz_clears(bornSup,bornInf,diff,exposant,exposer,alea,delta_t,a_t,b_t,abdelta,gcd,resultat,NULL);
     mpz_clears(nbrPremier,NULL);
 }
 
@@ -210,3 +252,4 @@ void mesureTempsLucas(char *nomFichier,int max){
 	}
 	mpz_clears(n,NULL);
 }
+
