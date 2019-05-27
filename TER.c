@@ -18,7 +18,7 @@
  */
 int main()
 {
-	printf("\n###################### test probabiliste ######################\n\n");
+	printf("\n################################# test probabiliste ##################################\n\n");
 
 
 	printf("\n###################### Fermat Miller Strassen ######################\n\n");
@@ -51,7 +51,7 @@ int main()
  	printf("cont = %d\n", cont);
  	mpz_clears(m_test, NULL);
 
- 	printf("\n######################      LucasFrobenius     ######################\n\n");
+ 	printf("\n######################################## LucasFrobenius  #####################################\n\n");
 	mpz_t res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea;
 	mpz_inits(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo,racine,Test,alea, NULL);
 	mpz_set_ui(x, 2);
@@ -105,7 +105,7 @@ int main()
 	mpz_clears(res_t, n_t, a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea, NULL);
 	gmp_randclear(state);
 
-	printf("\n################################# test deterministes #################################\n\n");
+	printf("\n############################################ test deterministes ########################################\n\n");
 
 
 
@@ -183,16 +183,19 @@ int main()
 	mpz_clears(lucas, NULL);
 
 
-	printf("\n###################### test ######################\n\n");
+	/*printf("\n###################### LucasFrobenius_avecIteration ######################\n\n");
 
 	mpz_t res_tt, n_ttt;
 	mpz_inits(res_tt, n_ttt, NULL);
 	mpz_set_ui(n_ttt, 31);
 	int iterr = 20;
 	int intervalAlea = 10;
+	printf("Pour %d iterations avec un a (alea) <= %d\n",iterr, intervalAlea);
+	printf("*****************************************\n");
 	LucasFrobenius_avecIteration(res_tt, n_ttt, iterr, intervalAlea);
+	printf("*****************************************\n\n");
 
-	mpz_clears(res_tt, n_ttt, NULL);
+	mpz_clears(res_tt, n_ttt, NULL);*/
 
 
 

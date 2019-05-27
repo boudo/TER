@@ -294,8 +294,9 @@ void Test_Lucas(mpz_t res,mpz_t n)
 
 //En cours!!!!!!!!!!
 
-/*! \fn LucasFrobenius(mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
+/*! \fn LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
  * 	\brief Fonction permettant de calculer le theoreme de Lucas
+ * 	\param res : renvoie le resultat
  * 	\param n : nombre entier à tester strictement supérieur à 1
  *	\param a : nombre entier aléatoire
  *	\param b : nombre entier aléatoire
@@ -382,6 +383,7 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	{
 		gmp_printf("%Zd est un nombre de frobenius problement 1er\n", n);
 		mpz_set_ui(res, 1);
+		mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
 		return;
 	}
 
@@ -391,7 +393,13 @@ void LucasFrobenius(mpz_t res, mpz_t n, mpz_t a, mpz_t b, mpz_t delta)
 	mpz_clears(u, v, V0, V1, A, m,test1, test1Mod, test2, test2Mod, aCarre, invB, jacobi, nMoins1, B, expo, test3, NULL);
 }
 
-
+/*! \fn LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int intervalAlea)
+ * 	\brief Fonction permettant de calculer le theoreme de Lucas avec iteration
+ * 	\param res_t : renvoie le resultat
+ * 	\param n_t : nombre entier à tester strictement supérieur à 1
+ *	\param iter : nombre entier aléatoire
+ *	\param intervalAlea : nombre entier aléatoire
+ */
 void LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int intervalAlea)
 {
 	mpz_t  a_t, b_t, delta_t, abdelta, gcd,n,x, expo, racine,Test,alea;
@@ -420,11 +428,13 @@ void LucasFrobenius_avecIteration(mpz_t res_t, mpz_t n_t, int iter, int interval
 			pgcd(gcd, n_t, abdelta);
 		}while(mpz_cmp_ui(Test, 0) == 0 && (mpz_cmp_ui(a_t, 0) == 0) && mpz_cmp_ui(gcd, 1) == 0);
 
-		gmp_printf("alea %Zd\n", a_t);
-		gmp_printf("delta %Zd\n", delta_t);
-		gmp_printf("abdelta = %Zd\n\n", abdelta);
+		gmp_printf("a = %Zd\n", a_t);
+		gmp_printf("b = %Zd\n", b_t);
+		gmp_printf("delta = %Zd\n", delta_t);
+		gmp_printf("a_b_delta = %Zd\n", abdelta);
 
 		LucasFrobenius(res_t, n_t, a_t, b_t, delta_t);
+		printf("\n");
 		
 	}
 	

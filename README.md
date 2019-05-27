@@ -1,45 +1,42 @@
-# TER ( chacun travaille sur sa b.....)
-
-## Construction de projet
-	pour construire le projet: " make all" (cree les doc neccessaire pour les bin et doxygen)
-	pour excecuter le projet : " make " ( les tes dans le main sont lancé)
-	pour nettoyer que les .0 : " make clean"
-	pour nettoyer tout l proj: " make cleanAll"
-	pour voir le site de projet: " make site" (assurez vous d'avoir fait au prealable "make all")
+# TER Master 1 Tests De primalités
 
 
+#### Robin Joran
 
-## Generations Doxygen
-	Il faut juste taper "doxygen" dans le terminal au niveau du fichier doxyfile(ter/).
-	Puis se déplacer dans Documentation/html/ et ouvrir le fichier index.html
+#### Boudo Ibrahim
 
-Travail a faire :
+#### Slimani Arezki
 
-## faire le TRI des fonctions + listes.c et .h 
-	essayer de traduire les fonctions que ta besoin en listegmp ibra comme ca on aura
-	pas de galere.
-    voir les 2 fonctions de decomposition et en eliminer une
-    Verifier le doxygen svp (pour le jacobi arezki faut que tu regardes)
+## I] Configuration Du Projet(Indispensable pour le bon fonctionnement du projet)
 
+### 1) Construction Du Projet
 
-## Test de Lucas
-	terminer
+    make all (création des dossiers nécessaires pour la configuration du projet)
 
-## Test de Pepin
-	A implementer
+### 2) Exécution Du Projet
 
-## Cribe d' Erastotene(FINI)
-	tester les valeurs svp !!!
+    " make " (Permet d'exécuter le programme)
 
-## Generer des nombres premiers
-	A implementer
+### 3) Génération Des Fichiers De Mesures
 
-## Calculer le temps des algos en fonction des resultats
-	A implementer
+    " make testTemps " 
 
+### 4) Génération Des Fichiers De Mesures
 
-## Afficher les resultats sur un graphe
-	A implementer
+    " make testTemps " 
 
+### 5) Génération Des Graphes
 
-site pour lucas et fibo : http://fracademic.com/dic.nsf/frwiki/1240121
+    " make graphe "
+
+### 6) Pour Nettoyer Les Fichiers Binaires
+
+    " make clean "
+
+### 7) Pour Nettoyer Tout Le Projet
+
+    " make cleanAll "
+
+### 8) Pour Voir Le Site De Projet
+
+    " make site " (assurez-vous d'avoir fait au préalable " make all ")

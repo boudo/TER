@@ -1,6 +1,9 @@
 #ifndef FONCTIONS_H
 #define FONCTIONS_H
 
+/*! \def PRECISION
+ *  \brief Constante
+ */
 #define PRECISION 4096
 
 #include <gmp.h>
@@ -17,32 +20,6 @@
  *  \version   1.00
  *  \date      24 fevrier 2019
  */
-
-//LISTE
-
-/*! \struct elem
- *  \brief Structure elem qui va permettre de stocker un element dans une liste
- */
-struct elem{
-	int val;/*!< valeur de l'élément*/
-	struct elem *suiv;/*!< élément suivant*/
-};
-
-typedef struct elem* liste;/*!< typedef de la structure */
-
-liste creer_liste();
-
-int est_vide(liste l);
-
-void affiche_liste(liste l);
-
-liste libere_liste(liste l);
-
-liste ajoute_elem_debut(liste l,int i);
-
-liste supprime_elem_debut(liste l);
-
-// liste getBinaire(const mpz_t expo);
 
 //LISTE GMP
 
@@ -115,12 +92,6 @@ void PolyLucas(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 
 // Mieux PolyLucas
 void PolyLucas_or(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
-
-// Resultat pas bon
-void PolyLucas_or2(mpz_t res, mpz_t v1, mpz_t v0, mpz_t a, mpz_t b, mpz_t n);
-
-// Afaire
-void PolyLucas_dinamyk(mpz_t res,mpz_t a,mpz_t b,mpz_t n);
 
 void chaineLucasBinaire(mpz_t u, mpz_t v, mpz_t V0, mpz_t V1, mpz_t n, mpz_t modul);
 
