@@ -9,6 +9,12 @@
  *  \date      24 fevrier 2019
  */
 
+/*! \fn double pow(double a, double b)
+ *  \brief Fonction qui permet de calculer un nombre a la puissance b
+ *  \param a : nombre a
+ *  \param b : puissance b
+ * 	\return a^b
+ */
 double pow(double a, double b) {
 	if(a == 1.0 || b == 0.0) {
 		return 1.0;
