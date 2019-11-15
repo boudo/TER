@@ -1,5 +1,6 @@
 # TER Master 1 Tests De primalités
 
+### Tests De primalités déterministes et probabilistes (comparaison des performances de chacun de 1 a 1024 bits)
 
 #### Robin Joran
 
